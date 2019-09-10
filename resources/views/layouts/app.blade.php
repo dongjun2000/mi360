@@ -58,7 +58,7 @@
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    用户退出
+                                    退出
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
