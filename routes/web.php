@@ -24,6 +24,6 @@ Route::get('article/new', 'ArticleController@newArticle')->name('article.new');
 
 Route::resource('user', 'UserController');
 Route::resource('article', 'ArticleController');
-Route::resource('tag', 'TagController');
+Route::resource('tags', 'TagController');
 
 

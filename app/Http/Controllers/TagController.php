@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 标签列表页
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        $categories = Category::query()->with('tags')->get();
 
+        return view('tags.index', compact('categories'));
     }
 
     /**
@@ -30,7 +33,7 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -39,20 +42,19 @@ class TagController extends Controller
     }
 
     /**
-     * Display the specified resource.
      *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param string $name 标签名
      */
-    public function show(Tag $tag)
+    public function show(Request $request, $name)
     {
-        //
+        dd($name);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Tag  $tag
+     * @param  \App\Tag $tag
      * @return \Illuminate\Http\Response
      */
     public function edit(Tag $tag)
@@ -63,8 +65,8 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tag  $tag
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Tag $tag
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Tag $tag)
@@ -75,7 +77,7 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Tag  $tag
+     * @param  \App\Tag $tag
      * @return \Illuminate\Http\Response
      */
     public function destroy(Tag $tag)

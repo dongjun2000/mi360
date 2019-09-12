@@ -58,7 +58,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="">标签</a>
+                                <a class="dropdown-item" href="{{ route('tags.index') }}">标签</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="">排行榜</a>
                             </div>

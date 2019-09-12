@@ -1,0 +1,36 @@
+.tags {
+
+  .tag-list {
+    .title {
+      color: #333;
+      font-size: 14px;
+      font-weight: 700;
+      border-bottom: 1px solid #eee;
+      padding: 5px 0;
+    }
+    ul {
+      margin-top: 10px;
+      li {
+        margin: 0 4px 8px 0;
+        &:hover a {
+          color: #fff;
+          background-color: $blue;
+        }
+        a {
+          border-radius: 5px;
+          padding: 2px 8px;
+          background-color: $blue-1;
+
+          display: block;
+          color: $blue;
+          text-decoration: none;
+          .icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 3px;
+          }
+        }
+      }
+    }
+  }
+}

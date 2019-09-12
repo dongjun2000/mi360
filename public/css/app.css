@@ -10722,3 +10722,39 @@ header .nav-link {
   color: #333;
 }
 
+.tags .tag-list .title {
+  color: #333;
+  font-size: 14px;
+  font-weight: 700;
+  border-bottom: 1px solid #eee;
+  padding: 5px 0;
+}
+
+.tags .tag-list ul {
+  margin-top: 10px;
+}
+
+.tags .tag-list ul li {
+  margin: 0 4px 8px 0;
+}
+
+.tags .tag-list ul li:hover a {
+  color: #fff;
+  background-color: #3490dc;
+}
+
+.tags .tag-list ul li a {
+  border-radius: 5px;
+  padding: 2px 8px;
+  background-color: #e6f1fa;
+  display: block;
+  color: #3490dc;
+  text-decoration: none;
+}
+
+.tags .tag-list ul li a .icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 3px;
+}
+
