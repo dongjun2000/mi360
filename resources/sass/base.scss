@@ -1,0 +1,50 @@
+a {
+  color: $blue;
+}
+
+
+
+header {
+  nav {
+    &.navbar {
+      background-color: $blue;
+    }
+  }
+  .nav-link {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.avatar-24 {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.avatar-38 {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+
+.list {
+  color: #777;
+  .pic {
+    width: 64px;
+    height: 64px;
+  }
+  h2 {
+    &.title {
+      font-size: 16px;
+      font-weight: 700;
+      a {
+        color: #333;
+      }
+    }
+  }
+  .line {
+    color: #ccc;
+  }
+}
+

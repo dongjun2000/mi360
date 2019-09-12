@@ -19,10 +19,11 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('article/hot', 'ArticleController@hotArticle')->name('article.hot');
+Route::get('article/new', 'ArticleController@newArticle')->name('article.new');
 
+Route::resource('user', 'UserController');
 Route::resource('article', 'ArticleController');
 Route::resource('tag', 'TagController');
-
-
 
 
