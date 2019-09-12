@@ -96,14 +96,16 @@ class ArticleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 查看文章详情
      *
      * @param  \App\Article $article
      * @return \Illuminate\Http\Response
      */
     public function show(Article $article)
     {
-//        dd($article);
+        // 分发事件 - 阅读数自增
+        event('article.read', $article);
+
         return view('article.show', compact('article'));
     }
 

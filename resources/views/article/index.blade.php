@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row article-list">
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
@@ -32,17 +32,7 @@
                                                 <a href="{{ route('article.show', $article) }}"
                                                    title="{{ $article->title }}">{{ $article->title }}</a>
                                                 <span class="badge badge-pill badge-success">
-                                                    @switch($article->type)
-                                                        @case(2)
-                                                        转载
-                                                        @break;
-                                                        @case(3)
-                                                        翻译
-                                                        @break;
-                                                        @default
-                                                        原创
-                                                        @break;
-                                                    @endswitch
+                                                    {{ $article->type }}
                                                 </span>
                                             </h2>
                                             <ul class="list-inline">
@@ -63,11 +53,11 @@
                                                     </span>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <span>收藏数 {{ $article->collect }}</span>
+                                                    <span>收藏数: {{ $article->collect }}</span>
                                                     <span class="line">/</span>
-                                                    <span>点赞数 {{ $article->zan }}</span>
+                                                    <span>点赞数: {{ $article->zan }}</span>
                                                     <span class="line">/</span>
-                                                    <span>阅读数 {{ $article->read }}</span>
+                                                    <span>阅读数: {{ $article->read }}</span>
                                                 </li>
                                             </ul>
                                             {{--文章简介--}}
@@ -75,7 +65,7 @@
                                         </div>
                                         @if($article->pic)
                                             <img src="{{ $article->pic }}" class="align-self-center ml-3 rounded pic"
-                                                 alt="...">
+                                                 alt="{{ $article->title }}" title="{{ $article->title }}">
                                         @endif
                                     </div>
                                 </li>

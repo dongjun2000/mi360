@@ -1,3 +1,19 @@
+// 所有列表公共样式
+.list {
+  h2 {
+    &.title {
+      font-size: 16px;
+      font-weight: 700;
+      a {
+        color: #333;
+      }
+    }
+  }
 
+  .pic {
+    width: 64px;
+    height: 64px;
+  }
+}
 
 

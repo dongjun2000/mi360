@@ -21,6 +21,29 @@ class Article extends Model
     }
 
     /**
+     * 访问器 - 转换数据字段为文字
+     *
+     * @param $value
+     * @return string
+     */
+    public function getTypeAttribute($value)
+    {
+        $str = '原创';
+        switch ($value) {
+            case 1:
+                $str = '原创';
+                break;
+            case 2:
+                $str = '转载';
+                break;
+            case 3:
+                $str = '翻译';
+                break;
+        }
+        return $str;
+    }
+
+    /**
      * 与用户模型一对多关联-反向
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

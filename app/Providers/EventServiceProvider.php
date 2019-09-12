@@ -21,7 +21,7 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     /**
-     * Register any events for your application.
+     * 注册应用中的其它事件
      *
      * @return void
      */
@@ -29,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        // 定义事件 - 阅读数自增
+        Event::listen('article.read', function ($model) {
+            $model->increment('read');
+        });
     }
 }

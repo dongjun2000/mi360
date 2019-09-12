@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@charset "UTF-8";
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -10648,6 +10648,14 @@ a {
   color: #3490dc;
 }
 
+a:hover {
+  color: #3490dc;
+}
+
+body {
+  color: #777;
+}
+
 header nav.navbar {
   background-color: #3490dc;
 }
@@ -10669,13 +10677,14 @@ header .nav-link {
   border-radius: 50%;
 }
 
-.list {
-  color: #777;
+.avatar-48 {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
 }
 
-.list .pic {
-  width: 64px;
-  height: 64px;
+.line {
+  color: #ccc;
 }
 
 .list h2.title {
@@ -10687,7 +10696,29 @@ header .nav-link {
   color: #333;
 }
 
-.list .line {
-  color: #ccc;
+.list .pic {
+  width: 64px;
+  height: 64px;
+}
+
+.detail h1 {
+  color: #333;
+  font-size: 22px;
+}
+
+.article-show .author .title {
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.article-show .author .info {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.article-show .author h5 {
+  font-size: 14px;
+  color: #333;
 }
 
