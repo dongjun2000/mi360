@@ -23,6 +23,10 @@ class CreateArticlesTable extends Migration
             $table->text('content');
             $table->integer('read')->default(0);
             $table->integer('zan')->default(0);
+            $table->integer('collect')->default(0);
+            $table->boolean('iscomment')->default(false)->comment('是否推荐');
+            $table->boolean('ishot')->default(false)->comment('是否热门');
+            $table->boolean('isshow')->default(true)->comment('是否显示');
             $table->timestamps();
         });
     }
