@@ -41,6 +41,24 @@
                                 <span class="line">/</span>
                                 <span>阅读数: {{ $article->read }}</span>
                             </li>
+                            @if(count($article->tags))
+                                <li class="list-inline-item">
+                                    <ul class="list-inline">
+                                        @foreach($article->tags as $tag)
+                                            <li class="list-inline-item">
+                                                <a class="tags" href="{{ route('tags.show', $tag->name) }}">
+                                                    @if(!empty($tag->icon))
+                                                        <img class="icon" src="{{ asset($tag->icon) }}"
+                                                             alt="{{ $tag->name }}"
+                                                             title="{{ $tag->name }}">
+                                                    @endif
+                                                    {{ $tag->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endif
                         </ul>
 
                         {{--文章内容--}}
@@ -49,8 +67,10 @@
                         </div>
 
                         <div class="text-muted text-center mt-5">
-                            <button class="btn btn-success btn-lg mr-md-2">点赞 <span class="line">|</span> {{ $article->zan }}</button>
-                            <button class="btn btn-primary btn-lg ml-md-2">收藏 <span class="line">|</span> {{ $article->collect }}</button>
+                            <button class="btn btn-success btn-lg mr-md-2">点赞 <span
+                                        class="line">|</span> {{ $article->zan }}</button>
+                            <button class="btn btn-primary btn-lg ml-md-2">收藏 <span
+                                        class="line">|</span> {{ $article->collect }}</button>
                         </div>
                     </div>
 

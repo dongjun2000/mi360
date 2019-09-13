@@ -7,7 +7,22 @@
             <li class="breadcrumb-item"><a href="/" title="首页">首页</a></li>
             <li class="breadcrumb-item"><a href="{{ route('tags.index') }}" title="标签">标签</a></li>
             <li class="breadcrumb-item"><a href="{{ route('tags.show', $tag->name) }}">{{ $tag->name }}</a></li>
-            <li class="breadcrumb-item">标签动态</li>
+            <li class="breadcrumb-item">
+                @switch($label)
+                    @case('show')
+                    标签动态
+                    @break
+                    @case('info')
+                    标签百科
+                    @break
+                    @case('questions')
+                    相关问答
+                    @break
+                    @case('article')
+                    相关文章
+                    @break
+                @endswitch
+            </li>
         </ol>
         <div class="row">
             <div class="col-md-9">
