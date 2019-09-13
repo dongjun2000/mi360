@@ -10656,6 +10656,11 @@ body {
   color: #777;
 }
 
+.breadcrumb,
+.jumbotron {
+  background-color: #f2f2f2;
+}
+
 header nav.navbar {
   background-color: #3490dc;
 }
@@ -10685,6 +10690,27 @@ header .nav-link {
 
 .line {
   color: #ccc;
+}
+
+a.tags {
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 2px 8px;
+  background-color: #e6f1fa;
+  display: block;
+  color: #3490dc;
+  text-decoration: none;
+}
+
+a.tags .icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 3px;
+}
+
+a.tags:hover {
+  color: #fff;
+  background-color: #3490dc;
 }
 
 .list h2.title {
@@ -10736,25 +10762,5 @@ header .nav-link {
 
 .tags .tag-list ul li {
   margin: 0 4px 8px 0;
-}
-
-.tags .tag-list ul li:hover a {
-  color: #fff;
-  background-color: #3490dc;
-}
-
-.tags .tag-list ul li a {
-  border-radius: 5px;
-  padding: 2px 8px;
-  background-color: #e6f1fa;
-  display: block;
-  color: #3490dc;
-  text-decoration: none;
-}
-
-.tags .tag-list ul li a .icon {
-  width: 18px;
-  height: 18px;
-  margin-right: 3px;
 }
 

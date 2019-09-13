@@ -9,6 +9,10 @@ body {
   color: #777;
 }
 
+.breadcrumb, .jumbotron {
+  background-color: #f2f2f2;
+}
+
 header {
   nav {
     &.navbar {
@@ -41,4 +45,24 @@ header {
 
 .line {
   color: #ccc;
+}
+
+a.tags {
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 2px 8px;
+  background-color: $blue-1;
+
+  display: block;
+  color: $blue;
+  text-decoration: none;
+  .icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 3px;
+  }
+  &:hover {
+    color: #fff;
+    background-color: $blue;
+  }
 }

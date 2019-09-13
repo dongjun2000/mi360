@@ -17,7 +17,7 @@
                     <ul class="list-inline">
                         @foreach($category->tags as $tag)
                             <li class="list-inline-item">
-                                <a href="{{ route('tags.show', ['name' => $tag->name]) }}">
+                                <a class="tags" href="{{ route('tags.show', $tag->name) }}">
                                     @if(!empty($tag->icon))
                                         <img class="icon" src="{{ asset($tag->icon) }}" alt="{{ $tag->name }}"
                                              title="{{ $tag->name }}">

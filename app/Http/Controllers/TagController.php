@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use App\Category;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -42,13 +43,16 @@ class TagController extends Controller
     }
 
     /**
+     * 标签详情页
      *
      * @param Request $request
      * @param string $name 标签名
      */
     public function show(Request $request, $name)
     {
-        dd($name);
+        $label = 'show';
+        $tag = Tag::query()->where('name', $name)->first();
+        return view('tags.show', compact('tag', 'label'));
     }
 
     /**
@@ -83,5 +87,48 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         //
+    }
+
+    /**
+     * 标签相关问答
+     *
+     * @param Request $request
+     * @param $name
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function questions(Request $request, $name)
+    {
+        $label = 'questions';
+        $tag = Tag::query()->where('name', $name)->first();
+        return view('tags.show', compact('tag', 'label'));
+    }
+
+    /**
+     * 标签相关文章
+     *
+     * @param Request $request
+     * @param $name
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function article(Request $request, $name)
+    {
+        $label = 'article';
+        $tag = Tag::query()->where('name', $name)->first();
+
+        return view('tags.show', compact('tag', 'label'));
+    }
+
+    /**
+     * 标签百科
+     *
+     * @param Request $request
+     * @param $name
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function info(Request $request, $name)
+    {
+        $label = 'info';
+        $tag = Tag::query()->where('name', $name)->first();
+        return view('tags.show', compact('tag', 'label'));
     }
 }
