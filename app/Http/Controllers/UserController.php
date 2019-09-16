@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verified')->except(['show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -46,7 +51,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('user.show');
     }
 
     /**
