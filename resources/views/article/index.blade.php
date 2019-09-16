@@ -9,15 +9,15 @@
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
                                 <a class="nav-link @if($category === 'commend') active @endif"
-                                   href="{{ route('article.index') }}">推荐文章</a>
+                                   href="{{ route('articles.index') }}">推荐文章</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link @if($category === 'hot') active @endif"
-                                   href="{{ route('article.hot') }}">热门文章</a>
+                                   href="{{ route('articles.hot') }}">热门文章</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link @if($category === 'new') active @endif"
-                                   href="{{ route('article.new') }}">最新文章</a>
+                                   href="{{ route('articles.new') }}">最新文章</a>
                             </li>
                         </ul>
                     </div>
@@ -29,7 +29,7 @@
                                         <div class="media-body">
                                             {{--文章标题--}}
                                             <h2 class="mt-2 mb-2 title">
-                                                <a href="{{ route('article.show', $article) }}"
+                                                <a href="{{ route('articles.show', $article) }}"
                                                    title="{{ $article->title }}">{{ $article->title }}</a>
                                                 <span class="badge badge-pill badge-success">
                                                     {{ $article->type }}
@@ -39,14 +39,14 @@
                                                 {{--作者信息--}}
                                                 <li class="list-inline-item">
                                                     {{--作者头像--}}
-                                                    <a href="{{ route('user.show', $article->user) }}">
+                                                    <a href="{{ route('users.show', $article->user) }}">
                                                         <img src="{{ $article->user->avatar }}"
                                                              alt="{{$article->user->name}}"
                                                              title="{{$article->user->name}}" class="avatar-24">
                                                     </a>
                                                     {{--作者名--}}
                                                     <span>
-                                                        <a href="{{ route('user.show', $article->user) }}"
+                                                        <a href="{{ route('users.show', $article->user) }}"
                                                            title="{{$article->user->name}}">{{ $article->user->name }}</a>
                                                         在 {{ $article->created_at }} 发布于
                                                         <a href="" title="">self.文章</a>

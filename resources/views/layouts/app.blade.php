@@ -40,7 +40,7 @@
                             <a href="/" class="nav-link active">首页</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('article.index') }}" class="nav-link">编程</a>
+                            <a href="{{ route('articles.index') }}" class="nav-link">编程</a>
                         </li>
                         <li class="nav-item">
                             <a href="" class="nav-link">问答</a>
@@ -81,7 +81,7 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item"><a href="{{ route('article.create') }}" class="nav-link">写文章</a></li>
+                            <li class="nav-item"><a href="{{ route('articles.create') }}" class="nav-link">写文章</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -89,7 +89,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="">我的主页</a>
+                                    <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}">我的主页</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="">个人设置</a>
                                     <div class="dropdown-divider"></div>

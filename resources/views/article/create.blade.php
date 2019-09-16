@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <form action="{{ route('article.store') }}" method="post">
+                <form action="{{ route('articles.store') }}" method="post">
                     @csrf
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">

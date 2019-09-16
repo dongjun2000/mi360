@@ -17,7 +17,7 @@
         {{--面包屑导航--}}
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/" title="首页">首页</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('article.index') }}" title="编程">编程</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('articles.index') }}" title="编程">编程</a></li>
             <li class="breadcrumb-item active">{{ $article->title }}</li>
         </ol>
 
