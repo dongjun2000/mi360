@@ -5,7 +5,7 @@
         <div class="row article-list">
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between align-items-end">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
                                 <a class="nav-link @if($category === 'commend') active @endif"
@@ -20,6 +20,9 @@
                                    href="{{ route('articles.new') }}">最新文章</a>
                             </li>
                         </ul>
+                        @auth
+                            <a class="btn btn-primary btn-sm" href="{{ route('articles.create') }}">写文章</a>
+                        @endauth
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush list">
