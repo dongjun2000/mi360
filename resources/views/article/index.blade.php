@@ -67,8 +67,11 @@
                                             <p>{{ $article->intro }}...</p>
                                         </div>
                                         @if($article->pic)
-                                            <img src="{{ $article->pic }}" class="align-self-center ml-3 rounded pic"
-                                                 alt="{{ $article->title }}" title="{{ $article->title }}">
+                                            <a href="{{ route('articles.show', $article) }}">
+                                                <img src="{{ $article->pic }}"
+                                                     class="align-self-center ml-3 rounded pic"
+                                                     alt="{{ $article->title }}" title="{{ $article->title }}">
+                                            </a>
                                         @endif
                                     </div>
                                 </li>
