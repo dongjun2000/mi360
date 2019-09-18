@@ -52,7 +52,7 @@
 
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="pl-3">
-                                <button class="btn btn-success btn-sm">关注 <span class="line">|</span> 0</button>
+                                <button class="btn btn-success btn-sm">关注 <span class="line">|</span> {{ $question->follow }}</button>
                                 <button class="btn btn-primary btn-sm">收藏 <span class="line">|</span> 0</button>
                             </div>
                             <div class="pr-4 d-inline-flex align-items-center">
