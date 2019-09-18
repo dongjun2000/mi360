@@ -1,6 +1,6 @@
 <ul class="list-group list-group-flush list">
-    @if(count($tag->articles) > 0)
-        @foreach($tag->articles as $article)
+    @if(count($items) > 0)
+        @foreach($items as $article)
             <li class="list-group-item">
                 <div class="media">
                     <div class="media-body">
@@ -47,7 +47,6 @@
                 </div>
             </li>
         @endforeach
-
     @else
         <li class="list-group-item">暂无相关文章</li>
     @endif

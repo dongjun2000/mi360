@@ -51,7 +51,7 @@ class TagController extends Controller
     public function show(Request $request, $name)
     {
         $label = 'show';
-        $tag = Tag::query()->where('name', $name)->first();
+        $tag   = Tag::query()->where('name', $name)->first();
         return view('tags.show', compact('tag', 'label'));
     }
 
@@ -99,8 +99,11 @@ class TagController extends Controller
     public function questions(Request $request, $name)
     {
         $label = 'questions';
-        $tag = Tag::query()->where('name', $name)->first();
-        return view('tags.show', compact('tag', 'label'));
+        $tag   = Tag::query()->where('name', $name)->first();
+
+        $items = $tag->questions()->paginate(10);
+
+        return view('tags.show', compact('tag', 'items', 'label'));
     }
 
     /**
@@ -113,9 +116,11 @@ class TagController extends Controller
     public function article(Request $request, $name)
     {
         $label = 'article';
-        $tag = Tag::query()->where('name', $name)->first();
+        $tag   = Tag::query()->where('name', $name)->first();
 
-        return view('tags.show', compact('tag', 'label'));
+        $items = $tag->articles()->with('user:id,name,avatar')->paginate(10);
+
+        return view('tags.show', compact('tag', 'items', 'label'));
     }
 
     /**
@@ -128,7 +133,7 @@ class TagController extends Controller
     public function info(Request $request, $name)
     {
         $label = 'info';
-        $tag = Tag::query()->where('name', $name)->first();
+        $tag   = Tag::query()->where('name', $name)->first();
         return view('tags.show', compact('tag', 'label'));
     }
 }

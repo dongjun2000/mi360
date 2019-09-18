@@ -79,6 +79,11 @@
                             @break
                         @endswitch
                     </div>
+                    @if(isset($items) && count($items) > 0)
+                        <div class="card-footer">
+                            {{ $items->links() }}
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="col-md-3">2</div>

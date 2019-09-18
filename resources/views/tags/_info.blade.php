@@ -2,6 +2,6 @@
     @if(!empty($tag->content))
         {!! $tag->content !!}
     @else
-        暂无该百科标题
+        暂无该标签百科
     @endif
 </div>
