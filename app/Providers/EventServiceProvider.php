@@ -31,6 +31,7 @@ class EventServiceProvider extends ServiceProvider
 
         // 定义事件 - 阅读数自增
         Event::listen('article.read', function ($model) {
+            $model->timestamps = false;
             $model->increment('read');
         });
     }
