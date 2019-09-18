@@ -78,7 +78,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer d-flex justify-content-center">
                         {{ $articles->links() }}
                     </div>
                 </div>
