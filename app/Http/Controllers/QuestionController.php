@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuestionStore;
 use Auth;
 use App\Question;
 use Carbon\Carbon;
@@ -72,7 +73,7 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuestionStore $request)
     {
         $question = Auth::user()->questions()->create([
             'title' => $request->get('title'),
