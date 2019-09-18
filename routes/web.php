@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('articles/hot', 'ArticleController@hotArticle')->name('articles.hot');
 Route::get('articles/new', 'ArticleController@newArticle')->name('articles.new');

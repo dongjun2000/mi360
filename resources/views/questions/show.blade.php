@@ -141,7 +141,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-md-0 mt-3">
                 <div style="position:sticky; top:15px;">
                     <ul class="list-group">
                         <li class="list-group-item disabled active">相似问题</li>
