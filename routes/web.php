@@ -30,4 +30,4 @@ Route::resource('users', 'UserController');
 Route::resource('articles', 'ArticleController');
 Route::resource('tags', 'TagController');
 Route::resource('questions', 'QuestionController');
-
+Route::resource('answers', 'AnswerController');

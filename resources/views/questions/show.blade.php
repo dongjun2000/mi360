@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+@stop
+
 @section('content')
     <div class="container">
         {{--面包屑导航--}}
@@ -52,7 +56,8 @@
 
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="pl-3">
-                                <button class="btn btn-success btn-sm">关注 <span class="line">|</span> {{ $question->follow }}</button>
+                                <button class="btn btn-success btn-sm">关注 <span
+                                            class="line">|</span> {{ $question->follow }}</button>
                                 <button class="btn btn-primary btn-sm">收藏 <span class="line">|</span> 0</button>
                             </div>
                             <div class="pr-4 d-inline-flex align-items-center">
@@ -73,72 +78,71 @@
 
                 <div class="card mt-3">
                     <div class="card-body">
+                        <h5 class="mb-2">{{ count($answers) }} 个回答</h5>
                         <ul class="list-group list-group-flush mt-3">
-                            <li class="list-group-item">
-                                <div class="media">
-                                    <a href="">
-                                        <img src="http://mi360.cc/imgs/default/face.jpg" class="align-self-start mr-3 avatar-48"
-                                             alt="...">
-                                    </a>
-                                    <div class="media-body">
-                                        <div class="mt-0">
-                                            <a href="" class="font-weight-bold mr-2">董俊俊</a>
-                                            <span class="font">2分钟前回答</span>
+                            @foreach($answers as $answer)
+                                <li class="list-group-item">
+                                    <div class="media">
+                                        <a href="{{ route('users.show', $answer->user) }}">
+                                            <img src="{{ $answer->user->avatar }}"
+                                                 class="align-self-start mr-3 avatar-48"
+                                                 alt="...">
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="mt-0">
+                                                <a href="{{ route('users.show', $answer->user) }}"
+                                                   class="font-weight-bold mr-2">{{ $answer->user->name }}</a>
+                                                <span class="font">{{ $answer->created_at }}回答</span>
+                                            </div>
+                                            <div class="mt-2">
+                                                {!! $answer->content !!}
+                                            </div>
+                                            <div class="mt-2 d-inline-flex">
+                                                @can('update', $answer)
+                                                    <a href="{{ route('answers.edit', $answer) }}"
+                                                       class="btn btn-success btn-sm mr-2">编辑</a>
+                                                @endcan
+                                                @can('delete', $answer)
+                                                    <form action="{{ route('answers.destroy', $answer) }}"
+                                                          method="post">
+                                                        @csrf @method('DELETE')
+                                                        <button class="btn btn-danger btn-sm">删除</button>
+                                                    </form>
+                                                @endcan
+                                            </div>
                                         </div>
-                                        <div class="mt-2">
-                                            {!! $question->content !!}
-                                        </div>
-                                        <div class="mt-2">
-                                            <a href="">编辑</a>
-                                            <a href="">删除</a>
-                                        </div>
+                                        @if($answer->accept)
+                                            <div class="align-self-center mr-3 ml-5 text-success d-flex flex-column align-items-center">
+                                                <i class="fa fa-check-circle accepted-check-icon"
+                                                   style="font-size: 24px"></i>
+                                                <span>已采纳</span>
+                                            </div>
+                                        @endif
                                     </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media">
-                                    <a href="">
-                                        <img src="http://mi360.cc/imgs/default/face.jpg" class="align-self-start mr-3 avatar-48"
-                                             alt="...">
-                                    </a>
-                                    <div class="media-body">
-                                        <div class="mt-0">
-                                            <a href="" class="font-weight-bold mr-2">董俊俊</a>
-                                            <span class="font">2分钟前回答</span>
-                                        </div>
-                                        <div class="mt-2">
-                                            {!! $question->content !!}
-                                        </div>
-                                        <div class="mt-2">
-                                            <a href="">编辑</a>
-                                            <a href="">删除</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media">
-                                    <a href="">
-                                        <img src="http://mi360.cc/imgs/default/face.jpg" class="align-self-start mr-3 avatar-48"
-                                             alt="...">
-                                    </a>
-                                    <div class="media-body">
-                                        <div class="mt-0">
-                                            <a href="" class="font-weight-bold mr-2">董俊俊</a>
-                                            <span class="font">2分钟前回答</span>
-                                        </div>
-                                        <div class="mt-2">
-                                            {!! $question->content !!}
-                                        </div>
-                                        <div class="mt-2">
-                                            <a href="">编辑</a>
-                                            <a href="">删除</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
+                </div>
+
+                <div class="card mt-3">
+                    <form action="{{ route('answers.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="question_id" value="{{ $question->id }}">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <strong>撰写答案</strong>
+                            <button class="btn btn-success btn-sm">提交答案</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <textarea class="form-control" name="content" id="content" rows="3"
+                                          style="resize: none;"></textarea>
+                                @error('content')
+                                <small id="helpId" class="form-text text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="col-md-3 mt-md-0 mt-3">
@@ -156,4 +160,14 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('script')
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
+    <script>
+        $('textarea').ckeditor({
+            height: 150
+        });
+    </script>
 @stop

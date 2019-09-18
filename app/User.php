@@ -56,4 +56,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Question::class, 'user_id');
     }
+
+    /**
+     * 与回答模型一对多关联
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function answers()
+    {
+        return $this->hasMany(Answer::class, 'user_id');
+    }
 }

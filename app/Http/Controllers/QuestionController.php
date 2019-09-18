@@ -100,7 +100,10 @@ class QuestionController extends Controller
         // 触发事件
         event('article.read', $question);
 
-        return view('questions.show', compact('question'));
+        // 回答列表
+        $answers = $question->answers()->with('user')->orderByDesc('accept')->orderByDesc('updated_at')->get();
+
+        return view('questions.show', compact('question', 'answers'));
     }
 
     /**
