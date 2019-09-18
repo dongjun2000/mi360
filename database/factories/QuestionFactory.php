@@ -19,7 +19,8 @@ $factory->define(Question::class, function (Faker $faker) {
         'laster_answer_user' => [
             'id'         => ($current_id = $faker->randomElement($ids)),
             'name'       => \App\User::query()->where('id', $current_id)->pluck('name')[0],
-            'created_at' => $faker->time()
+            'created_at' => $faker->date('Y-m-d H:i:s'),
+            'type'      => $faker->numberBetween(0, 1),
         ],
     ];
 });

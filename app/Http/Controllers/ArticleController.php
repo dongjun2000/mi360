@@ -86,7 +86,7 @@ class ArticleController extends Controller
     public function store(ArticleSotre $request)
     {
 
-        $article = \Auth::user()->articles()->create([
+        $article = Auth::user()->articles()->create([
             'type'    => $request->get('type'),
             'title'   => $request->get('title'),
             'content' => $request->get('content'),

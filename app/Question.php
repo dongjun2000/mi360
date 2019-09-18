@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+    public $fillable = ['title', 'content', 'laster_answer_user'];
+
     /**
      * 定义性类型转换
      *

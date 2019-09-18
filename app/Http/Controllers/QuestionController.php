@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Question;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verified')->except(['index', 'show' ,'hotQuestions', 'unanswered']);
+    }
+
     /**
      * 热门问题
      *
@@ -16,7 +23,7 @@ class QuestionController extends Controller
     {
         $category = 'hot';
 
-        $questions = Question::query()->where('hot', '===', true)->orderBy('updated_at', 'DESC')->paginate(10);
+        $questions = Question::query()->where('hot', true)->orderBy('updated_at', 'DESC')->paginate(10);
 
         return view('questions.index', compact('category', 'questions'));
     }
@@ -56,7 +63,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        return view('questions.create');
     }
 
     /**
@@ -67,7 +74,18 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $question = Auth::user()->questions()->create([
+            'title' => $request->get('title'),
+            'content' => $request->get('content'),
+            'laster_answer_user' => [
+                'id' => Auth::user()->id,
+                'name' => Auth::user()->name,
+                'created_at' => date('Y-m-d H:i:s'),
+                'type' => 0,    // 创建
+            ],
+        ]);
+
+        return redirect()->route('questions.show', $question);
     }
 
     /**
