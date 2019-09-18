@@ -50,6 +50,8 @@ class TagController extends Controller
      */
     public function show(Request $request, $name)
     {
+        return redirect()->route('tags.questions', $name);
+
         $label = 'show';
         $tag   = Tag::query()->where('name', $name)->first();
         return view('tags.show', compact('tag', 'label'));
