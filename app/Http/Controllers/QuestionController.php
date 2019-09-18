@@ -97,6 +97,8 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
+        // 触发事件
+        event('article.read', $question);
 
         return view('questions.show', compact('question'));
     }
