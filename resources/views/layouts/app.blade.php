@@ -43,7 +43,7 @@
                             <a href="{{ route('articles.index') }}" class="nav-link">编程</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">问答</a>
+                            <a href="{{ route('questions.index') }}" class="nav-link">问答</a>
                         </li>
                         <li class="nav-item">
                             <a href="" class="nav-link">专栏</a>
@@ -66,7 +66,7 @@
                     </ul>
                     <form class="form-inline ml-auto">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                        <button class="btn btn-success my-2 my-sm-0" type="submit">搜索</button>
                     </form>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto align-items-center">
@@ -81,8 +81,20 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item"><a href="{{ route('articles.create') }}" class="nav-link">写文章</a></li>
+                            {{--操作菜单--}}
                             <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>创建</a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a href="{{ route('questions.create') }}" class="dropdown-item">提问题</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="{{ route('articles.create') }}" class="dropdown-item">写文章</a>
+                                </div>
+                            </li>
+
+                            {{--用户信息--}}
+                            <li class="nav-item dropdown ml-4">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" title="{{ Auth::user()->name }}" class="avatar-38"> <span class="caret"></span>
