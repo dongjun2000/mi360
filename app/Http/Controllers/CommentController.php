@@ -35,13 +35,14 @@ class CommentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 保存评论操作
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CommentStore $request)
     {
+//        dd($request->all());
         Auth::user()->comments()->create($request->all());
 
         return back()->with('success', '评论成功!');

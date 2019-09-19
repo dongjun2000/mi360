@@ -94,7 +94,7 @@ class ArticleController extends Controller
             'intro'   => mb_substr(strip_tags($request->get('content')), 0, 100),
         ]);
 
-        return redirect()->route('article.show', $article);
+        return redirect()->route('articles.show', $article);
     }
 
     /**
@@ -109,7 +109,7 @@ class ArticleController extends Controller
         event('article.read', $article);
 
         // 按pid分组
-        $comments = $article->comments()->with('user')->orderByDesc('created_at')->get()->groupBy('pid');
+        $comments = $article->comments()->with('user')->orderBy('created_at')->get()->groupBy('pid');
 
         return view('article.show', compact('article', 'comments'));
     }

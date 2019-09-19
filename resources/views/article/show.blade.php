@@ -85,7 +85,8 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <textarea class="form-control" name="content" id="content" rows="3" placeholder="文明社会，理性评论"></textarea>
+                                <textarea required class="form-control" name="content" id="content" rows="3"
+                                          placeholder="文明社会，理性评论"></textarea>
                                 @error('content')
                                 <small id="helpId" class="form-text text-danger">{{ $message }}</small>
                                 @enderror
@@ -102,7 +103,7 @@
                                 @foreach($comments[0] as $comment)
                                     <li class="list-group-item">
                                         <div class="media">
-                                            <a href="">
+                                            <a href="{{ route('users.show', $comment->user) }}">
                                                 <img src="{{ $comment->user->avatar }}" class="mr-3 avatar-48"
                                                      alt="{{ $comment->user->name }}">
                                             </a>
@@ -110,18 +111,21 @@
                                                 <div class="mt-0">
                                                     <a href="{{ route('users.show', $comment->user->id) }}"
                                                        class="font-weight-bold mr-2">{{ $comment->user->name }}</a>
-                                                    <span class="font">{{ $comment->created_at->diffForHumans() }}评论</span>
+                                                    <span class="font">{{ $comment->created_at->diffForHumans() }}
+                                                        评论了文章： {{ $article->title }}</span>
                                                 </div>
                                                 <div class="mt-2">
                                                     {!! $comment->content !!}
                                                 </div>
                                                 <div class="mt-2 d-inline-flex">
+                                                    <a href="#collapseExample{{ $comment->id }}" data-toggle="collapse"
+                                                       class="btn btn-success btn-sm mr-2">回复</a>
+
                                                     @can('update', $comment)
                                                         <a href="{{ route('comments.edit', $comment) }}"
                                                            class="btn btn-info text-white btn-sm mr-2">编辑</a>
                                                     @endcan
-                                                    <a href="{{ route('comments.reply', $comment) }}"
-                                                       class="btn btn-success btn-sm mr-2">回复</a>
+
                                                     @can('delete', $comment)
                                                         <form action="{{ route('comments.destroy', $comment) }}"
                                                               method="post">
@@ -130,6 +134,23 @@
                                                         </form>
                                                     @endcan
                                                 </div>
+                                                <form action="{{ route('comments.store') }}" method="post"
+                                                      class="mt-2 collapse" id="collapseExample{{ $comment->id }}">
+                                                    @csrf
+                                                    <input type="hidden" name="pid" value="{{ $comment->id }}">
+                                                    <input type="hidden" name="article_id" value="{{ $article->id }}">
+                                                    <input type="hidden" name="reply_user_id" value="{{ $comment->user->id }}">
+                                                    <div class="input-group mb-3">
+                                                        <textarea required type="text" class="form-control" id="content"
+                                                                  name="content" placeholder="文明社会，理性评论"
+                                                                  rows="1"></textarea>
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-success" type="submit"
+                                                                    id="button-addon2">添加回复
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                                 @if(isset($comments[$comment->id]))
                                                     @foreach($comments[$comment->id] as $child)
                                                         <div class="media mt-3">
@@ -140,21 +161,26 @@
                                                             </a>
                                                             <div class="media-body">
                                                                 <div class="mt-0">
-                                                                    <a href="{{ route('users.show', ['id' => $child->user->id]) }}"
+                                                                    <a href="{{ route('users.show', $child->user) }}"
                                                                        class="font-weight-bold mr-2">{{ $child->user->name }}</a>
                                                                     <span class="font">{{ $child->created_at->diffForHumans() }}
-                                                                        回复</span>
+                                                                        回复了</span>
+                                                                    <a href="{{ route('users.show', $child->user) }}" class="font-weight-bold">{{ $child->reply_user->name }}</a>
                                                                 </div>
                                                                 <div class="mt-2">
                                                                     {!! $child->content !!}
                                                                 </div>
                                                                 <div class="mt-2 d-inline-flex">
+                                                                    <a href="#collapseExample{{ $child->id }}"
+                                                                       data-toggle="collapse"
+                                                                       href="{{ route('comments.reply', $child) }}"
+                                                                       class="btn btn-success btn-sm mr-2">回复</a>
+
                                                                     @can('update', $child)
                                                                         <a href="{{ route('comments.edit', $child) }}"
-                                                                           class="btn btn-sm mr-2">编辑</a>
+                                                                           class="btn btn-info text-white btn-sm mr-2">编辑</a>
                                                                     @endcan
-                                                                    <a href="{{ route('comments.reply', $child) }}"
-                                                                       class="btn btn-success btn-sm mr-2">回复</a>
+
                                                                     @can('delete', $child)
                                                                         <form action="{{ route('comments.destroy', $child) }}"
                                                                               method="post">
@@ -164,6 +190,29 @@
                                                                         </form>
                                                                     @endcan
                                                                 </div>
+                                                                <form action="{{ route('comments.store') }}"
+                                                                      method="post" class="mt-2 collapse"
+                                                                      id="collapseExample{{ $child->id }}">
+                                                                    @csrf
+                                                                    <input type="hidden" name="pid"
+                                                                           value="{{ $comment->id }}">
+                                                                    <input type="hidden" name="article_id"
+                                                                           value="{{ $article->id }}">
+                                                                    <input type="hidden" name="reply_user_id"
+                                                                           value="{{ $child->user->id }}">
+                                                                    <div class="input-group mb-3">
+                                                                        <textarea required type="text" class="form-control"
+                                                                                  id="content" name="content"
+                                                                                  placeholder="文明社会，理性评论"
+                                                                                  rows="1"></textarea>
+                                                                        <div class="input-group-append">
+                                                                            <button class="btn btn-success"
+                                                                                    type="submit" id="button-addon2">
+                                                                                添加回复
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     @endforeach

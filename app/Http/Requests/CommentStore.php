@@ -25,6 +25,8 @@ class CommentStore extends FormRequest
     {
         return [
             'article_id' => 'required|int',
+            'comment_id' => 'sometimes|int',
+            'reply_user_id' => 'sometimes|int',
             'content'    => 'required|max:255'
         ];
     }

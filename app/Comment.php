@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    public $fillable = ['article_id', 'content'];
+    public $fillable = ['article_id', 'content', 'pid', 'reply_user_id'];
 
     /**
      * 与文章模型一对多关联 - 反向
@@ -26,6 +26,18 @@ class Comment extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * 与用户模型一对多关联 - 反向
+     *
+     * 回复用户
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function reply_user()
+    {
+        return $this->belongsTo(User::class, 'reply_user_id');
     }
 
     /**
