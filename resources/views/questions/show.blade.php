@@ -92,7 +92,7 @@
                                             <div class="mt-0">
                                                 <a href="{{ route('users.show', $answer->user) }}"
                                                    class="font-weight-bold mr-2">{{ $answer->user->name }}</a>
-                                                <span class="font">{{ $answer->created_at }}回答</span>
+                                                <span class="font">{{ $answer->created_at }} 回答了： {{ $question->title }}</span>
                                             </div>
                                             <div class="mt-2">
                                                 {!! $answer->content !!}
@@ -104,7 +104,7 @@
                                                 @endcan
                                                 @can('delete', $answer)
                                                     <form action="{{ route('answers.destroy', $answer) }}"
-                                                          method="post">
+                                                          method="post" onsubmit="return confirm('真的要删除该评论？')">
                                                         @csrf @method('DELETE')
                                                         <button class="btn btn-danger btn-sm">删除</button>
                                                     </form>

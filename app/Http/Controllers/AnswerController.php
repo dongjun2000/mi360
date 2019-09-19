@@ -45,6 +45,9 @@ class AnswerController extends Controller
     {
         Auth::user()->answers()->create($request->all());
 
+        // TODO:: 更新问题表的冗余字段
+
+
         return back()->with('success', '发表成功!');
     }
 
@@ -87,10 +90,16 @@ class AnswerController extends Controller
      * 删除答案操作
      *
      * @param Answer $answer
+     * @return $this
+     * @throws \Exception
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy(Answer $answer)
     {
         $this->authorize('delete', $answer);
+
+        $answer->delete();
+
+        return back()->with('success', '删除成功！');
     }
 }

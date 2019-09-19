@@ -4,9 +4,12 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Answer extends Model
 {
+    use SoftDeletes;
+
     public $fillable = ['question_id', 'content'];
 
     /**
