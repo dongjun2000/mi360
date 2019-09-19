@@ -21,6 +21,7 @@ class CreateCommentsTable extends Migration
             $table->integer('article_id');
             $table->string('content')->comment('评论内容');
             $table->tinyInteger('status')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

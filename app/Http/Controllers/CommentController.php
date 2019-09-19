@@ -86,10 +86,16 @@ class CommentController extends Controller
      * 删除评论
      *
      * @param Comment $comment
+     * @return $this
+     * @throws \Exception
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy(Comment $comment)
     {
         $this->authorize('delete', $comment);
+
+        $comment->delete();
+
+        return back()->with('success', '删除成功！');
     }
 }

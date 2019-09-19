@@ -128,7 +128,7 @@
 
                                                     @can('delete', $comment)
                                                         <form action="{{ route('comments.destroy', $comment) }}"
-                                                              method="post">
+                                                              method="post" onsubmit="return confirm('真的要删除该评论？')">
                                                             @csrf @method('DELETE')
                                                             <button class="btn btn-danger btn-sm">删除</button>
                                                         </form>
@@ -173,7 +173,6 @@
                                                                 <div class="mt-2 d-inline-flex">
                                                                     <a href="#collapseExample{{ $child->id }}"
                                                                        data-toggle="collapse"
-                                                                       href="{{ route('comments.reply', $child) }}"
                                                                        class="btn btn-success btn-sm mr-2">回复</a>
 
                                                                     {{--@can('update', $child)--}}
@@ -183,7 +182,7 @@
 
                                                                     @can('delete', $child)
                                                                         <form action="{{ route('comments.destroy', $child) }}"
-                                                                              method="post">
+                                                                              method="post" onsubmit="return confirm('真的要删除该评论？')">
                                                                             @csrf @method('DELETE')
                                                                             <button class="btn btn-danger btn-sm">删除
                                                                             </button>
