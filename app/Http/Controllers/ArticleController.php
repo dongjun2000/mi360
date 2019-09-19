@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use Auth;
 use App\Article;
 use App\Http\Requests\ArticleSotre;
@@ -107,7 +108,10 @@ class ArticleController extends Controller
         // 分发事件 - 阅读数自增
         event('article.read', $article);
 
-        return view('article.show', compact('article'));
+        // 按pid分组
+        $comments = $article->comments()->with('user')->orderByDesc('created_at')->get()->groupBy('pid');
+
+        return view('article.show', compact('article', 'comments'));
     }
 
     /**

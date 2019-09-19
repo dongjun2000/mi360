@@ -73,9 +73,84 @@
                                         class="line">|</span> {{ $article->collect }}</button>
                         </div>
                     </div>
-
                 </div>
+                @if(isset($comments[0]))
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5 class="mb-2">用户评论</h5>
+                            <ul class="list-group list-group-flush mt-3">
+                                @foreach($comments[0] as $comment)
+                                    <li class="list-group-item">
+                                        <div class="media">
+                                            <a href="">
+                                                <img src="{{ $comment->user['avatar'] }}" class="mr-3 avatar-48"
+                                                     alt="{{ $comment->user['name'] }}">
+                                            </a>
+                                            <div class="media-body">
+                                                <div class="mt-0">
+                                                    <a href="{{ route('users.show', ['id' => $comment->user['id']]) }}"
+                                                       class="font-weight-bold mr-2">{{ $comment->user['name'] }}</a>
+                                                    <span class="font">{{ $comment->created_at->diffForHumans() }}
+                                                        评论</span>
+                                                </div>
+                                                <div class="mt-2">
+                                                    {!! $comment->content !!}
+                                                </div>
+                                                <div class="mt-2 d-inline-flex">
+                                                    <a href="{{ route('answers.edit', $comment) }}"
+                                                       class="btn btn-success btn-sm mr-2">编辑</a>
+                                                    <a href="{{ route('answers.edit', $comment) }}"
+                                                       class="btn btn-success btn-sm mr-2">回复</a>
+                                                    <form action="{{ route('answers.destroy', $comment) }}"
+                                                          method="post">
+                                                        @csrf @method('DELETE')
+                                                        <button class="btn btn-danger btn-sm">删除</button>
+                                                    </form>
+                                                </div>
+                                                @if(isset($comments[$comment->id]))
+                                                    @foreach($comments[$comment->id] as $child)
+                                                        <div class="media mt-3">
+                                                            <a href="#">
+                                                                <img src="{{ $child->user->avatar }}"
+                                                                     class="mr-3 avatar-48"
+                                                                     alt="{{ $child->user->name }}">
+                                                            </a>
+                                                            <div class="media-body">
+                                                                <div class="mt-0">
+                                                                    <a href="{{ route('users.show', ['id' => $child->user->id]) }}"
+                                                                       class="font-weight-bold mr-2">{{ $child->user->name }}</a>
+                                                                    <span class="font">{{ $child->created_at->diffForHumans() }}
+                                                                        回复</span>
+                                                                </div>
+                                                                <div class="mt-2">
+                                                                    {!! $child->content !!}
+                                                                </div>
+                                                                <div class="mt-2 d-inline-flex">
+                                                                    <a href="{{ route('answers.edit', $comment) }}"
+                                                                       class="btn btn-success btn-sm mr-2">编辑</a>
+                                                                    <a href="{{ route('answers.edit', $comment) }}"
+                                                                       class="btn btn-success btn-sm mr-2">回复</a>
+                                                                    <form action="{{ route('answers.destroy', $comment) }}"
+                                                                          method="post">
+                                                                        @csrf @method('DELETE')
+                                                                        <button class="btn btn-danger btn-sm">删除
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                @endif
             </div>
+
             <div class="col-md-3">
                 {{--作者信息--}}
                 <div class="card author">

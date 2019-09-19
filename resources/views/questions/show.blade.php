@@ -86,7 +86,7 @@
                                         <a href="{{ route('users.show', $answer->user) }}">
                                             <img src="{{ $answer->user->avatar }}"
                                                  class="align-self-start mr-3 avatar-48"
-                                                 alt="...">
+                                                 alt="{{ $answer->user->name }}">
                                         </a>
                                         <div class="media-body">
                                             <div class="mt-0">

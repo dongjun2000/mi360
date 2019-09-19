@@ -64,6 +64,16 @@ class Article extends Model
     }
 
     /**
+     * 与评论模型一对多关联
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'article_id');
+    }
+
+    /**
      * 查询作用域 - 允许显示的
      *
      * @param $query
