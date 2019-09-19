@@ -92,9 +92,4 @@ class CommentController extends Controller
     {
         $this->authorize('delete', $comment);
     }
-
-    public function reply()
-    {
-        echo 'reply';
-    }
 }
