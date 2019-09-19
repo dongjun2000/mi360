@@ -74,6 +74,26 @@
                         </div>
                     </div>
                 </div>
+                {{--评论表单区--}}
+                <div class="card mt-3">
+                    <form action="{{ route('comments.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="article_id" value="{{ $article->id }}">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <strong>评论</strong>
+                            <button class="btn btn-success btn-sm">发表评论</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <textarea class="form-control" name="content" id="content" rows="3" placeholder="文明社会，理性评论"></textarea>
+                                @error('content')
+                                <small id="helpId" class="form-text text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {{--评论列表区--}}
                 @if(isset($comments[0]))
                     <div class="card mt-3">
                         <div class="card-body">
@@ -83,29 +103,32 @@
                                     <li class="list-group-item">
                                         <div class="media">
                                             <a href="">
-                                                <img src="{{ $comment->user['avatar'] }}" class="mr-3 avatar-48"
-                                                     alt="{{ $comment->user['name'] }}">
+                                                <img src="{{ $comment->user->avatar }}" class="mr-3 avatar-48"
+                                                     alt="{{ $comment->user->name }}">
                                             </a>
                                             <div class="media-body">
                                                 <div class="mt-0">
-                                                    <a href="{{ route('users.show', ['id' => $comment->user['id']]) }}"
-                                                       class="font-weight-bold mr-2">{{ $comment->user['name'] }}</a>
-                                                    <span class="font">{{ $comment->created_at->diffForHumans() }}
-                                                        评论</span>
+                                                    <a href="{{ route('users.show', $comment->user->id) }}"
+                                                       class="font-weight-bold mr-2">{{ $comment->user->name }}</a>
+                                                    <span class="font">{{ $comment->created_at->diffForHumans() }}评论</span>
                                                 </div>
                                                 <div class="mt-2">
                                                     {!! $comment->content !!}
                                                 </div>
                                                 <div class="mt-2 d-inline-flex">
-                                                    <a href="{{ route('answers.edit', $comment) }}"
-                                                       class="btn btn-success btn-sm mr-2">编辑</a>
-                                                    <a href="{{ route('answers.edit', $comment) }}"
+                                                    @can('update', $comment)
+                                                        <a href="{{ route('comments.edit', $comment) }}"
+                                                           class="btn btn-info text-white btn-sm mr-2">编辑</a>
+                                                    @endcan
+                                                    <a href="{{ route('comments.reply', $comment) }}"
                                                        class="btn btn-success btn-sm mr-2">回复</a>
-                                                    <form action="{{ route('answers.destroy', $comment) }}"
-                                                          method="post">
-                                                        @csrf @method('DELETE')
-                                                        <button class="btn btn-danger btn-sm">删除</button>
-                                                    </form>
+                                                    @can('delete', $comment)
+                                                        <form action="{{ route('comments.destroy', $comment) }}"
+                                                              method="post">
+                                                            @csrf @method('DELETE')
+                                                            <button class="btn btn-danger btn-sm">删除</button>
+                                                        </form>
+                                                    @endcan
                                                 </div>
                                                 @if(isset($comments[$comment->id]))
                                                     @foreach($comments[$comment->id] as $child)
@@ -126,16 +149,20 @@
                                                                     {!! $child->content !!}
                                                                 </div>
                                                                 <div class="mt-2 d-inline-flex">
-                                                                    <a href="{{ route('answers.edit', $comment) }}"
-                                                                       class="btn btn-success btn-sm mr-2">编辑</a>
-                                                                    <a href="{{ route('answers.edit', $comment) }}"
+                                                                    @can('update', $child)
+                                                                        <a href="{{ route('comments.edit', $child) }}"
+                                                                           class="btn btn-sm mr-2">编辑</a>
+                                                                    @endcan
+                                                                    <a href="{{ route('comments.reply', $child) }}"
                                                                        class="btn btn-success btn-sm mr-2">回复</a>
-                                                                    <form action="{{ route('answers.destroy', $comment) }}"
-                                                                          method="post">
-                                                                        @csrf @method('DELETE')
-                                                                        <button class="btn btn-danger btn-sm">删除
-                                                                        </button>
-                                                                    </form>
+                                                                    @can('delete', $child)
+                                                                        <form action="{{ route('comments.destroy', $child) }}"
+                                                                              method="post">
+                                                                            @csrf @method('DELETE')
+                                                                            <button class="btn btn-danger btn-sm">删除
+                                                                            </button>
+                                                                        </form>
+                                                                    @endcan
                                                                 </div>
                                                             </div>
                                                         </div>

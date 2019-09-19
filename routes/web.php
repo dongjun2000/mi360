@@ -25,9 +25,12 @@ Route::get('tags/{name}/questions', 'TagController@questions')->name('tags.quest
 Route::get('tags/{name}/article', 'TagController@article')->name('tags.article');
 Route::get('tags/{name}/info', 'TagController@info')->name('tags.info');
 
+Route::get('comments/{comment}/reply', 'CommentController@reply')->name('comments.reply');
+
 
 Route::resource('users', 'UserController');
 Route::resource('articles', 'ArticleController');
 Route::resource('tags', 'TagController');
 Route::resource('questions', 'QuestionController');
 Route::resource('answers', 'AnswerController');
+Route::resource('comments', 'CommentController');

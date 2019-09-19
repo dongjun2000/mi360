@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Comment;
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentStore;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,9 +40,11 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentStore $request)
     {
-        //
+        Auth::user()->comments()->create($request->all());
+
+        return back()->with('success', '评论成功!');
     }
 
     /**
@@ -50,36 +59,41 @@ class CommentController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 更新评论页面
      *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param Comment $comment
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(Comment $comment)
     {
-        //
+        $this->authorize('update', $comment);
     }
 
     /**
-     * Update the specified resource in storage.
+     * 更新评论操作
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Comment $comment
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $this->authorize('update', $comment);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 删除评论
      *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param Comment $comment
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy(Comment $comment)
     {
-        //
+        $this->authorize('delete', $comment);
+    }
+
+    public function reply()
+    {
+        echo 'reply';
     }
 }

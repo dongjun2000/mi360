@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    public $fillable = ['article_id', 'content'];
+
     /**
      * 与文章模型一对多关联 - 反向
      *
