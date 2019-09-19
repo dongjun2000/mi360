@@ -1,5 +1,7 @@
 @extends('errors.layout')
 
+@section('title', 'HTTP 404')
+
 @section('message')
     <div class="d-flex justify-content-around align-items-center">
         <div>
@@ -21,12 +23,15 @@
             padding: 80px 0;
             display: flex;
         }
+
         .justify-content-around {
             justify-content: space-around;
         }
+
         .align-items-center {
             align-items: center;
         }
+
         .btn {
             display: block;
             width: 60px;
@@ -35,13 +40,16 @@
             text-align: center;
             border-radius: 3px;
         }
+
         .btn-primary {
             color: #fff;
             background-color: #00B0E8;
         }
+
         a.btn {
             text-decoration: none;
         }
+
         a.btn:hover {
             background-color: #0f74a8;
         }
