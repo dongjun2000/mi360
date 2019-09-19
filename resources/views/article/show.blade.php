@@ -121,10 +121,10 @@
                                                     <a href="#collapseExample{{ $comment->id }}" data-toggle="collapse"
                                                        class="btn btn-success btn-sm mr-2">回复</a>
 
-                                                    @can('update', $comment)
-                                                        <a href="{{ route('comments.edit', $comment) }}"
-                                                           class="btn btn-info text-white btn-sm mr-2">编辑</a>
-                                                    @endcan
+                                                    {{--@can('update', $comment)--}}
+                                                        {{--<a href="{{ route('comments.edit', $comment) }}"--}}
+                                                           {{--class="btn btn-info text-white btn-sm mr-2">编辑</a>--}}
+                                                    {{--@endcan--}}
 
                                                     @can('delete', $comment)
                                                         <form action="{{ route('comments.destroy', $comment) }}"
@@ -176,10 +176,10 @@
                                                                        href="{{ route('comments.reply', $child) }}"
                                                                        class="btn btn-success btn-sm mr-2">回复</a>
 
-                                                                    @can('update', $child)
-                                                                        <a href="{{ route('comments.edit', $child) }}"
-                                                                           class="btn btn-info text-white btn-sm mr-2">编辑</a>
-                                                                    @endcan
+                                                                    {{--@can('update', $child)--}}
+                                                                        {{--<a href="{{ route('comments.edit', $child) }}"--}}
+                                                                           {{--class="btn btn-info text-white btn-sm mr-2">编辑</a>--}}
+                                                                    {{--@endcan--}}
 
                                                                     @can('delete', $child)
                                                                         <form action="{{ route('comments.destroy', $child) }}"
