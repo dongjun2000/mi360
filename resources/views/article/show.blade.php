@@ -63,6 +63,12 @@
 
                         {{--文章内容--}}
                         <div class="card-text content">
+                            @if($article->pic)
+                                <div class="text-center mb-3">
+                                    <img src="{{ $article->pic }}" alt="{{ $article->title }}"
+                                         title="{{ $article->title }}">
+                                </div>
+                            @endif
                             {!! $article->content !!}
                         </div>
 
@@ -122,8 +128,8 @@
                                                        class="btn btn-success btn-sm mr-2">回复</a>
 
                                                     {{--@can('update', $comment)--}}
-                                                        {{--<a href="{{ route('comments.edit', $comment) }}"--}}
-                                                           {{--class="btn btn-info text-white btn-sm mr-2">编辑</a>--}}
+                                                    {{--<a href="{{ route('comments.edit', $comment) }}"--}}
+                                                    {{--class="btn btn-info text-white btn-sm mr-2">编辑</a>--}}
                                                     {{--@endcan--}}
 
                                                     @can('delete', $comment)
@@ -139,7 +145,8 @@
                                                     @csrf
                                                     <input type="hidden" name="pid" value="{{ $comment->id }}">
                                                     <input type="hidden" name="article_id" value="{{ $article->id }}">
-                                                    <input type="hidden" name="reply_user_id" value="{{ $comment->user->id }}">
+                                                    <input type="hidden" name="reply_user_id"
+                                                           value="{{ $comment->user->id }}">
                                                     <div class="input-group mb-3">
                                                         <textarea required type="text" class="form-control" id="content"
                                                                   name="content" placeholder="文明社会，理性评论"
@@ -165,7 +172,8 @@
                                                                        class="font-weight-bold mr-2">{{ $child->user->name }}</a>
                                                                     <span class="font">{{ $child->created_at->diffForHumans() }}
                                                                         回复了</span>
-                                                                    <a href="{{ route('users.show', $child->user) }}" class="font-weight-bold">{{ $child->reply_user->name }}</a>
+                                                                    <a href="{{ route('users.show', $child->user) }}"
+                                                                       class="font-weight-bold">{{ $child->reply_user->name }}</a>
                                                                 </div>
                                                                 <div class="mt-2">
                                                                     {!! $child->content !!}
@@ -176,13 +184,14 @@
                                                                        class="btn btn-success btn-sm mr-2">回复</a>
 
                                                                     {{--@can('update', $child)--}}
-                                                                        {{--<a href="{{ route('comments.edit', $child) }}"--}}
-                                                                           {{--class="btn btn-info text-white btn-sm mr-2">编辑</a>--}}
+                                                                    {{--<a href="{{ route('comments.edit', $child) }}"--}}
+                                                                    {{--class="btn btn-info text-white btn-sm mr-2">编辑</a>--}}
                                                                     {{--@endcan--}}
 
                                                                     @can('delete', $child)
                                                                         <form action="{{ route('comments.destroy', $child) }}"
-                                                                              method="post" onsubmit="return confirm('真的要删除该评论？')">
+                                                                              method="post"
+                                                                              onsubmit="return confirm('真的要删除该评论？')">
                                                                             @csrf @method('DELETE')
                                                                             <button class="btn btn-danger btn-sm">删除
                                                                             </button>
@@ -200,7 +209,8 @@
                                                                     <input type="hidden" name="reply_user_id"
                                                                            value="{{ $child->user->id }}">
                                                                     <div class="input-group mb-3">
-                                                                        <textarea required type="text" class="form-control"
+                                                                        <textarea required type="text"
+                                                                                  class="form-control"
                                                                                   id="content" name="content"
                                                                                   placeholder="文明社会，理性评论"
                                                                                   rows="1"></textarea>
@@ -226,7 +236,7 @@
                 @endif
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 mt-md-0 mt-3">
                 {{--作者信息--}}
                 <div class="card author">
                     <div class="card-header title">
