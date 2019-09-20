@@ -15,6 +15,13 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes(['verify' => true]);
 
+// 关注与取关
+Route::get('follow/{user}', 'UserController@follow')->name('users.follow');
+
+// 关注与粉丝列表
+Route::get('user/{user}/follow', 'FollowController@follows')->name('follow');
+Route::get('user/{user}/fans', 'FollowController@fans')->name('fans');
+
 Route::get('articles/hot', 'ArticleController@hotArticle')->name('articles.hot');
 Route::get('articles/new', 'ArticleController@newArticle')->name('articles.new');
 

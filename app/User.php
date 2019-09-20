@@ -38,6 +38,50 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
+     * 多对多自关联 - 我的关注
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function follows()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'fans', 'follow')->withTimestamps();
+    }
+
+    /**
+     * 多对多自关联 - 我的粉丝
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function fans()
+    {
+        // 我的粉丝按照关注时间倒序
+        return $this->belongsToMany(User::class, 'follows', 'follow', 'fans')->orderBy('follows.created_at', 'DESC')->withTimestamps();
+    }
+
+    /**
+     * 关注与取关
+     *
+     * @param $ids int|array 粉丝用户id
+     * @return array
+     */
+    public function followToggle($ids)
+    {
+        $ids = is_array($ids) ?: [$ids];
+        return $this->fans()->toggle($ids);
+    }
+
+    /**
+     * 查询指定用户是否是我的粉丝
+     *
+     * @param $user_id int 粉丝用户id
+     * @return mixed
+     */
+    public function isFollow($user_id)
+    {
+        return $this->fans()->wherePivot('fans', $user_id)->first();
+    }
+
+    /**
      * 与文章模型一对多关联
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

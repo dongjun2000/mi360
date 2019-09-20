@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -10,6 +11,19 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('verified')->except(['show']);
+    }
+
+    /**
+     * 关注与取关
+     *
+     * @param User $user
+     * @return $this
+     */
+    public function follow(User $user)
+    {
+        $user->followToggle(Auth::user()->id);
+
+        return back()->with('success', '关注成功!');
     }
 
     /**
@@ -35,7 +49,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -46,18 +60,25 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
-        return view('user.show', compact('user'));
+        // 判断用户的关注状态
+        $followStatus = false;
+        if (Auth::check()) {
+            // 登录用户获取关注状态
+            $followStatus = $user->isFollow(Auth::user()->id);
+        }
+
+        return view('user.show', compact('user', 'followStatus'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -68,8 +89,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -80,7 +101,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)

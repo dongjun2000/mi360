@@ -239,10 +239,10 @@
             <div class="col-md-3 mt-md-0 mt-3">
                 {{--作者信息--}}
                 <div class="card author">
-                    <div class="card-header title">
+                    <div class="card-header">
                         作者
                     </div>
-                    <div class="card-body info">
+                    <div class="card-body">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex align-items-center justify-content-between">
                                 <h5>{{ $article->user->name }}</h5>

@@ -10713,6 +10713,22 @@ a.tags:hover {
   background-color: #3490dc;
 }
 
+.author .card-header {
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.author .card-body,
+.author .card-footer {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.author .card-footer {
+  text-align: center;
+}
+
 .list h2.title {
   font-size: 16px;
   font-weight: 700;
@@ -10730,22 +10746,6 @@ a.tags:hover {
 .detail h1 {
   color: #333;
   font-size: 22px;
-}
-
-.article-show .author .title {
-  color: #333;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.article-show .author .info {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.article-show .author h5 {
-  font-size: 14px;
-  color: #333;
 }
 
 .tags .tag-list .title {

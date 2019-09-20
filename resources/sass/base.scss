@@ -66,3 +66,18 @@ a.tags {
     background-color: $blue;
   }
 }
+
+.author {
+  .card-header {
+    color: #333;
+    font-size:16px;
+    font-weight: 500;
+  }
+  .card-body,.card-footer {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .card-footer {
+    text-align: center;
+  }
+}

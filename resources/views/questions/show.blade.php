@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('css')
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-@stop
-
 @section('content')
     <div class="container">
         {{--面包屑导航--}}
