@@ -55,7 +55,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function fans()
     {
         // 我的粉丝按照关注时间倒序
-        return $this->belongsToMany(User::class, 'follows', 'follow', 'fans')->orderBy('follows.created_at', 'DESC')->withTimestamps();
+        return $this->belongsToMany(User::class, 'follows', 'follow', 'fans')->withTimestamps();
     }
 
     /**
