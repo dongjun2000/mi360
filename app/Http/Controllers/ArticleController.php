@@ -64,6 +64,7 @@ class ArticleController extends Controller
             ->with('user')
             ->orderByDesc('id')
             ->show()
+            ->comment()
             ->paginate(10);
 
         return view('article.index', compact('articles', 'category'));
