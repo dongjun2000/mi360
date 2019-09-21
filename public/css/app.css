@@ -10652,6 +10652,11 @@ a:hover {
   color: #3490dc;
 }
 
+h1 {
+  font-weight: 700;
+  font-size: 20px;
+}
+
 body {
   color: #777;
 }
@@ -10726,6 +10731,13 @@ a.tags:hover {
 }
 
 .author .card-footer {
+  text-align: center;
+}
+
+i.fa {
+  color: #a5a5a5;
+  margin-right: 0.25rem;
+  width: 1.18em;
   text-align: center;
 }
 

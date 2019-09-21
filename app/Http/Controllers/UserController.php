@@ -65,16 +65,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        // 判断用户的关注状态
-        $followStatus = false;
-        if (Auth::check()) {
-            // 登录用户获取关注状态
-            $followStatus = $user->isFollow(Auth::user()->id);
-        }
 
-        $user = User::query()->withCount('fans', 'articles')->find($user->id);
-
-        return view('user.show', compact('user', 'followStatus'));
+        return view('user.show', compact('user'));
     }
 
     /**
