@@ -25,7 +25,7 @@ class AnswerStore extends FormRequest
     {
         return [
             'question_id' => 'required|int',
-            'content' => 'required|min:50',
+            'content' => 'required|min:20',
         ];
     }
 }
