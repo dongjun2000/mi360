@@ -11,9 +11,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-3">
+                            <h5 class="mb-3" title="{{ $user->name }} 的文章">
                                 <i class="fa fa-file-text-o fa-2x"></i>
-                                {{ $user->name }} 的文章 ({{ $articles->total() }})
+                                {{ Str::limit($user->name, 12) }} 的文章 ({{ $articles->total() }})
                             </h5>
                             <div class="btn-group d-inline-flex align-items-center">
                                 <span>排序：</span>
@@ -32,7 +32,7 @@
                             @include('includes.articles')
                         </ul>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer d-flex justify-content-center">
                         {{ $articles->links() }}
                     </div>
                 </div>

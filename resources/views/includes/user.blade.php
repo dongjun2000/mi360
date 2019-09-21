@@ -10,7 +10,7 @@
                     <li class="list-inline-item d-flex flex-column align-items-center" title="博客文章总数">
 
                         <span>文章</span>
-                        <a href="">
+                        <a href="{{ route('users.articles', $user) }}">
                             <span>{{ $user->articles_count }}</span>
                         </a>
                     </li>

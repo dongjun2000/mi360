@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('verified')->except(['show', 'articles']);
+        $this->middleware('verified')->except(['show', 'articles', 'questions', 'answers', 'collects']);
     }
 
     /**
@@ -126,21 +126,41 @@ class UserController extends Controller
     /**
      * 我的提问
      *
+     * @param Request $request
      * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function questions(User $user)
+    public function questions(Request $request, User $user)
     {
+        $tag = 'questions';
 
+        // 排序参数处理
+        $sort = $request->get('sort', 'created_at');
+        $sort = in_array($sort, ['created_at', 'answer', 'follow', 'read']) ? $sort : 'created_at';
+
+        $questions = $user->questions()->orderByDesc($sort)->paginate(10);
+
+        return view('user.questions', compact('tag', 'user', 'questions'));
     }
 
     /**
      * 我的回答
      *
+     * @param Request $request
      * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function answers(User $user)
+    public function answers(Request $request, User $user)
     {
+        $tag = 'answers';
 
+        // 排序参数处理
+        $sort = $request->get('sort', 'created_at');
+        $sort = in_array($sort, ['created_at', 'accept']) ? $sort : 'created_at';
+
+        $answers = $user->answers()->with('question')->orderByDesc($sort)->paginate(10);
+
+        return view('user.answers', compact('tag', 'user', 'answers'));
     }
 
     /**
