@@ -22,11 +22,10 @@
                             </a>
                             {{--作者名--}}
                             <span>
-                                                        <a href="{{ route('users.show', $article->user) }}"
-                                                           title="{{$article->user->name}}">{{ $article->user->name }}</a>
-                                                        在 {{ $article->created_at }} 发布于
-                                                        <a href="" title="">self.文章</a>
-                                                    </span>
+                                <a href="{{ route('users.show', $article->user) }}"
+                                   title="{{$article->user->name}}">{{ $article->user->name }}</a>
+                                在 {{ $article->created_at }} 发布
+                            </span>
                         </li>
                         <li class="list-inline-item">
                             <span>收藏数: {{ $article->collect }}</span>
