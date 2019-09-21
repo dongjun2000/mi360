@@ -65,8 +65,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-
-        return view('user.show', compact('user'));
+        $tag = 'show';
+        return view('user.show', compact('tag','user'));
     }
 
     /**
@@ -101,5 +101,45 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    /**
+     * 我的文章
+     *
+     * @param User $user
+     */
+    public function articles(User $user)
+    {
+
+    }
+
+    /**
+     * 我的提问
+     *
+     * @param User $user
+     */
+    public function questions(User $user)
+    {
+
+    }
+
+    /**
+     * 我的回答
+     *
+     * @param User $user
+     */
+    public function answers(User $user)
+    {
+
+    }
+
+    /**
+     * 我的收藏
+     *
+     * @param User $user
+     */
+    public function collects(User $user)
+    {
+
     }
 }

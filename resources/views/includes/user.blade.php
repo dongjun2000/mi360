@@ -16,7 +16,7 @@
                     </li>
                     <li class="list-inline-item d-flex flex-column align-items-center" title="关注作者的用户数">
                         <span>粉丝</span>
-                        <a href="{{ route('fans', $user) }}">
+                        <a href="{{ route('users.fans', $user) }}">
                             <span>{{ $user->fans_count }}</span>
                         </a>
                     </li>
@@ -43,8 +43,8 @@
                 <p title="工作单位与职位">
                     <i class="fa fa-suitcase"></i>
                     开发者
-                    <i class="fa fa-id-card ml-2"></i>
-                    PHP开发
+                     @
+                    十堰梦航教育科技有限公司
                 </p>
                 <p title="地址">
                     <i class="fa fa-map-marker"></i>

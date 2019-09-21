@@ -88,8 +88,14 @@ a.tags {
 }
 
 i.fa {
-  color: #a5a5a5;
   margin-right: .25rem;
   width: 1.18em;
   text-align: center;
+}
+
+.list-group-item.active {
+  background-color: rgba(0,0,0,.05);
+  border-color: rgba(0,0,0,.05);
+  color: #000;
+  font-weight: bold;
 }

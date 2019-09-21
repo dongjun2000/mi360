@@ -18,9 +18,12 @@ Auth::routes(['verify' => true]);
 // 关注与取关
 Route::get('follow/{user}', 'UserController@follow')->name('users.follow');
 
-// 关注与粉丝列表
-Route::get('user/{user}/follow', 'FollowController@follows')->name('follow');
-Route::get('user/{user}/fans', 'FollowController@fans')->name('fans');
+Route::get('users/{user}/follows', 'FollowController@follows')->name('users.follows');
+Route::get('users/{user}/fans', 'FollowController@fans')->name('users.fans');
+Route::get('users/{user}/articles', 'UserController@articles')->name('users.articles');
+Route::get('users/{user}/questions', 'UserController@questions')->name('users.questions');
+Route::get('users/{user}/answers', 'UserController@answers')->name('users.answers');
+Route::get('users/{user}/collects', 'UserController@collects')->name('users.collects');
 
 Route::get('articles/hot', 'ArticleController@hotArticle')->name('articles.hot');
 Route::get('articles/new', 'ArticleController@newArticle')->name('articles.new');

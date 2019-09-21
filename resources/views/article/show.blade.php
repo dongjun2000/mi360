@@ -41,7 +41,7 @@
                                 <span class="line">/</span>
                                 <span>阅读数: {{ $article->read }}</span>
                             </li>
-                            @if(count($article->tags))
+                            @if($article->tags->count())
                                 <li class="list-inline-item">
                                     <ul class="list-inline">
                                         @foreach($article->tags as $tag)
