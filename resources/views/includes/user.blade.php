@@ -65,7 +65,7 @@
         </ul>
     </div>
     <div class="card-footer p-2 text-center">
-        @if(Auth::user()->id === $user->id)
+        @if(Auth::check() && Auth::user()->id === $user->id)
             <a href="" class="btn btn-primary btn-block">编辑个人资料</a>
         @else
             <div class="btn-group">

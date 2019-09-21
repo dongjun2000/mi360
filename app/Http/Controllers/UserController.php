@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('verified')->except(['show']);
+        $this->middleware('verified')->except(['show', 'articles']);
     }
 
     /**
@@ -66,7 +66,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $tag = 'show';
-        return view('user.show', compact('tag','user'));
+        return view('user.show', compact('tag', 'user'));
     }
 
     /**
@@ -104,13 +104,23 @@ class UserController extends Controller
     }
 
     /**
-     * 我的文章
+     * 我的文章列表
      *
+     * @param Request $request
      * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function articles(User $user)
+    public function articles(Request $request, User $user)
     {
+        $tag = 'articles';
 
+        // 排序参数处理
+        $sort = $request->get('sort', 'created_at');
+        $sort = in_array($sort, ['created_at', 'read', 'collect', 'zan']) ? $sort : 'created_at';
+
+        $articles = $user->articles()->orderByDesc($sort)->paginate(10);
+
+        return view('user.articles', compact('tag', 'user', 'articles'));
     }
 
     /**
