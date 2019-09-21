@@ -60,13 +60,13 @@
 
                                         <span>文章</span>
                                         <a href="">
-                                            <span>{{ $user->articles->count() }}</span>
+                                            <span>{{ $user->articles_count }}</span>
                                         </a>
                                     </li>
                                     <li class="list-inline-item d-flex flex-column align-items-center" title="关注作者的用户数">
                                         <span>粉丝</span>
                                         <a href="{{ route('fans', $user) }}">
-                                            <span>{{ $user->fans->count() }}</span>
+                                            <span>{{ $user->fans_count }}</span>
                                         </a>
                                     </li>
                                     <li class="list-inline-item d-flex flex-column align-items-center" title="收到了0个赞数">

@@ -26,6 +26,7 @@ class ArticleController extends Controller
     {
         $category = 'hot';
         $articles = Article::query()
+            ->with('user')
             ->orderByDesc('id')
             ->show()
             ->hot()
@@ -43,6 +44,7 @@ class ArticleController extends Controller
     {
         $category = 'new';
         $articles = Article::query()
+            ->with('user')
             ->orderByDesc('id')
             ->show()
             ->paginate(10);
@@ -59,10 +61,9 @@ class ArticleController extends Controller
     {
         $category = 'commend';
         $articles = Article::query()
+            ->with('user')
             ->orderByDesc('id')
             ->show()
-            ->comment()
-            ->with('user')
             ->paginate(10);
 
         return view('article.index', compact('articles', 'category'));

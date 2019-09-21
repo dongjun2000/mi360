@@ -72,6 +72,8 @@ class UserController extends Controller
             $followStatus = $user->isFollow(Auth::user()->id);
         }
 
+        $user = User::query()->withCount('fans', 'articles')->find($user->id);
+
         return view('user.show', compact('user', 'followStatus'));
     }
 
