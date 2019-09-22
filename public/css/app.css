@@ -10702,6 +10702,12 @@ header .nav-link {
   border-radius: 50%;
 }
 
+.avatar-58 {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+}
+
 .line {
   color: #ccc;
 }
