@@ -59,7 +59,14 @@
                         @foreach($question->tags as $tag)
                             <li class="list-inline-item">
                                 <a class="tags"
-                                   href="{{ route('tags.show', $tag->name) }}">{{ $tag->name }}</a>
+                                   href="{{ route('tags.show', $tag->name) }}">
+                                    @if(!empty($tag->icon))
+                                        <img class="icon" src="{{ asset($tag->icon) }}"
+                                             alt="{{ $tag->name }}"
+                                             title="{{ $tag->name }}">
+                                    @endif
+                                    {{ $tag->name }}
+                                </a>
                             </li>
                         @endforeach
                     </ul>
@@ -68,5 +75,5 @@
         </li>
     @endforeach
 @else
-    <li class="list-group-item d-flex justify-content-around">暂无提问！</li>
+    <li class="list-group-item">暂无提问！</li>
 @endif

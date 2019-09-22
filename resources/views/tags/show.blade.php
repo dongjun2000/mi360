@@ -63,23 +63,25 @@
                         </ul>
                     </div>
                     <div class="card-body">
-                        {{--label页 加载不同的模板--}}
-                        @switch($label)
-                            @case('show')
-                            @include('tags._show')
-                            @break
-                            @case('info')
-                            @include('tags._info')
-                            @break
-                            @case('article')
-                            @include('tags._article')
-                            @break
-                            @case('questions')
-                            @include('tags._questions')
-                            @break
-                        @endswitch
+                        <ul class="list-group list-group-flush list">
+                            {{--label页 加载不同的模板--}}
+                            @switch($label)
+                                @case('show')
+                                @include('tags._show')
+                                @break
+                                @case('info')
+                                @include('tags._info')
+                                @break
+                                @case('article')
+                                @include('includes.articles', ['articles' => $items])
+                                @break
+                                @case('questions')
+                                @include('includes.questions', ['questions' => $items])
+                                @break
+                            @endswitch
+                        </ul>
                     </div>
-                    @if(isset($items) && count($items) > 0)
+                    @if(isset($items) && $items->total() > 0)
                         <div class="card-footer">
                             {{ $items->links() }}
                         </div>
