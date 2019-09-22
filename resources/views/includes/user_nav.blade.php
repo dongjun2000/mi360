@@ -1,4 +1,4 @@
-<div class="list-group">
+<div class="list-group" style="position: sticky; top: 15px;">
     @foreach($navs as $key => $item)
         <a href="{{ route("users.{$key}", $user) }}"
            class="p-3 d-flex justify-content-between align-items-center list-group-item list-group-item-action @if($key === $tag) active @endif">

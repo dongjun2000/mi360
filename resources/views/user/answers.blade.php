@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-2" style="position: sticky; top: 15px;">
+            <div class="col-md-2">
                 @include('includes.user_nav')
             </div>
             <div class="col-md-7">
