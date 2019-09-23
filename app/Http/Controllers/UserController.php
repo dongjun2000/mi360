@@ -66,7 +66,10 @@ class UserController extends Controller
     public function show(User $user)
     {
         $tag = 'show';
-        return view('user.show', compact('tag', 'user'));
+
+        $activities = $user->activities()->orderByDesc('created_at')->paginate(20);
+
+        return view('user.show', compact('tag', 'user', 'activities'));
     }
 
     /**
@@ -170,6 +173,8 @@ class UserController extends Controller
      */
     public function collects(User $user)
     {
+        $tag = 'collects';
 
+        return view('user.collects', compact('tag','user'));
     }
 }

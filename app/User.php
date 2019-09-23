@@ -120,4 +120,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Comment::class, 'user_id');
     }
+
+    /**
+     * 与个人动态模型一对多关联
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function activities()
+    {
+        return $this->hasMany(Activity::class, 'user_id');
+    }
 }
