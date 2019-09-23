@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet"
+          href="{{ asset('vendor/unisharp/laravel-ckeditor/plugins/codesnippet/lib/highlight/styles/zenburn.css') }}">
+@stop
+
 @section('content')
     <div class="container">
         {{--面包屑导航--}}
@@ -119,6 +124,11 @@
 @stop
 
 @section('script')
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
+    <script type="text/javascript">
+        hljs.initHighlightingOnLoad();
+    </script>
+
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
     <script>
