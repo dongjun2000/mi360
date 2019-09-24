@@ -33,6 +33,7 @@
                     <div class="card-header">
                         @switch($tag)
                             @case('index')
+                            <i class="fa fa-heart"></i>
                             推荐阅读
                             @break
                             @case('hottest')
@@ -49,13 +50,14 @@
                             </ul>
                             @break
                             @case('newest')
+                            <i class="fa fa-globe"></i>
                             最新内容
                             @break
                             @case('channel')
+                            <i class="fa {{ $category->icon }}"></i>
                             {{ $category->name }}
                             @break
                         @endswitch
-
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush list">

@@ -40,7 +40,7 @@ class HomeController extends Controller
      * @param null $time
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function hottest(Article $article, $time = null)
+    public function hottest(Article $article, $time = 'day')
     {
         $tag = 'hottest';
 
