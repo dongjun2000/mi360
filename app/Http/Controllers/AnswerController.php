@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Answer;
-use App\Http\Requests\AnswerStore;
 use Auth;
+use App\Answer;
+use App\Events\QuestionAnswer;
+use App\Http\Requests\AnswerStore;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
@@ -45,8 +46,8 @@ class AnswerController extends Controller
     {
         Auth::user()->answers()->create($request->all());
 
-        // TODO:: 更新问题表的冗余字段
-
+        // 触发回答问题事件
+        event(new QuestionAnswer($request->question_id));
 
         return back()->with('success', '发表成功!');
     }

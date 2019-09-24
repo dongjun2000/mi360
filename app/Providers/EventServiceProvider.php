@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\QuestionAnswer;
+use App\Listeners\UpdateQuestion;
 use App\Listeners\UserActivitySubscriber;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
@@ -27,6 +29,11 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        // 回答问题
+        QuestionAnswer::class => [
+            // 更新问题表冗余字段
+            UpdateQuestion::class,
         ],
     ];
 
