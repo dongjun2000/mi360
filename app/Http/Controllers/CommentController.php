@@ -42,7 +42,6 @@ class CommentController extends Controller
      */
     public function store(CommentStore $request)
     {
-//        dd($request->all());
         Auth::user()->comments()->create($request->all());
 
         return back()->with('success', '评论成功!');

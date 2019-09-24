@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row" data-pjax>
             <div class="col-md-2">
                 <div class="card">
                     <div class="card-body p-0">

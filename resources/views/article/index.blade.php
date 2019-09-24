@@ -6,7 +6,7 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-end">
-                        <ul class="nav nav-tabs card-header-tabs">
+                        <ul class="nav nav-tabs card-header-tabs" data-pjax>
                             <li class="nav-item">
                                 <a class="nav-link @if($category === 'commend') active @endif"
                                    href="{{ route('articles.index') }}">推荐文章</a>
@@ -25,11 +25,11 @@
                         @endauth
                     </div>
                     <div class="card-body">
-                        <ul class="list-group list-group-flush list">
+                        <ul class="list-group list-group-flush list" data-pjax>
                             @include('includes.articles')
                         </ul>
                     </div>
-                    <div class="card-footer d-flex justify-content-center">
+                    <div class="card-footer d-flex justify-content-center" data-pjax>
                         {{ $articles->links() }}
                     </div>
                 </div>

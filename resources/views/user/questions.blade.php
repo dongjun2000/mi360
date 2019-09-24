@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2" data-pjax>
                 @include('includes.user_nav')
             </div>
             <div class="col-md-7">
@@ -31,7 +31,7 @@
                             @include('includes.questions')
                         </ul>
                     </div>
-                    <div class="card-footer d-flex justify-content-center">
+                    <div class="card-footer d-flex justify-content-center" data-pjax>
                         {{ $questions->links() }}
                     </div>
                 </div>

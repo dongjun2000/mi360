@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2" data-pjax>
                 @include('includes.user_nav')
             </div>
             <div class="col-md-7 mt-md-0 mt-3">
@@ -111,7 +111,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer" data-pjax>
                         {{ $activities->links() }}
                     </div>
                 </div>

@@ -15,7 +15,7 @@
 @section('content')
     <div class="container">
         {{--面包屑导航--}}
-        <ol class="breadcrumb">
+        <ol class="breadcrumb" data-pjax>
             <li class="breadcrumb-item"><a href="/" title="首页">首页</a></li>
             <li class="breadcrumb-item"><a href="{{ route('articles.index') }}" title="编程">编程</a></li>
             <li class="breadcrumb-item active">{{ $article->title }}</li>

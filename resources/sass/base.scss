@@ -24,9 +24,10 @@ body {
 }
 
 header {
+  border-top: 5px solid $cyan;
   nav {
     &.navbar {
-      background-color: $blue;
+      //background-color: $blue;
     }
   }
   .nav-link {

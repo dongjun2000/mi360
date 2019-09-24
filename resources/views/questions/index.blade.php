@@ -6,7 +6,7 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-end">
-                        <ul class="nav nav-tabs card-header-tabs">
+                        <ul class="nav nav-tabs card-header-tabs" data-pjax>
                             @foreach(['index' => '最新问答', 'unanswered' => '等待回答', 'hot' => '热门问答'] as $key => $item)
                                 <li class="nav-item">
                                     <a class="nav-link @if($key === $category) active @endif"
@@ -23,7 +23,7 @@
                             @include('includes.questions')
                         </ul>
                     </div>
-                    <div class="card-footer d-flex justify-content-center">
+                    <div class="card-footer d-flex justify-content-center" data-pjax>
                         {{ $questions->links() }}
                     </div>
                 </div>

@@ -4,7 +4,10 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
+
+window.NProgress = require('nprogress');
 
 window.Vue = require('vue');
 

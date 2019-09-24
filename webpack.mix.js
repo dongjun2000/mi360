@@ -12,7 +12,10 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css').version();
+    .sass('resources/sass/app.scss', 'public/css')
+    .version();
+
+mix.copyDirectory('resources/plugin', 'public/plugin');
 
 mix.browserSync({
     proxy: 'mi360.cc'

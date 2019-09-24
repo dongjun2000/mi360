@@ -21,11 +21,11 @@
     @yield('css')
 </head>
 <body>
-<div id="app">
+<div id="pjax-container">
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}" data-pjax>
                     {{ config('app.name', '编程故事') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -37,11 +37,11 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto" data-pjax>
                         <li class="nav-item">
                             <a href="/" class="nav-link active">首页</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" data-pjax>
                             <a href="{{ route('articles.index') }}" class="nav-link">编程</a>
                         </li>
                         <li class="nav-item">
@@ -74,11 +74,11 @@
                     <ul class="navbar-nav ml-auto align-items-center">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
+                            <li class="nav-item" data-pjax>
                                 <a class="nav-link" href="{{ route('login') }}">登录</a>
                             </li>
                             @if (Route::has('register'))
-                                <li class="nav-item">
+                                <li class="nav-item" data-pjax>
                                     <a class="nav-link" href="{{ route('register') }}">注册</a>
                                 </li>
                             @endif
@@ -96,10 +96,11 @@
                             </li>
 
                             {{--用户信息--}}
-                            <li class="nav-item dropdown ml-4">
+                            <li class="nav-item dropdown ml-4" data-pjax>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" title="{{ Auth::user()->name }}" class="avatar-38"> <span class="caret"></span>
+                                    <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}"
+                                         title="{{ Auth::user()->name }}" class="avatar-38"> <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -127,14 +128,16 @@
             </div>
         </nav>
     </header>
-    <main class="py-4">
+    <main class="py-4" id="app">
         @yield('content')
     </main>
 </div>
 <!-- Scripts -->
-
 <script src="{{ mix('js/app.js') }}"></script>
+<script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+<script src="{{ asset('plugin/pjax/pjax.js') }}"></script>
 
 @yield('script')
+
 </body>
 </html>
