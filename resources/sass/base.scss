@@ -110,3 +110,12 @@ i.fa {
   color: #000;
   font-weight: bold;
 }
+
+.card-header {
+  background-color: transparent;
+  border-top: 2px solid $blue;
+}
+
+.card-header, .card-footer {
+  background-color: transparent;
+}

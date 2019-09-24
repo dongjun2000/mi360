@@ -11,10 +11,31 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $names = ['编程语言', '前端开发', 'JavaScript开发', '小程序开发', '区块链', '人工智能', 'iOS开发', 'Android开发', 'PHP开发', '数据库', '.NET开发', 'Python开发', 'Ruby开发', '开发工具', '云计算', 'Java开发', '搜索', '开放平台', '服务器'];
-        foreach($names as $name) {
+        $categories = [
+            ['name' => '编程语言', 'icon' => 'fa-code'],
+            ['name' => '前端开发', 'icon' => 'fa-html5'],
+            ['name' => 'JavaScript', 'icon' => 'fa-code'],
+            ['name' => '小程序开发', 'icon' => 'fa-weixin'],
+            ['name' => '区块链', 'icon' => 'fa-chain'],
+            ['name' => '人工智能', 'icon' => 'fa-cog'],
+            ['name' => 'iOS开发', 'icon' => 'fa-apple'],
+            ['name' => 'Android开发', 'icon' => 'fa-android'],
+            ['name' => 'PHP开发', 'icon' => 'fa-wordpress'],
+            ['name' => '数据库', 'icon' => 'fa-database'],
+            ['name' => '.NET开发', 'icon' => 'fa-windows'],
+            ['name' => 'Python开发', 'icon' => 'fa-code'],
+            ['name' => 'Ruby开发', 'icon' => 'fa-code'],
+            ['name' => '开发工具', 'icon' => 'fa-legal'],
+            ['name' => '云计算', 'icon' => 'fa-skyatlas'],
+            ['name' => 'Java开发', 'icon' => 'fa-code'],
+            ['name' => '搜索', 'icon' => 'fa-search'],
+            ['name' => '开放平台', 'icon' => 'fa-qq'],
+            ['name' => '服务器', 'icon' => 'fa-linux']
+        ];
+        foreach ($categories as $category) {
             \App\Category::create([
-                'name' => $name
+                'name' => $category['name'],
+                'icon' => $category['icon'],
             ]);
         }
     }

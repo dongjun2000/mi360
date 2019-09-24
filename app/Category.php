@@ -17,4 +17,12 @@ class Category extends Model
     {
         return $this->belongsToMany(Tag::class, 'category_tag', 'category_id', 'tag_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'category_id');
+    }
 }

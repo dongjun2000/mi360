@@ -22,15 +22,11 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function hotArticle()
+    public function hotArticle(Article $article)
     {
         $category = 'hot';
-        $articles = Article::query()
-            ->with('user')
-            ->orderByDesc('id')
-            ->show()
-            ->hot()
-            ->paginate(10);
+
+        $articles = $article->hottest();
 
         return view('article.index', compact('articles', 'category'));
     }
@@ -40,14 +36,11 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function newArticle()
+    public function newArticle(Article $article)
     {
         $category = 'new';
-        $articles = Article::query()
-            ->with('user')
-            ->orderByDesc('id')
-            ->show()
-            ->paginate(10);
+
+        $articles = $article->newest();
 
         return view('article.index', compact('articles', 'category'));
     }
@@ -57,15 +50,10 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, Article $article)
     {
         $category = 'commend';
-        $articles = Article::query()
-            ->with('user')
-            ->orderByDesc('id')
-            ->show()
-            ->comment()
-            ->paginate(10);
+        $articles = $article->comment();
 
         return view('article.index', compact('articles', 'category'));
     }

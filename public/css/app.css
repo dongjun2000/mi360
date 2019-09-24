@@ -10762,6 +10762,16 @@ i.fa {
   font-weight: bold;
 }
 
+.card-header {
+  background-color: transparent;
+  border-top: 2px solid #3490dc;
+}
+
+.card-header,
+.card-footer {
+  background-color: transparent;
+}
+
 .list h2.title {
   font-size: 16px;
   font-weight: 700;

@@ -11,9 +11,16 @@
 |
 */
 
+Auth::routes(['verify' => true]);
+
 Route::get('/', 'HomeController@index')->name('home');
 
-Auth::routes(['verify' => true]);
+// 首页热门
+Route::get('hottest/{time?}', 'HomeController@hottest')->name('hottest');
+// 首页最新
+Route::get('newest', 'HomeController@newest')->name('newest');
+// 技术频道
+Route::get('channel/{channel?}', 'HomeController@channel')->name('channel');
 
 // 关注与取关
 Route::get('follow/{user}', 'UserController@follow')->name('users.follow');
@@ -41,3 +48,5 @@ Route::resource('tags', 'TagController');
 Route::resource('questions', 'QuestionController');
 Route::resource('answers', 'AnswerController');
 Route::resource('comments', 'CommentController');
+Route::resource('categories', 'CategoryController');
+

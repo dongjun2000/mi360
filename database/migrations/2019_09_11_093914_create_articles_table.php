@@ -16,7 +16,8 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->tinyInteger('type')->comment('文章类型,原创、转载、翻译');
-            $table->integer('user_id');
+            $table->integer('category_id')->comment('分类id');
+            $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('pic')->default('');
             $table->string('intro');
