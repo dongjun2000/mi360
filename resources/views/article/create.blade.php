@@ -13,6 +13,18 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
+                                <select class="form-control" id="exampleFormControlSelect1" name="category_id">
+                                    <option>==请选择文章分类==</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                    <small id="helpId" class="form-text text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <label for="name">
@@ -25,21 +37,19 @@
                                     </div>
                                     <input type="text" id="title"
                                            class="form-control @error('title') is-invalid @enderror" name="title"
-                                           placeholder="标题：美好的一天" required>
+                                           placeholder="标题：美好的一天" value="{{ old('title') }}" required>
                                 </div>
                                 @error('title')
                                 <small id="helpId" class="form-text text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <input type="text" class="form-control tags" name="tags" id="tags"
                                        placeholder="标签，如：php,Laravel(用逗号,分隔)">
                             </div>
-
                             <div class="form-group">
                                 <textarea class="form-control" name="content" id="content" rows="10"
-                                          style="resize: none"></textarea>
+                                          style="resize: none">{{ old('content') }}</textarea>
                                 @error('content')
                                 <small id="helpId" class="form-text text-danger">{{ $message }}</small>
                                 @enderror

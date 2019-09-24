@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Tag;
 use Auth;
 use App\Article;
@@ -65,7 +66,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('article.create');
+        $categories = Category::query()->get(['id', 'name']);
+
+        return view('article.create', compact('categories'));
     }
 
     /**
@@ -76,12 +79,12 @@ class ArticleController extends Controller
      */
     public function store(ArticleSotre $request)
     {
-
         $article = Auth::user()->articles()->create([
-            'type'    => $request->get('type'),
-            'title'   => $request->get('title'),
-            'content' => $request->get('content'),
-            'intro'   => mb_substr(strip_tags($request->get('content')), 0, 100),
+            'category_id' => $request->get('category_id'),
+            'type'        => $request->get('type'),
+            'title'       => $request->get('title'),
+            'content'     => $request->get('content'),
+            'intro'       => mb_substr(strip_tags($request->get('content')), 0, 100),
         ]);
 
         return redirect()->route('articles.show', $article);

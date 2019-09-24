@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 
 class Article extends Model
 {
-    public $fillable = ['type', 'title', 'pic', 'content', 'intro'];
+    public $fillable = ['type', 'title', 'pic', 'content', 'intro', 'category_id'];
 
     /**
      * 访问器 - 格式化文章创建时间

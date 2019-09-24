@@ -24,9 +24,18 @@ class ArticleSotre extends FormRequest
     public function rules()
     {
         return [
+            'category_id' => 'nullable|required|exists:categories,id',
             'title' => 'required|min:2|max:80',
             'content' => 'required|min:100',
             'type' => 'numeric|in:1,2,3'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'category_id.required' => '请选择文章分类',
+            'category_id.exists' => '请选择正确的文章分类',
         ];
     }
 }
