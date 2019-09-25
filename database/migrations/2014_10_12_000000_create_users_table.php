@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('weixin_qrcode')->nullable()->comment('微信账号二维码');
             $table->string('pay_qrcode')->nullable()->comment('支付二维码');
             $table->string('intro')->nullable()->comment('个人简介');
+            $table->unsignedBigInteger('visitor_total')->default(0)->comment('访客总数');
             $table->rememberToken();
             $table->timestamps();
         });

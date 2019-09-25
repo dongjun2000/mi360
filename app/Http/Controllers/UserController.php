@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\User;
+use App\Events\UserShow;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserSettings;
 
@@ -69,6 +70,8 @@ class UserController extends Controller
         $tag = 'show';
 
         $activities = $user->activities()->orderByDesc('created_at')->paginate(20);
+
+        event(new UserShow($user));
 
         return view('user.show', compact('tag', 'user', 'activities'));
     }

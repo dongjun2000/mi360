@@ -3,9 +3,12 @@
 namespace App\Providers;
 
 use App\Events\QuestionAnswer;
+use App\Events\UserShow;
 use App\Listeners\LoginSuccessUpdateLogtime;
 use App\Listeners\UpdateQuestion;
 use App\Listeners\UserActivitySubscriber;
+use App\Listeners\UserShowUpdateVisitor;
+use App\Listeners\UserShowUpdateVisitorTotal;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
@@ -34,6 +37,13 @@ class EventServiceProvider extends ServiceProvider
         ],
         Login::class => [
             LoginSuccessUpdateLogtime::class,
+        ],
+        // 查看用户主页
+        UserShow::class => [
+            // 更新最近访客
+            UserShowUpdateVisitor::class,
+            // 更新访客总数
+            UserShowUpdateVisitorTotal::class,
         ],
         // 回答问题
         QuestionAnswer::class => [
