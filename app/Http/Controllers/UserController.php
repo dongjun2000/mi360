@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserSettings;
 
 class UserController extends Controller
 {
@@ -175,6 +176,50 @@ class UserController extends Controller
     {
         $tag = 'collects';
 
-        return view('user.collects', compact('tag','user'));
+        return view('user.collects', compact('tag', 'user'));
+    }
+
+    /**
+     * 设置个人资料页
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function settings()
+    {
+        $user = Auth::user();
+
+        return view('user.settings', compact('user'));
+    }
+
+    /**
+     * 设置个人资料操作
+     *
+     * @param UserSettings $request
+     * @return $this
+     */
+    public function doSettings(UserSettings $request)
+    {
+        $user = Auth::user();
+
+        if ($weixin_qrcode = $this->upload($request, 'weixin_qrcode')) {
+            $user->weixin_qrcode = $weixin_qrcode;
+        }
+
+        if ($pay_qrcode = $this->upload($request, 'pay_qrcode')) {
+            $user->pay_qrcode = $pay_qrcode;
+        }
+
+        $user->name     = $request->name;
+        $user->gender   = $request->get('gender');
+        $user->github   = $request->get('github');
+        $user->realname = $request->get('realname');
+        $user->city     = $request->get('city');
+        $user->company  = $request->get('company');
+        $user->position = $request->get('position');
+        $user->website  = $request->get('website');
+        $user->intro    = $request->get('intro');
+        $user->save();
+
+        return back()->with('success', '修改成功!');
     }
 }

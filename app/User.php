@@ -38,6 +38,15 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
+     * 定义转换为日期格式的属性
+     *
+     * @var array
+     */
+    protected $dates = [
+        'logtime',
+    ];
+
+    /**
      * 多对多自关联 - 我的关注
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

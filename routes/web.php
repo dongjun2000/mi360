@@ -32,6 +32,10 @@ Route::get('users/{user}/questions', 'UserController@questions')->name('users.qu
 Route::get('users/{user}/answers', 'UserController@answers')->name('users.answers');
 Route::get('users/{user}/collects', 'UserController@collects')->name('users.collects');
 
+// 个人设置
+Route::get( 'users/settings', 'UserController@settings')->name('users.settings');
+Route::post('users/settings', 'UserController@doSettings')->name('users.settings');
+
 Route::get('articles/hot', 'ArticleController@hotArticle')->name('articles.hot');
 Route::get('articles/new', 'ArticleController@newArticle')->name('articles.new');
 

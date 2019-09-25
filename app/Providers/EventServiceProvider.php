@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Events\QuestionAnswer;
+use App\Listeners\LoginSuccessUpdateLogtime;
 use App\Listeners\UpdateQuestion;
 use App\Listeners\UserActivitySubscriber;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -29,6 +31,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        Login::class => [
+            LoginSuccessUpdateLogtime::class,
         ],
         // 回答问题
         QuestionAnswer::class => [

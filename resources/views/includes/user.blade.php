@@ -37,36 +37,46 @@
             </li>
             <li class="list-group-item">
                 <h1 class="pt-2 pb-2" title="{{ $user->name }}">{{ Str::limit($user->name, 12) }}
-                    <i class="fa fa-mars text-primary"></i>
-                    <i class="fa fa-venus text-danger"></i>
+                    @if($user->gender)
+                        <i class="fa fa-mars text-primary" title="男"></i>
+                    @else
+                        <i class="fa fa-venus text-danger" title="女"></i>
+                    @endif
                 </h1>
                 <p title="工作单位与职位">
-                    <i class="fa fa-suitcase"></i>
-                    开发者
-                     @
-                    十堰梦航教育科技有限公司
+                    @if($user->position)
+                        <i class="fa fa-suitcase"></i>
+                        {{ $user->position }}
+                    @endif
+                    @if($user->company) @
+                        {{ $user->company }}
+                    @endif
                 </p>
-                <p title="地址">
-                    <i class="fa fa-map-marker"></i>
-                    深圳
-                </p>
-                <p title="网址">
-                    <i class="fa fa-link"></i>
-                    <a href="http://www.mi360.cn" target="_blank" class="text-muted">http://www.mi360.cn</a>
-                </p>
+                @if($user->city)
+                    <p title="地址">
+                        <i class="fa fa-map-marker"></i>
+                        {{ $user->city }}
+                    </p>
+                @endif
+                @if($user->website)
+                    <p title="网址">
+                        <i class="fa fa-link"></i>
+                        <a href="{{ $user->website }}" target="_blank" class="text-muted">{{ $user->website }}</a>
+                    </p>
+                @endif
                 <p title="最后在线">
                     <i class="fa fa-desktop"></i>
-                    1小时前
+                    {{ !is_null($user->logtime) ? $user->logtime->diffForHumans() : $user->created_at->diffForHumans() }}
                 </p>
             </li>
             <li class="list-group-item">
-                这家伙太懒，懒得介绍自己~~~
+                {{ $user->intro ?: '这家伙太懒，懒得介绍自己~~~' }}
             </li>
         </ul>
     </div>
     <div class="card-footer p-2 text-center">
         @if(Auth::check() && Auth::user()->id === $user->id)
-            <a href="" class="btn btn-primary btn-block">编辑个人资料</a>
+            <a href="{{ route('users.settings') }}" class="btn btn-primary btn-block">编辑个人资料</a>
         @else
             <div class="btn-group">
                 <a href="{{ route('users.follow', $user) }}"
