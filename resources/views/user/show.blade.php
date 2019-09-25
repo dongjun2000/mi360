@@ -9,11 +9,14 @@
             <div class="col-md-7 mt-md-0 mt-3">
                 {{--我的主页--}}
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="mb-3" title="{{ $user->name, 12 }} 的个人动态">
+                    <div class="card-header">
+                        <h5 title="{{ $user->name, 12 }} 的个人动态">
                             <i class="fa fa-rss fa-2x"></i>
                             {{ Str::limit($user->name, 12) }} 的个人动态
                         </h5>
+                    </div>
+                    <div class="card-body">
+
 
                         <ul class="list-group list-group-flush list">
                             @foreach($activities as $activity)

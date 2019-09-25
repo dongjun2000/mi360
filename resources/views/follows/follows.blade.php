@@ -8,11 +8,13 @@
             </div>
             <div class="col-md-7">
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="mb-2">
+                    <div class="card-header">
+                        <h5 title="{{ $user->name }} 关注用户">
                             <i class="fa fa-gittip fa-2x"></i>
-                            {{ $user->name }} 关注用户 ({{ $users->total() }})
+                            {{ Str::limit($user->name, 12) }} 关注用户 ({{ $users->total() }})
                         </h5>
+                    </div>
+                    <div class="card-body">
                         <ul class="list-group list-group-flush mt-3">
                             @include('includes.fans')
                         </ul>
