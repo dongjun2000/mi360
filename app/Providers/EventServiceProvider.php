@@ -2,19 +2,14 @@
 
 namespace App\Providers;
 
-use App\Events\ArticleCollect;
-use App\Events\ArticleZan;
 use App\Events\QuestionAnswer;
 use App\Events\UserShow;
-use App\Listeners\ArticleCollectTotal;
-use App\Listeners\ArticleZanTotal;
+use App\Listeners\HandleCountSubscriber;
 use App\Listeners\LoginSuccessUpdateLogtime;
 use App\Listeners\UpdateQuestion;
 use App\Listeners\UserActivitySubscriber;
-use App\Listeners\UserCollectTotal;
 use App\Listeners\UserShowUpdateVisitor;
 use App\Listeners\UserShowUpdateVisitorTotal;
-use App\Listeners\UserZanTotal;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
@@ -29,7 +24,10 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $subscribe = [
+        // 用户活动记录
         UserActivitySubscriber::class,
+        // 处理冗余统计数据
+        HandleCountSubscriber::class,
     ];
 
     /**
@@ -42,6 +40,7 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         Login::class          => [
+            // 登录成功后更新登录时间
             LoginSuccessUpdateLogtime::class,
         ],
         // 查看用户主页
@@ -55,20 +54,6 @@ class EventServiceProvider extends ServiceProvider
         QuestionAnswer::class => [
             // 更新问题表冗余字段
             UpdateQuestion::class,
-        ],
-        // 文章点赞
-        ArticleZan::class     => [
-            // 更新用户的获赞总数
-            UserZanTotal::class,
-            // 更新文章的获赞总数
-            ArticleZanTotal::class,
-        ],
-        // 文章收藏
-        ArticleCollect::class => [
-            // 更新用户的被收藏总数
-            UserCollectTotal::class,
-            // 更新文章的被收藏总数
-            ArticleCollectTotal::class,
         ],
     ];
 
