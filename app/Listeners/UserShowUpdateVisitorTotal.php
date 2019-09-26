@@ -20,14 +20,16 @@ class UserShowUpdateVisitorTotal
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param  object $event
      * @return void
      */
     public function handle($event)
     {
-        // 更新主页访问总数
-        $user = $event->user;
-        $user->timestamps = false;
-        $user->increment('visitor_total');
+        if (!\Auth::check() || (\Auth::check() && \Auth::user()->id !== $event->user->id)) {
+            // 更新主页访问总数
+            $user             = $event->user;
+            $user->timestamps = false;
+            $user->increment('visitor_total');
+        }
     }
 }

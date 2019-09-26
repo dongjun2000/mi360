@@ -26,21 +26,22 @@ class UserShowUpdateVisitor
      */
     public function handle($event)
     {
-        $user = \Auth::user();
-        // 登录用户访问自己的主页浏览量不增加
-        if ($user->id !== $event->user->id) {
-            Visitor::updateOrCreate(
-                [
-                    'user_id' => $event->user->id,
-                    'visitor' => $user->id,
-                ],
-                [
-                    'visitor_info' => [
-                        'avatar' => $user->avatar,
-                        'name'   => $user->name,
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            if ($user->id !== $event->user->id) {   // 登录用户访问自己的主页浏览量不增加
+                Visitor::updateOrCreate(
+                    [
+                        'user_id' => $event->user->id,
+                        'visitor' => $user->id,
+                    ],
+                    [
+                        'visitor_info' => [
+                            'avatar' => $user->avatar,
+                            'name'   => $user->name,
+                        ]
                     ]
-                ]
-            );
+                );
+            }
         }
     }
 }
