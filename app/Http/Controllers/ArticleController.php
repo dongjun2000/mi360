@@ -102,14 +102,16 @@ class ArticleController extends Controller
         event('article.read', $article);
 
         $zanStatus = false;
+        $collectStatus = false;
         if(Auth::check()) {
             $zanStatus = $article->isZan(Auth::user()->id);
+            $collectStatus = $article->isCollect(Auth::user()->id);
         }
 
         // 按pid分组
         $comments = $article->comments()->with('user')->orderBy('created_at')->get()->groupBy('pid');
 
-        return view('article.show', compact('article', 'comments', 'zanStatus'));
+        return view('article.show', compact('article', 'comments', 'zanStatus', 'collectStatus'));
     }
 
     /**

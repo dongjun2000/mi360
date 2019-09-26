@@ -2,32 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ArticleCollect;
 use Auth;
-use App\Zan;
 use App\Article;
-use App\Events\ArticleZan;
+use App\Collect;
 use Illuminate\Http\Request;
 
-class ZanController extends Controller
+class CollectController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('verified');
-    }
-
     /**
-     * 文章点赞与取消点赞
+     * 收藏与取消收藏
      *
      * @param Article $article
      * @return \Illuminate\Http\RedirectResponse
      */
     public function article(Article $article)
     {
-        $result = $article->zans()->toggle(Auth::user());
+        $result = $article->collects()->toggle(Auth::user());
 
-        $is_zan = count($result['attached']) ? true : false;
+        $is_collect = count($result['attached']) ? true : false;
 
-        event(new ArticleZan($article, $is_zan));
+        event(new ArticleCollect($article, $is_collect));
 
         return back();
     }
@@ -55,7 +50,7 @@ class ZanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -66,10 +61,10 @@ class ZanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Zan  $zan
+     * @param  \App\Collect $collect
      * @return \Illuminate\Http\Response
      */
-    public function show(Zan $zan)
+    public function show(Collect $collect)
     {
         //
     }
@@ -77,10 +72,10 @@ class ZanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Zan  $zan
+     * @param  \App\Collect $collect
      * @return \Illuminate\Http\Response
      */
-    public function edit(Zan $zan)
+    public function edit(Collect $collect)
     {
         //
     }
@@ -88,11 +83,11 @@ class ZanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Zan  $zan
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Collect $collect
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Zan $zan)
+    public function update(Request $request, Collect $collect)
     {
         //
     }
@@ -100,10 +95,10 @@ class ZanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Zan  $zan
+     * @param  \App\Collect $collect
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Zan $zan)
+    public function destroy(Collect $collect)
     {
         //
     }

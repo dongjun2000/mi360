@@ -20,17 +20,17 @@
                             <span>{{ $user->fans_count }}</span>
                         </a>
                     </li>
-                    <li class="list-inline-item d-flex flex-column align-items-center" title="收到了0个赞数">
+                    <li class="list-inline-item d-flex flex-column align-items-center" title="收到了{{ $user->zan }}个赞数">
                         <span>点赞</span>
                         <a href="">
                             <span>{{ $user->zan }}</span>
                         </a>
                     </li>
                     <li class="list-inline-item d-flex flex-column align-items-center"
-                        title="所有文章被收藏了0次">
+                        title="所有文章被收藏了{{ $user->collect }}次">
                         <span>收藏</span>
                         <a href="">
-                            <span>0</span>
+                            <span>{{ $user->collect }}</span>
                         </a>
                     </li>
                 </ul>

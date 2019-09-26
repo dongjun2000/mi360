@@ -2,13 +2,16 @@
 
 namespace App\Providers;
 
+use App\Events\ArticleCollect;
 use App\Events\ArticleZan;
 use App\Events\QuestionAnswer;
 use App\Events\UserShow;
+use App\Listeners\ArticleCollectTotal;
 use App\Listeners\ArticleZanTotal;
 use App\Listeners\LoginSuccessUpdateLogtime;
 use App\Listeners\UpdateQuestion;
 use App\Listeners\UserActivitySubscriber;
+use App\Listeners\UserCollectTotal;
 use App\Listeners\UserShowUpdateVisitor;
 use App\Listeners\UserShowUpdateVisitorTotal;
 use App\Listeners\UserZanTotal;
@@ -59,6 +62,13 @@ class EventServiceProvider extends ServiceProvider
             UserZanTotal::class,
             // 更新文章的获赞总数
             ArticleZanTotal::class,
+        ],
+        // 文章收藏
+        ArticleCollect::class => [
+            // 更新用户的被收藏总数
+            UserCollectTotal::class,
+            // 更新文章的被收藏总数
+            ArticleCollectTotal::class,
         ],
     ];
 

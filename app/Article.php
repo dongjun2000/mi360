@@ -43,14 +43,46 @@ class Article extends Model
         return $str;
     }
 
+    /**
+     * 获取文章所有的点赞用户
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
     public function zans()
     {
-        return $this->morphToMany(User::class, 'zan');
+        return $this->morphToMany(User::class, 'zan')->withTimestamps();
     }
 
+    /**
+     * 查询是否点赞该文章
+     *
+     * @param $user_id
+     * @return mixed
+     */
     public function isZan($user_id)
     {
         return $this->zans()->wherePivot('user_id', $user_id)->first();
+    }
+
+    /**
+     * 获取收藏文章的所有用户
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function collects()
+    {
+        return $this->morphToMany(User::class, 'collect')->withTimestamps();
+    }
+
+    /**
+     * 查询用户是否收藏该文章
+     *
+     * @param $user_id
+     * @return mixed
+     */
+    public function isCollect($user_id)
+    {
+         return $this->collects()->wherePivot('user_id', $user_id)->first();
     }
 
     /**

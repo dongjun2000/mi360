@@ -140,8 +140,23 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Activity::class, 'user_id');
     }
 
-    public function zans()
+    /**
+     * 获取用户点赞的所有文章
+     *
+     * @return $this
+     */
+    public function article_zans()
     {
         return $this->morphedByMany(Article::class, 'zan')->withTimestamps();
+    }
+
+    /**
+     * 获取用户收藏的所有文章
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function article_collects()
+    {
+        return $this->morphedByMany(Article::class, 'collect');
     }
 }
