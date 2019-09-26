@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('visitor_total')->default(0)->comment('访客总数');
             $table->integer('zan')->default(0)->comment('被赞总数');
             $table->integer('collect')->default(0)->comment('被收藏的总数');
+            $table->integer('article')->default(0)->comment('发表的文章总数');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -11,7 +11,7 @@
 
                         <span>文章</span>
                         <a href="{{ route('users.articles', $user) }}">
-                            <span>{{ $user->articles_count }}</span>
+                            <span>{{ $user->article }}</span>
                         </a>
                     </li>
                     <li class="list-inline-item d-flex flex-column align-items-center" title="关注作者的用户数">

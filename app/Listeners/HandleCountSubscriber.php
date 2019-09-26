@@ -2,14 +2,25 @@
 
 namespace App\Listeners;
 
+use App\Article;
+use Auth;
 use App\Events\ArticleCollect;
 use App\Events\ArticleZan;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+/**
+ * Class HandleCountSubscriber
+ * @package App\Listeners
+ */
 class HandleCountSubscriber
 {
 
+    /**
+     * 定义事件及事件处理列表
+     *
+     * @var array
+     */
     protected $listen = [
         // 文章点赞
         ArticleZan::class     => [
@@ -25,6 +36,7 @@ class HandleCountSubscriber
             // 更新文章的被收藏总数
             'onArticleCollectTotal',
         ],
+        'eloquent.created: App\Article' => 'onUserArticleTotal',
     ];
 
     /**
@@ -46,6 +58,16 @@ class HandleCountSubscriber
         }
     }
 
+    public function onUserArticleTotal(Article $article)
+    {
+        $user = $article->user;
+        $user->timestamps = false;
+        $user->increment('article');
+    }
+
+    /**
+     * @param $event
+     */
     public function onArticleZanTotal($event)
     {
         $article             = $event->article;
@@ -53,6 +75,9 @@ class HandleCountSubscriber
         $event->is_zan ? $article->increment('zan') : $article->decrement('zan');
     }
 
+    /**
+     * @param $event
+     */
     public function onUserZanTotal($event)
     {
         $user             = $event->article->user;
@@ -60,6 +85,9 @@ class HandleCountSubscriber
         $event->is_zan ? $user->increment('zan') : $user->decrement('zan');
     }
 
+    /**
+     * @param $event
+     */
     public function onUserCollectTotal($event)
     {
         $user             = $event->article->user;
@@ -67,6 +95,9 @@ class HandleCountSubscriber
         $event->is_collect ? $user->increment('collect') : $user->decrement('collect');
     }
 
+    /**
+     * @param $event
+     */
     public function onArticleCollectTotal($event)
     {
         $article             = $event->article;
