@@ -23,7 +23,7 @@
                     <li class="list-inline-item d-flex flex-column align-items-center" title="收到了0个赞数">
                         <span>点赞</span>
                         <a href="">
-                            <span>0</span>
+                            <span>{{ $user->zan }}</span>
                         </a>
                     </li>
                     <li class="list-inline-item d-flex flex-column align-items-center"

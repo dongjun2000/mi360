@@ -101,10 +101,15 @@ class ArticleController extends Controller
         // 分发事件 - 阅读数自增
         event('article.read', $article);
 
+        $zanStatus = false;
+        if(Auth::check()) {
+            $zanStatus = $article->isZan(Auth::user()->id);
+        }
+
         // 按pid分组
         $comments = $article->comments()->with('user')->orderBy('created_at')->get()->groupBy('pid');
 
-        return view('article.show', compact('article', 'comments'));
+        return view('article.show', compact('article', 'comments', 'zanStatus'));
     }
 
     /**

@@ -139,4 +139,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Activity::class, 'user_id');
     }
+
+    public function zans()
+    {
+        return $this->morphedByMany(Article::class, 'zan')->withTimestamps();
+    }
 }

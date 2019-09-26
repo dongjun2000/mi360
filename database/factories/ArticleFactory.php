@@ -15,7 +15,7 @@ $factory->define(Article::class, function (Faker $faker) {
         'pic'        => $faker->imageUrl(),
         'intro'      => $faker->text(200),
         'content'    => $faker->text(1000),
-        'zan'        => $faker->numberBetween(0, 100),
+        'zan'        => 0,
         'read'       => $faker->numberBetween(0, 100),
         'collect'    => $faker->numberBetween(0, 100),
         'isshow'     => $faker->boolean(),

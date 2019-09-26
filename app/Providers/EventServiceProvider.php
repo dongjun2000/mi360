@@ -2,13 +2,16 @@
 
 namespace App\Providers;
 
+use App\Events\ArticleZan;
 use App\Events\QuestionAnswer;
 use App\Events\UserShow;
+use App\Listeners\ArticleZanTotal;
 use App\Listeners\LoginSuccessUpdateLogtime;
 use App\Listeners\UpdateQuestion;
 use App\Listeners\UserActivitySubscriber;
 use App\Listeners\UserShowUpdateVisitor;
 use App\Listeners\UserShowUpdateVisitorTotal;
+use App\Listeners\UserZanTotal;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
@@ -32,14 +35,14 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Registered::class => [
+        Registered::class     => [
             SendEmailVerificationNotification::class,
         ],
-        Login::class => [
+        Login::class          => [
             LoginSuccessUpdateLogtime::class,
         ],
         // 查看用户主页
-        UserShow::class => [
+        UserShow::class       => [
             // 更新最近访客
             UserShowUpdateVisitor::class,
             // 更新访客总数
@@ -49,6 +52,13 @@ class EventServiceProvider extends ServiceProvider
         QuestionAnswer::class => [
             // 更新问题表冗余字段
             UpdateQuestion::class,
+        ],
+        // 文章点赞
+        ArticleZan::class     => [
+            // 更新用户的获赞总数
+            UserZanTotal::class,
+            // 更新文章的获赞总数
+            ArticleZanTotal::class,
         ],
     ];
 

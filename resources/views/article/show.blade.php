@@ -72,11 +72,17 @@
                             {!! $article->content !!}
                         </div>
 
-                        <div class="text-muted text-center mt-5">
-                            <button class="btn btn-success btn-lg mr-md-2">点赞 <span
-                                        class="line">|</span> {{ $article->zan }}</button>
-                            <button class="btn btn-primary btn-lg ml-md-2">收藏 <span
-                                        class="line">|</span> {{ $article->collect }}</button>
+                        <div class="d-flex justify-content-center mt-5">
+                            <form action="{{ route('articles.zan', $article) }}" method="post">
+                                @csrf
+                                <button class="btn btn-success btn-lg mr-md-2">{{ $zanStatus ? '取消点赞' : '点赞' }} <span
+                                            class="line">|</span> {{ $article->zan }}</button>
+                            </form>
+                            <form action="" method="post">
+                                @csrf
+                                <button class="btn btn-primary btn-lg ml-md-2">收藏 <span
+                                            class="line">|</span> {{ $article->collect }}</button>
+                            </form>
                         </div>
                     </div>
                 </div>

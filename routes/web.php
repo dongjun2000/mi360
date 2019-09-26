@@ -38,6 +38,7 @@ Route::post('users/settings', 'UserController@doSettings')->name('users.settings
 
 Route::get('articles/hot', 'ArticleController@hotArticle')->name('articles.hot');
 Route::get('articles/new', 'ArticleController@newArticle')->name('articles.new');
+Route::post('articles/{article}/zan', 'ZanController@article')->name('articles.zan');
 
 Route::get('questions/hot', 'QuestionController@hotQuestions')->name('questions.hot');
 Route::get('questions/unanswered', 'QuestionController@unanswered')->name('questions.unanswered');

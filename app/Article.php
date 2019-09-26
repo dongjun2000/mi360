@@ -43,6 +43,16 @@ class Article extends Model
         return $str;
     }
 
+    public function zans()
+    {
+        return $this->morphToMany(User::class, 'zan');
+    }
+
+    public function isZan($user_id)
+    {
+        return $this->zans()->wherePivot('user_id', $user_id)->first();
+    }
+
     /**
      * 与分类模型一对多关联 - 反向
      *
