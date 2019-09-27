@@ -2,11 +2,9 @@
 
 namespace App\Providers;
 
-use App\Events\QuestionAnswer;
 use App\Events\UserShow;
 use App\Listeners\HandleCountSubscriber;
 use App\Listeners\LoginSuccessUpdateLogtime;
-use App\Listeners\UpdateQuestion;
 use App\Listeners\UserActivitySubscriber;
 use App\Listeners\UserShowUpdateVisitor;
 use App\Listeners\UserShowUpdateVisitorTotal;
@@ -49,11 +47,6 @@ class EventServiceProvider extends ServiceProvider
             UserShowUpdateVisitor::class,
             // 更新访客总数
             UserShowUpdateVisitorTotal::class,
-        ],
-        // 回答问题
-        QuestionAnswer::class => [
-            // 更新问题表冗余字段
-            UpdateQuestion::class,
         ],
     ];
 

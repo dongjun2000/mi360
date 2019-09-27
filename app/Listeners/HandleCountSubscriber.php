@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
+use App\Answer;
 use App\Article;
 use App\Question;
-use Auth;
 use App\Events\ArticleCollect;
 use App\Events\ArticleZan;
 use Illuminate\Queue\InteractsWithQueue;
@@ -39,6 +39,12 @@ class HandleCountSubscriber
         ],
         'eloquent.created: App\Article'  => 'onUserArticleTotal',
         'eloquent.created: App\Question' => 'onUserQuestionTotal',
+        'eloquent.created: App\Answer'   => [
+            // 更新用户的回答总数
+            'onUserAnswerTotal',
+            // 更新问题的回答总数
+            'onQuestionAnswerTotal',
+        ]
     ];
 
     /**
@@ -58,6 +64,27 @@ class HandleCountSubscriber
                 $events->listen($event, __CLASS__ . '@' . $listener);
             }
         }
+    }
+
+    public function onQuestionAnswerTotal(Answer $answer)
+    {
+        $question = $answer->question;
+        $question->timestamps = false;
+        $question->answer += 1;
+        $question->laster_answer_user = [
+            'id' => \Auth::user()->id,
+            'name' => \Auth::user()->name,
+            'type' => 1,
+            'created_at' => now()
+        ];
+        $question->save();
+    }
+
+    public function onUserAnswerTotal(Answer $answer)
+    {
+        $user = $answer->user;
+        $user->timestamps = false;
+        $user->increment('answer');
     }
 
     public function onUserQuestionTotal(Question $question)

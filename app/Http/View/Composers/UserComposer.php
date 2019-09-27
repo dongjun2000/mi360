@@ -30,7 +30,7 @@ class UserComposer
         }
 
         // 获取用户实例，并且统计粉丝和发表的文章数
-        $user = User::query()->withCount('fans', 'follows', 'answers', 'questions')->find($this->user->id);
+        $user = User::query()->withCount('fans', 'follows')->find($this->user->id);
 
         $navs = $this->setNav($user);
 
@@ -51,7 +51,7 @@ class UserComposer
             'show' => ['title' => '我的主页', 'icon' => 'fa-home'],
             'articles' => ['title' => '我的文章', 'icon' => 'fa-file-text-o', 'num' => $user->article],
             'questions' => ['title'=>'我的提问', 'icon' => 'fa-question-circle-o', 'num' => $user->question],
-            'answers' => ['title' => '我的回答', 'icon' => 'fa-thumbs-o-up', 'num' => $user->answers_count],
+            'answers' => ['title' => '我的回答', 'icon' => 'fa-thumbs-o-up', 'num' => $user->answer],
             'follows' => ['title' => '我的关注', 'icon' => 'fa-eye', 'num' => $user->follows_count],
             'fans' => ['title' =>'我的粉丝', 'icon' => 'fa-smile-o', 'num' => $user->fans_count],
             'collects' => ['title' => '我的收藏', 'icon' => 'fa-heart-o', 'num' => 0]

@@ -46,9 +46,6 @@ class AnswerController extends Controller
     {
         Auth::user()->answers()->create($request->all());
 
-        // 触发回答问题事件
-        event(new QuestionAnswer($request->question_id));
-
         return back()->with('success', '发表成功!');
     }
 
