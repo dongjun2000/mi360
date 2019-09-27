@@ -9,7 +9,9 @@
                 @foreach($visitors as $visitor)
                     <li class="d-inline-flex flex-column align-items-center">
                         <a href="{{ route('users.show', $visitor->visitor) }}">
-                        <img class="avatar-58" src="http://mi360.cc/imgs/default/face.jpg" alt="{{ $visitor->visitor_info['name'] }}" title="{{ $visitor->visitor_info['name'] }}">
+                            <img class="avatar-58" src="{{ $visitor->visitor_info['avatar'] }}"
+                                 alt="{{ $visitor->visitor_info['name'] }}"
+                                 title="{{ $visitor->visitor_info['name'] }}">
                         </a>
                         <div class="d-flex flex-column justify-content-between align-items-center"
                              style="position: relative;">
