@@ -17,7 +17,7 @@
                     <li class="list-inline-item d-flex flex-column align-items-center" title="关注作者的用户数">
                         <span>粉丝</span>
                         <a href="{{ route('users.fans', $user) }}">
-                            <span>{{ $user->fans_count }}</span>
+                            <span>{{ $user->fan }}</span>
                         </a>
                     </li>
                     <li class="list-inline-item d-flex flex-column align-items-center" title="收到了{{ $user->zan }}个赞数">

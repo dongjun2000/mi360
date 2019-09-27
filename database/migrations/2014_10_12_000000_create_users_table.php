@@ -37,6 +37,8 @@ class CreateUsersTable extends Migration
             $table->integer('article')->default(0)->comment('发表的文章总数');
             $table->integer('question')->default(0)->comment('提问的总数');
             $table->integer('answer')->default(0)->comment('回答总数');
+            $table->integer('follow')->default(0)->comment('我的关注总数');
+            $table->integer('fan')->default(0)->comment('我的粉丝总数');
             $table->rememberToken();
             $table->timestamps();
         });

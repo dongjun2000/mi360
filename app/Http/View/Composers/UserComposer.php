@@ -29,8 +29,8 @@ class UserComposer
             $followStatus = $this->user->isFollow(Auth::user()->id);
         }
 
-        // 获取用户实例，并且统计粉丝和发表的文章数
-        $user = User::query()->withCount('fans', 'follows')->find($this->user->id);
+        // 获取用户实例
+        $user = User::find($this->user->id);
 
         $navs = $this->setNav($user);
 
@@ -52,9 +52,9 @@ class UserComposer
             'articles' => ['title' => '我的文章', 'icon' => 'fa-file-text-o', 'num' => $user->article],
             'questions' => ['title'=>'我的提问', 'icon' => 'fa-question-circle-o', 'num' => $user->question],
             'answers' => ['title' => '我的回答', 'icon' => 'fa-thumbs-o-up', 'num' => $user->answer],
-            'follows' => ['title' => '我的关注', 'icon' => 'fa-eye', 'num' => $user->follows_count],
-            'fans' => ['title' =>'我的粉丝', 'icon' => 'fa-smile-o', 'num' => $user->fans_count],
-            'collects' => ['title' => '我的收藏', 'icon' => 'fa-heart-o', 'num' => 0]
+            'follows' => ['title' => '我的关注', 'icon' => 'fa-eye', 'num' => $user->follow],
+            'fans' => ['title' =>'我的粉丝', 'icon' => 'fa-smile-o', 'num' => $user->fan],
+            'collects' => ['title' => '我的收藏', 'icon' => 'fa-heart-o']
         ];
     }
 }

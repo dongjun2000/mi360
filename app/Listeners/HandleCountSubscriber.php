@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Answer;
 use App\Article;
 use App\Question;
+use App\Events\UserFollow;
 use App\Events\ArticleCollect;
 use App\Events\ArticleZan;
 use Illuminate\Queue\InteractsWithQueue;
@@ -37,6 +38,13 @@ class HandleCountSubscriber
             // 更新文章的被收藏总数
             'onArticleCollectTotal',
         ],
+        // 用户关注与取关
+        UserFollow::class                => [
+            // 更新用户的关注数
+            'onUserFollowTotal',
+            // 更新用户的粉丝数
+            'onUserFanTotal',
+        ],
         'eloquent.created: App\Article'  => 'onUserArticleTotal',
         'eloquent.created: App\Question' => 'onUserQuestionTotal',
         'eloquent.created: App\Answer'   => [
@@ -66,15 +74,31 @@ class HandleCountSubscriber
         }
     }
 
+    public function onUserFollowTotal($event)
+    {
+        //User $follow, User $fan, $is_follow
+
+        $user             = $event->follow;
+        $user->timestamps = false;
+        $event->is_follow ? $user->increment('fan') : $user->decrement('fan');
+    }
+
+    public function onUserFanTotal($event)
+    {
+        $user = $event->fan;
+        $user->timestamps = false;
+        $event->is_follow ? $user->increment('follow') : $user->decrement('follow');
+    }
+
     public function onQuestionAnswerTotal(Answer $answer)
     {
-        $question = $answer->question;
-        $question->timestamps = false;
-        $question->answer += 1;
+        $question                     = $answer->question;
+        $question->timestamps         = false;
+        $question->answer             += 1;
         $question->laster_answer_user = [
-            'id' => \Auth::user()->id,
-            'name' => \Auth::user()->name,
-            'type' => 1,
+            'id'         => \Auth::user()->id,
+            'name'       => \Auth::user()->name,
+            'type'       => 1,
             'created_at' => now()
         ];
         $question->save();
@@ -82,7 +106,7 @@ class HandleCountSubscriber
 
     public function onUserAnswerTotal(Answer $answer)
     {
-        $user = $answer->user;
+        $user             = $answer->user;
         $user->timestamps = false;
         $user->increment('answer');
     }
