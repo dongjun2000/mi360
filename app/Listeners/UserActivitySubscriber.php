@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Answer;
 use App\Article;
+use App\Events\ArticleCollect;
 use App\Question;
 use App\Activity;
 use Illuminate\Queue\InteractsWithQueue;
@@ -13,6 +14,7 @@ class UserActivitySubscriber
 {
     protected $listen = [
         // 事件名 => '事件操作'
+        ArticleCollect::class            => 'onArticleCollected',
         'eloquent.created: App\Article'  => 'onArticleCreated',
         'eloquent.created: App\Question' => 'onQuestionCreated',
         'eloquent.created: App\Answer'   => 'onAnswerCreated',
@@ -28,6 +30,36 @@ class UserActivitySubscriber
         foreach ($this->listen as $event => $listener) {
             $events->listen($event, __CLASS__ . '@' . $listener);
         }
+    }
+
+    /**
+     * 收藏文章动态
+     *
+     * @param $event
+     */
+    public function onArticleCollected($event)
+    {
+        $article = $event->article;
+        $user = \Auth::user();
+
+        Activity::create([
+            'user_id' => $user->id,
+            'subject_id' => $article->id,
+            'subject_type' => $article->getTable(),
+            'description' => '收藏了文章',
+            'properties' => [
+                'event' => 'article.collected',
+                'user' => [
+                    'name' => $user->name,
+                    'avatar' => $user->avatar,
+                ],
+                'article' => [
+                    'title' => $article->title,
+                    'intro' => $article->intro,
+                    'pic'   => $article->pic,
+                ],
+            ],
+        ]);
     }
 
     /**
@@ -95,17 +127,17 @@ class UserActivitySubscriber
             'subject_type' => $answer->getTable(),
             'description'  => '回答了问题',
             'properties'   => [
-                'event' => 'answer.created',
-                'user'    => [
+                'event'    => 'answer.created',
+                'user'     => [
                     'name'   => $answer->user->name,
                     'avatar' => $answer->user->avatar,
                 ],
                 'question' => [
-                    'id' => $answer->question->id,
+                    'id'    => $answer->question->id,
                     'title' => $answer->question->title,
                 ],
-                'answer' => [
-                    'id' => $answer,
+                'answer'   => [
+                    'id'      => $answer,
                     'content' => $answer->content,
                 ]
             ]
