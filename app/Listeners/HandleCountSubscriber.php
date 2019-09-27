@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Article;
+use App\Question;
 use Auth;
 use App\Events\ArticleCollect;
 use App\Events\ArticleZan;
@@ -23,20 +24,21 @@ class HandleCountSubscriber
      */
     protected $listen = [
         // 文章点赞
-        ArticleZan::class     => [
+        ArticleZan::class                => [
             // 更新用户的获赞总数
             'onUserZanTotal',
             // 更新文章的获赞总数
             'onArticleZanTotal',
         ],
         // 文章收藏
-        ArticleCollect::class => [
+        ArticleCollect::class            => [
             // 更新用户的被收藏总数
             'onUserCollectTotal',
             // 更新文章的被收藏总数
             'onArticleCollectTotal',
         ],
-        'eloquent.created: App\Article' => 'onUserArticleTotal',
+        'eloquent.created: App\Article'  => 'onUserArticleTotal',
+        'eloquent.created: App\Question' => 'onUserQuestionTotal',
     ];
 
     /**
@@ -58,9 +60,16 @@ class HandleCountSubscriber
         }
     }
 
+    public function onUserQuestionTotal(Question $question)
+    {
+        $user             = $question->user;
+        $user->timestamps = false;
+        $user->increment('question');
+    }
+
     public function onUserArticleTotal(Article $article)
     {
-        $user = $article->user;
+        $user             = $article->user;
         $user->timestamps = false;
         $user->increment('article');
     }
