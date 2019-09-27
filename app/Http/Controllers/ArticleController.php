@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Tag;
 use Auth;
 use App\Article;
+use App\Category;
+use App\Events\ArticleZan;
+use App\Events\ArticleCollect;
 use App\Http\Requests\ArticleSotre;
 use Illuminate\Http\Request;
 
@@ -146,5 +147,39 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         //
+    }
+
+    /**
+     * 收藏与取消收藏
+     *
+     * @param Article $article
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function collect(Article $article)
+    {
+        $result = $article->collects()->toggle(Auth::user());
+
+        $is_collect = count($result['attached']) ? true : false;
+
+        event(new ArticleCollect($article, $is_collect));
+
+        return back();
+    }
+
+    /**
+     * 文章点赞与取消点赞
+     *
+     * @param Article $article
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function zans(Article $article)
+    {
+        $result = $article->zans()->toggle(Auth::user());
+
+        $is_zan = count($result['attached']) ? true : false;
+
+        event(new ArticleZan($article, $is_zan));
+
+        return back();
     }
 }
