@@ -44,7 +44,8 @@
                                     ['title' => '月热门', 'path' => 'hottest/monthly', 'time' => 'monthly']
                                 ] as $item)
                                     <li class="nav-item">
-                                        <a class="nav-link @if($item['time'] === $time) active @endif" href="{{ url($item['path']) }}">{{ $item['title'] }}</a>
+                                        <a class="nav-link @if($item['time'] === $time) active @endif"
+                                           href="{{ url($item['path']) }}">{{ $item['title'] }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -70,7 +71,7 @@
                 </div>
             </div>
             <div class="col-md-3 mt-md-0 mt-3">
-
+                @include('includes.activities')
             </div>
         </div>
     </div>

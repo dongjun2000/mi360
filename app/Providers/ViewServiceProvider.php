@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\ActivityComposer;
 use App\Http\View\Composers\CategoryComposer;
 use App\Http\View\Composers\UserComposer;
 use App\Http\View\Composers\VisitorComposer;
@@ -21,6 +22,7 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(['includes.user', 'includes.user_nav'], UserComposer::class);
         View::composer('includes.category', CategoryComposer::class);
         View::composer('includes.visitor', VisitorComposer::class);
+        View::composer('includes.activities', ActivityComposer::class);
     }
 
     /**

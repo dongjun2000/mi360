@@ -102,10 +102,10 @@ class ArticleController extends Controller
         // 分发事件 - 阅读数自增
         event('article.read', $article);
 
-        $zanStatus = false;
+        $zanStatus     = false;
         $collectStatus = false;
-        if(Auth::check()) {
-            $zanStatus = $article->isZan(Auth::user()->id);
+        if (Auth::check()) {
+            $zanStatus     = $article->isZan(Auth::user()->id);
             $collectStatus = $article->isCollect(Auth::user()->id);
         }
 

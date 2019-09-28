@@ -104,7 +104,7 @@ class UserActivitySubscriber
             'properties'   => [
                 'event'    => 'question.created',
                 'user'     => [
-                    'name'   => $question->user->id,
+                    'name'   => $question->user->name,
                     'avatar' => $question->user->avatar,
                 ],
                 'question' => [
