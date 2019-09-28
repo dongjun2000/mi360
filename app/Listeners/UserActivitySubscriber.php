@@ -4,9 +4,10 @@ namespace App\Listeners;
 
 use App\Answer;
 use App\Article;
-use App\Events\ArticleCollect;
 use App\Question;
 use App\Activity;
+use App\Events\ArticleCollect;
+use App\Events\QuestionCollect;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -14,6 +15,7 @@ class UserActivitySubscriber
 {
     protected $listen = [
         // 事件名 => '事件操作'
+        QuestionCollect::class           => 'onQuestionCollected',
         ArticleCollect::class            => 'onArticleCollected',
         'eloquent.created: App\Article'  => 'onArticleCreated',
         'eloquent.created: App\Question' => 'onQuestionCreated',
@@ -33,6 +35,34 @@ class UserActivitySubscriber
     }
 
     /**
+     * 问答收藏
+     *
+     * @param $event
+     */
+    public function onQuestionCollected($event)
+    {
+        $question = $event->question;
+        $user = \Auth::user();
+
+        Activity::create([
+            'user_id' => $user->id,
+            'subject_id' => $question->id,
+            'subject_type' => $question->getTable(),
+            'description' => '收藏了问答',
+            'properties'   => [
+                'event'   => 'question.collected',
+                'user'    => [
+                    'name'   => $user->name,
+                    'avatar' => $user->avatar,
+                ],
+                'question' => [
+                    'title' => $question->title,
+                ],
+            ],
+        ]);
+    }
+
+    /**
      * 收藏文章动态
      *
      * @param $event
@@ -40,17 +70,17 @@ class UserActivitySubscriber
     public function onArticleCollected($event)
     {
         $article = $event->article;
-        $user = \Auth::user();
+        $user    = \Auth::user();
 
         Activity::create([
-            'user_id' => $user->id,
-            'subject_id' => $article->id,
+            'user_id'      => $user->id,
+            'subject_id'   => $article->id,
             'subject_type' => $article->getTable(),
-            'description' => '收藏了文章',
-            'properties' => [
-                'event' => 'article.collected',
-                'user' => [
-                    'name' => $user->name,
+            'description'  => '收藏了文章',
+            'properties'   => [
+                'event'   => 'article.collected',
+                'user'    => [
+                    'name'   => $user->name,
                     'avatar' => $user->avatar,
                 ],
                 'article' => [
@@ -137,7 +167,6 @@ class UserActivitySubscriber
                     'title' => $answer->question->title,
                 ],
                 'answer'   => [
-                    'id'      => $answer,
                     'content' => $answer->content,
                 ]
             ]
