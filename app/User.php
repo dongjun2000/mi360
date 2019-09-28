@@ -155,8 +155,12 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
-    public function article_collects()
+    public function collects($type = 'articles')
     {
-        return $this->morphedByMany(Article::class, 'collect');
+        if ($type === 'articles') {
+            return $this->morphedByMany(Article::class, 'collect');
+        } elseif ($type === 'questions') {
+            return $this->morphedByMany(Question::class, 'collect');
+        }
     }
 }

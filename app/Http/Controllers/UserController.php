@@ -180,11 +180,19 @@ class UserController extends Controller
      *
      * @param User $user
      */
-    public function collects(User $user)
+    public function collects(Request $request, User $user)
     {
         $tag = 'collects';
 
-        return view('user.collects', compact('tag', 'user'));
+        $type = $request->get('type', 'articles');
+
+        if (!in_array($type, ['articles', 'questions'])) {
+            abort(404, '参数错误！');
+        }
+
+        $models = $user->collects($type)->paginate(20);
+
+        return view('user.collects', compact('tag','type', 'user', 'models'));
     }
 
     /**
