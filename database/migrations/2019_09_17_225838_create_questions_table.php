@@ -19,6 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('user_id');
             $table->string('title');
             $table->text('content');
+            $table->integer('collect')->default(0)->comment('收藏数');
             $table->integer('follow')->default(0)->comment('关注数');
             $table->integer('answer')->default(0)->comment('回答数');
             $table->integer('read')->default(0)->comment('浏览数');

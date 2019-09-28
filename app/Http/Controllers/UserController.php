@@ -130,7 +130,7 @@ class UserController extends Controller
         $sort = $request->get('sort', 'created_at');
         $sort = in_array($sort, ['created_at', 'read', 'collect', 'zan']) ? $sort : 'created_at';
 
-        $articles = $user->articles()->orderByDesc($sort)->paginate(10);
+        $articles = $user->articles()->with('user')->orderByDesc($sort)->paginate(10);
 
         return view('user.articles', compact('tag', 'user', 'articles'));
     }

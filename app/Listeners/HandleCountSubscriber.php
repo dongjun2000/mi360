@@ -7,6 +7,7 @@ use App\Article;
 use App\Question;
 use App\Events\UserFollow;
 use App\Events\ArticleCollect;
+use App\Events\QuestionCollect;
 use App\Events\ArticleZan;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -33,10 +34,17 @@ class HandleCountSubscriber
         ],
         // 文章收藏
         ArticleCollect::class            => [
-            // 更新用户的被收藏总数
-            'onUserCollectTotal',
+            // 更新文章的用户的被收藏总数
+            'onArticleUserCollectTotal',
             // 更新文章的被收藏总数
             'onArticleCollectTotal',
+        ],
+        // 问答收藏
+        QuestionCollect::class => [
+            // 更新问答的用户的被收藏总数
+            'onQuestionUserCollectTotal',
+            // 更新问答的被收藏总数
+            'onQuestionCollectTotal',
         ],
         // 用户关注与取关
         UserFollow::class                => [
@@ -148,11 +156,31 @@ class HandleCountSubscriber
     /**
      * @param $event
      */
-    public function onUserCollectTotal($event)
+    public function onArticleUserCollectTotal($event)
     {
         $user             = $event->article->user;
         $user->timestamps = false;
         $event->is_collect ? $user->increment('collect') : $user->decrement('collect');
+    }
+
+    /**
+     * @param $event
+     */
+    public function onQuestionUserCollectTotal($event)
+    {
+        $user             = $event->question->user;
+        $user->timestamps = false;
+        $event->is_collect ? $user->increment('collect') : $user->decrement('collect');
+    }
+
+    /**
+     * @param $event
+     */
+    public function onQuestionCollectTotal($event)
+    {
+        $question = $event->question;
+        $question->timestamps = false;
+        $event->is_collect ? $question->increment('collect') : $question->decrement('collect');
     }
 
     /**

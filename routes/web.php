@@ -43,6 +43,7 @@ Route::post('articles/{article}/collect', 'ArticleController@collect')->name('ar
 
 Route::get('questions/hot', 'QuestionController@hotQuestions')->name('questions.hot');
 Route::get('questions/unanswered', 'QuestionController@unanswered')->name('questions.unanswered');
+Route::post('questions/{question}/collect', 'QuestionController@collect')->name('questions.collect');
 
 Route::get('tags/{name}/questions', 'TagController@questions')->name('tags.questions');
 Route::get('tags/{name}/article', 'TagController@article')->name('tags.article');

@@ -23,7 +23,10 @@
                     <div class="card-body p-2">
                         <ul class="list-group list-group-flush">
                             @foreach($models as $model)
-                                <li class="list-group-item"><a href="{{ route($type . '.show', $model) }}">{{ $model->title }}</a></li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <a href="{{ route($type . '.show', $model) }}">{{ $model->title }}</a>
+                                    <span>{{ $model->created_at }}</span>
+                                </li>
                             @endforeach
                         </ul>
                     </div>

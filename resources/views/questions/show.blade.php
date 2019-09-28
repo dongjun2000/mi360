@@ -56,10 +56,20 @@
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="pl-3">
-                                <button class="btn btn-success btn-sm">关注 <span
-                                            class="line">|</span> {{ $question->follow }}</button>
-                                <button class="btn btn-primary btn-sm">收藏 <span class="line">|</span> 0</button>
+                            <div class="pl-3 d-inline-flex">
+                                <form action="" method="post" class="pr-2">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-sm">关注 <span
+                                                class="line">|</span> {{ $question->follow }}</button>
+                                </form>
+                                <form action="{{ route('questions.collect', $question) }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        {{ $collectStatus ? '取消收藏' : '收藏' }}
+                                        <span class="line">|</span>
+                                        {{ $question->collect }}
+                                    </button>
+                                </form>
                             </div>
                             <div class="pr-4 d-inline-flex align-items-center">
                                 <a href="{{ route('users.show', $question->user) }}">

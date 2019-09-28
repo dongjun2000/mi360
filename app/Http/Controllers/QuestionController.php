@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\QuestionStore;
 use Auth;
 use App\Question;
-use Carbon\Carbon;
+use App\Events\QuestionCollect;
+use App\Http\Requests\QuestionStore;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('verified')->except(['index', 'show' ,'hotQuestions', 'unanswered']);
+        $this->middleware('verified')->except(['index', 'show', 'hotQuestions', 'unanswered']);
     }
 
     /**
@@ -76,13 +76,13 @@ class QuestionController extends Controller
     public function store(QuestionStore $request)
     {
         $question = Auth::user()->questions()->create([
-            'title' => $request->get('title'),
-            'content' => $request->get('content'),
+            'title'              => $request->get('title'),
+            'content'            => $request->get('content'),
             'laster_answer_user' => [
-                'id' => Auth::user()->id,
-                'name' => Auth::user()->name,
+                'id'         => Auth::user()->id,
+                'name'       => Auth::user()->name,
                 'created_at' => date('Y-m-d H:i:s'),
-                'type' => 0,    // 创建
+                'type'       => 0,    // 创建
             ],
         ]);
 
@@ -100,10 +100,15 @@ class QuestionController extends Controller
         // 触发事件
         event('article.read', $question);
 
+        $collectStatus = false;     // 收藏状态
+        if (Auth::check()) {
+            $collectStatus = $question->isCollect(Auth::user()->id);
+        }
+
         // 回答列表
         $answers = $question->answers()->with('user')->orderByDesc('accept')->orderByDesc('updated_at')->get();
 
-        return view('questions.show', compact('question', 'answers'));
+        return view('questions.show', compact('question', 'answers', 'collectStatus'));
     }
 
     /**
@@ -138,5 +143,22 @@ class QuestionController extends Controller
     public function destroy(Question $question)
     {
         //
+    }
+
+    /**
+     * 收藏与取消收藏
+     *
+     * @param Question $question
+     * @return $this
+     */
+    public function collect(Question $question)
+    {
+        $result = $question->collects()->toggle(Auth::user());
+
+        $is_collect = (bool)count($result['attached']);
+
+        event(new QuestionCollect($question, $is_collect));
+
+        return back();
     }
 }

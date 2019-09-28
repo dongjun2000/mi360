@@ -58,4 +58,25 @@ class Question extends Model
     {
         return $this->hasMany(Answer::class, 'question_id');
     }
+
+    /**
+     * 获取收藏问答的所有用户
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function collects()
+    {
+        return $this->morphToMany(User::class, 'collect')->withTimestamps();
+    }
+
+    /**
+     * 判断用户是否收藏该问答
+     *
+     * @param $user_id
+     * @return bool
+     */
+    public function isCollect($user_id)
+    {
+        return $this->collects()->wherePivot('user_id', $user_id)->exists();
+    }
 }
