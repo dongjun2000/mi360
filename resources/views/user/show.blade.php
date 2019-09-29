@@ -25,11 +25,9 @@
 
                                     <li class="list-group-item">
                                         <div class="media">
-                                            <a href="">
-                                                <img src="{{ $article['user']['avatar'] }}" class="mr-3 avatar-38"
-                                                     alt="{{ $article['user']['name'] }}"
-                                                     title="{{ $article['user']['name'] }}">
-                                            </a>
+                                            <img src="{{ $article['user']['avatar'] }}" class="mr-3 avatar-38"
+                                                 alt="{{ $article['user']['name'] }}"
+                                                 title="{{ $article['user']['name'] }}">
                                             <div class="media-body">
                                                 <div class="mt-2 d-flex justify-content-between">
                                                     <strong>{{ $activity->description }}</strong>
@@ -60,11 +58,9 @@
                                 @elseif($activity->properties['event'] === 'question.created' && $question = $activity->properties)
                                     <li class="list-group-item">
                                         <div class="media">
-                                            <a href="">
-                                                <img src="{{ $question['user']['avatar'] }}" class="mr-3 avatar-38"
-                                                     alt="{{ $question['user']['name'] }}"
-                                                     title="{{ $question['user']['name'] }}">
-                                            </a>
+                                            <img src="{{ $question['user']['avatar'] }}" class="mr-3 avatar-38"
+                                                 alt="{{ $question['user']['name'] }}"
+                                                 title="{{ $question['user']['name'] }}">
                                             <div class="media-body">
                                                 <div class="mt-2 d-flex justify-content-between">
                                                     <strong>{{ $activity->description }}</strong>
@@ -85,11 +81,9 @@
                                 @elseif($activity->properties['event'] === 'answer.created' && $answer = $activity->properties)
                                     <li class="list-group-item">
                                         <div class="media">
-                                            <a href="">
-                                                <img src="{{ $answer['user']['avatar'] }}" class="mr-3 avatar-38"
-                                                     alt="{{ $answer['user']['name'] }}"
-                                                     title="{{ $answer['user']['name'] }}">
-                                            </a>
+                                            <img src="{{ $answer['user']['avatar'] }}" class="mr-3 avatar-38"
+                                                 alt="{{ $answer['user']['name'] }}"
+                                                 title="{{ $answer['user']['name'] }}">
                                             <div class="media-body">
                                                 <div class="mt-2 d-flex justify-content-between">
                                                     <strong>{{ $activity->description }}</strong>
@@ -112,11 +106,9 @@
                                 @elseif($activity->properties['event'] === 'article.collected' && $article = $activity->properties)
                                     <li class="list-group-item">
                                         <div class="media">
-                                            <a href="">
-                                                <img src="{{ $article['user']['avatar'] }}" class="mr-3 avatar-38"
-                                                     alt="{{ $article['user']['name'] }}"
-                                                     title="{{ $article['user']['name'] }}">
-                                            </a>
+                                            <img src="{{ $article['user']['avatar'] }}" class="mr-3 avatar-38"
+                                                 alt="{{ $article['user']['name'] }}"
+                                                 title="{{ $article['user']['name'] }}">
                                             <div class="media-body">
                                                 <div class="mt-2 d-flex justify-content-between">
                                                     <strong>{{ $activity->description }}</strong>
@@ -139,6 +131,29 @@
                                                                  title="{{ $article['article']['title'] }}">
                                                         </a>
                                                     @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @elseif($activity->properties['event'] === 'question.collected' && $question = $activity->properties)
+                                    <li class="list-group-item">
+                                        <div class="media">
+                                            <img src="{{ $question['user']['avatar'] }}" class="mr-3 avatar-38"
+                                                 alt="{{ $question['user']['name'] }}"
+                                                 title="{{ $question['user']['name'] }}">
+                                            <div class="media-body">
+                                                <div class="mt-2 d-flex justify-content-between">
+                                                    <strong>{{ $activity->description }}</strong>
+                                                    <span>{{ $activity->created_at->diffForHumans() }}</span>
+                                                </div>
+                                                <div class="media mt-3">
+                                                    <div class="media-body">
+                                                        <h2 class="mt-0 title">
+                                                            <a href="{{ route('articles.show', $activity->subject_id) }}">
+                                                                {{ $question['question']['title'] }}
+                                                            </a>
+                                                        </h2>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
