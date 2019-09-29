@@ -35,7 +35,14 @@
                             @endif
                             {{ $tag->name }}
                         </a>
-                        <button class="btn btn-primary btn-sm ml-2">已关注 <span class="line">|</span> 0</button>
+                        <form action="{{ route('tags.concern', $tag) }}" method="post">
+                            @csrf
+                            <button class="btn btn-primary btn-sm ml-2">
+                                {{ $concernStatus ? '已关注' : '关注' }}
+                                <span class="line">|</span>
+                                {{ $tag->follow }}
+                            </button>
+                        </form>
                     </div>
                     <div class="row mt-4">
                         {{ $tag->intro }}...

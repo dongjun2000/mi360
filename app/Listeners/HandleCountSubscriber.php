@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Answer;
 use App\Article;
 use App\Question;
+use App\Events\TagFollow;
 use App\Events\ArticleZan;
 use App\Events\UserFollow;
 use App\Events\QuestionFollow;
@@ -49,6 +50,8 @@ class HandleCountSubscriber
         ],
         // 问答关注
         QuestionFollow::class            => 'onQuestionFollowTotal',
+        // 标签关注
+        TagFollow::class                 => 'onTagFollowTotal',
         // 用户关注与取关
         UserFollow::class                => [
             // 更新用户的关注数
@@ -196,8 +199,15 @@ class HandleCountSubscriber
 
     public function onQuestionFollowTotal($event)
     {
-        $question = $event->question;
+        $question             = $event->question;
         $question->timestamps = false;
         $event->is_follow ? $question->increment('follow') : $question->decrement('follow');
+    }
+
+    public function onTagFollowTotal($event)
+    {
+        $tag             = $event->tag;
+        $tag->timestamps = false;
+        $event->is_follow ? $tag->increment('follow') : $tag->decrement('follow');
     }
 }

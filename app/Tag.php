@@ -27,4 +27,25 @@ class Tag extends Model
     {
         return $this->belongsToMany(Question::class, 'question_tag')->withTimestamps();
     }
+
+    /**
+     * 关注标签的用户
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function concerns()
+    {
+        return $this->morphToMany(User::class, 'concern')->withTimestamps();
+    }
+
+    /**
+     * 判断用户是否关注该标签
+     *
+     * @param $user_id
+     * @return bool
+     */
+    public function isConcern($user_id)
+    {
+        return $this->concerns()->wherePivot('user_id', $user_id)->exists();
+    }
 }

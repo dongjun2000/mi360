@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Article;
-use App\Category;
+use Auth;
 use App\Tag;
+use App\Category;
+use App\Events\TagFollow;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -101,11 +102,13 @@ class TagController extends Controller
     public function questions(Request $request, $name)
     {
         $label = 'questions';
-        $tag   = Tag::query()->where('name', $name)->first();
+        $tag   = Tag::where('name', $name)->first();
 
         $items = $tag->questions()->paginate(10);
 
-        return view('tags.show', compact('tag', 'items', 'label'));
+        $concernStatus = $this->isConcern($tag);
+
+        return view('tags.show', compact('tag', 'items', 'label', 'concernStatus'));
     }
 
     /**
@@ -118,11 +121,13 @@ class TagController extends Controller
     public function article(Request $request, $name)
     {
         $label = 'article';
-        $tag   = Tag::query()->where('name', $name)->first();
+        $tag   = Tag::where('name', $name)->first();
 
         $items = $tag->articles()->with('user:id,name,avatar')->paginate(10);
 
-        return view('tags.show', compact('tag', 'items', 'label'));
+        $concernStatus = $this->isConcern($tag);
+
+        return view('tags.show', compact('tag', 'items', 'label', 'concernStatus'));
     }
 
     /**
@@ -135,7 +140,42 @@ class TagController extends Controller
     public function info(Request $request, $name)
     {
         $label = 'info';
-        $tag   = Tag::query()->where('name', $name)->first();
-        return view('tags.show', compact('tag', 'label'));
+        $tag   = Tag::where('name', $name)->first();
+
+        $concernStatus = $this->isConcern($tag);
+
+        return view('tags.show', compact('tag', 'items', 'label', 'concernStatus'));
+    }
+
+    /**
+     * 关注与取关
+     *
+     * @param Tag $tag
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function concern(Tag $tag)
+    {
+        $result = $tag->concerns()->toggle(Auth::user());
+
+        $is_follow = (bool)count($result['attached']);
+
+        event(new TagFollow($tag, $is_follow));
+
+        return back();
+    }
+
+    /**
+     * 获取关注状态
+     *
+     * @param Tag $tag
+     * @return bool
+     */
+    private function isConcern(Tag $tag)
+    {
+        $concernStatus = false;
+        if (Auth::check()) {
+            $concernStatus = $tag->isConcern(Auth::user()->id);
+        }
+        return $concernStatus;
     }
 }

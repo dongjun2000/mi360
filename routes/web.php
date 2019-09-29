@@ -49,6 +49,7 @@ Route::post('questions/{question}/concern', 'QuestionController@concern')->name(
 Route::get('tags/{name}/questions', 'TagController@questions')->name('tags.questions');
 Route::get('tags/{name}/article', 'TagController@article')->name('tags.article');
 Route::get('tags/{name}/info', 'TagController@info')->name('tags.info');
+Route::post('tags/{tag}/concern', 'TagController@concern')->name('tags.concern');
 
 Route::resource('users', 'UserController');
 Route::resource('articles', 'ArticleController');

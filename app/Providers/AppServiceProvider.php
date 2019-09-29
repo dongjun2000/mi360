@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Tag;
 use App\Answer;
 use App\Article;
 use App\Question;
@@ -34,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
             'articles'  => Article::class,
             'questions' => Question::class,
             'answers'   => Answer::class,
+            'tags'      => Tag::class,
         ]);
     }
 }

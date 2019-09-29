@@ -168,6 +168,12 @@ class QuestionController extends Controller
         return back();
     }
 
+    /**
+     * 关注与取关
+     *
+     * @param Question $question
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function concern(Question $question)
     {
         $result = $question->concerns()->toggle(Auth::user());
