@@ -3,7 +3,7 @@
         <i class="fa fa-comments"></i>
         动态
     </div>
-    <div class="card-body p-2">
+    <div class="card-body p-2" style="height:600px; overflow: auto; overflow-x: hidden;">
         <ul class="list-group list-group-flush">
             @foreach($activities as $activity)
                 @if($activity->properties['event'] === 'article.created')
