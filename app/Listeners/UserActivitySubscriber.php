@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Answer;
 use App\Article;
+use App\Events\QuestionFollow;
 use App\Question;
 use App\Activity;
 use App\Events\ArticleCollect;
@@ -15,6 +16,7 @@ class UserActivitySubscriber
 {
     protected $listen = [
         // 事件名 => '事件操作'
+        QuestionFollow::class            => 'onQuestionFollowed',
         QuestionCollect::class           => 'onQuestionCollected',
         ArticleCollect::class            => 'onArticleCollected',
         'eloquent.created: App\Article'  => 'onArticleCreated',
@@ -35,31 +37,62 @@ class UserActivitySubscriber
     }
 
     /**
+     * 问答关注
+     *
+     * @param $event
+     */
+    public function onQuestionFollowed($event)
+    {
+        if ($event->is_follow) {
+            $question = $event->question;
+            $user     = \Auth::user();
+            Activity::create([
+                'user_id'      => $user->id,
+                'subject_id'   => $question->id,
+                'subject_type' => $question->getTable(),
+                'description'  => '关注了问答',
+                'properties'   => [
+                    'event'    => 'question.followed',
+                    'user'     => [
+                        'name'   => $user->name,
+                        'avatar' => $user->avatar,
+                    ],
+                    'question' => [
+                        'title' => $question->title,
+                    ],
+                ],
+            ]);
+        }
+    }
+
+    /**
      * 问答收藏
      *
      * @param $event
      */
     public function onQuestionCollected($event)
     {
-        $question = $event->question;
-        $user = \Auth::user();
+        if ($event->is_collect) {
+            $question = $event->question;
+            $user     = \Auth::user();
 
-        Activity::create([
-            'user_id' => $user->id,
-            'subject_id' => $question->id,
-            'subject_type' => $question->getTable(),
-            'description' => '收藏了问答',
-            'properties'   => [
-                'event'   => 'question.collected',
-                'user'    => [
-                    'name'   => $user->name,
-                    'avatar' => $user->avatar,
+            Activity::create([
+                'user_id'      => $user->id,
+                'subject_id'   => $question->id,
+                'subject_type' => $question->getTable(),
+                'description'  => '收藏了问答',
+                'properties'   => [
+                    'event'    => 'question.collected',
+                    'user'     => [
+                        'name'   => $user->name,
+                        'avatar' => $user->avatar,
+                    ],
+                    'question' => [
+                        'title' => $question->title,
+                    ],
                 ],
-                'question' => [
-                    'title' => $question->title,
-                ],
-            ],
-        ]);
+            ]);
+        }
     }
 
     /**
@@ -69,27 +102,29 @@ class UserActivitySubscriber
      */
     public function onArticleCollected($event)
     {
-        $article = $event->article;
-        $user    = \Auth::user();
+        if ($event->is_collect) {
+            $article = $event->article;
+            $user    = \Auth::user();
 
-        Activity::create([
-            'user_id'      => $user->id,
-            'subject_id'   => $article->id,
-            'subject_type' => $article->getTable(),
-            'description'  => '收藏了文章',
-            'properties'   => [
-                'event'   => 'article.collected',
-                'user'    => [
-                    'name'   => $user->name,
-                    'avatar' => $user->avatar,
+            Activity::create([
+                'user_id'      => $user->id,
+                'subject_id'   => $article->id,
+                'subject_type' => $article->getTable(),
+                'description'  => '收藏了文章',
+                'properties'   => [
+                    'event'   => 'article.collected',
+                    'user'    => [
+                        'name'   => $user->name,
+                        'avatar' => $user->avatar,
+                    ],
+                    'article' => [
+                        'title' => $article->title,
+                        'intro' => $article->intro,
+                        'pic'   => $article->pic,
+                    ],
                 ],
-                'article' => [
-                    'title' => $article->title,
-                    'intro' => $article->intro,
-                    'pic'   => $article->pic,
-                ],
-            ],
-        ]);
+            ]);
+        }
     }
 
     /**
