@@ -261,6 +261,32 @@
                                             </div>
                                         </div>
                                     </li>
+                                @elseif($activity->properties['event'] === 'tag.followed' && $tag = $activity->properties)
+                                    <li class="list-group-item">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <div class="mt-2 d-flex justify-content-between">
+                                                    <div>
+                                                        <span class="font-weight-bold">
+                                                            {{ $tag['user']['name'] }}
+                                                        </span>
+                                                        {{ $activity->description }}
+                                                    </div>
+                                                    <span>{{ $activity->created_at->diffForHumans() }}</span>
+                                                </div>
+                                                <div class="media mt-3">
+                                                    <div class="media-body">
+                                                        <h5 class="mt-0">
+                                                            <a href="{{ route('tags.show', $activity->properties['tag']['name']) }}">
+                                                                {{ $tag['tag']['name'] }}
+                                                            </a>
+                                                        </h5>
+                                                        <p>{{ $tag['tag']['intro'] }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
                                 @endif
                                 {{--TODO:: 招聘...--}}
                             @endforeach

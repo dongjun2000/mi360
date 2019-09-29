@@ -6,6 +6,7 @@ use App\Answer;
 use App\Article;
 use App\Question;
 use App\Activity;
+use App\Events\TagFollow;
 use App\Events\UserFollow;
 use App\Events\ArticleZan;
 use App\Events\QuestionFollow;
@@ -23,6 +24,7 @@ class UserActivitySubscriber
         ArticleCollect::class            => 'onArticleCollected',
         ArticleZan::class                => 'onArticleZan',
         UserFollow::class                => 'onUserFollowed',
+        TagFollow::class                 => 'onTagFollowed',
         'eloquent.created: App\Article'  => 'onArticleCreated',
         'eloquent.created: App\Question' => 'onQuestionCreated',
         'eloquent.created: App\Answer'   => 'onAnswerCreated',
@@ -40,6 +42,43 @@ class UserActivitySubscriber
         }
     }
 
+    /**
+     * 标签关注
+     *
+     * @param $event
+     */
+    public function onTagFollowed($event)
+    {
+        if ($event->is_follow) {
+            $tag  = $event->tag;
+            $user = \Auth::user();
+
+            Activity::create([
+                'user_id'      => $user->id,
+                'subject_id'   => $tag->id,
+                'subject_type' => $tag->getTable(),
+                'description'  => '关注了标签',
+                'properties'   => [
+                    'event' => 'tag.followed',
+                    'user'  => [
+                        'name'   => $user->name,
+                        'avatar' => $user->avatar,
+                    ],
+                    'tag'   => [
+                        'name'   => $tag->name,
+                        'follow' => $tag->follow,
+                        'intro'  => $tag->intro,
+                    ],
+                ],
+            ]);
+        }
+    }
+
+    /**
+     * 好友关注
+     *
+     * @param $event
+     */
     public function onUserFollowed($event)
     {
         if ($event->is_follow) {
