@@ -6,6 +6,7 @@ use App\Answer;
 use App\Article;
 use App\Question;
 use App\Activity;
+use App\Events\UserFollow;
 use App\Events\ArticleZan;
 use App\Events\QuestionFollow;
 use App\Events\ArticleCollect;
@@ -21,6 +22,7 @@ class UserActivitySubscriber
         QuestionCollect::class           => 'onQuestionCollected',
         ArticleCollect::class            => 'onArticleCollected',
         ArticleZan::class                => 'onArticleZan',
+        UserFollow::class                => 'onUserFollowed',
         'eloquent.created: App\Article'  => 'onArticleCreated',
         'eloquent.created: App\Question' => 'onQuestionCreated',
         'eloquent.created: App\Answer'   => 'onAnswerCreated',
@@ -35,6 +37,36 @@ class UserActivitySubscriber
     {
         foreach ($this->listen as $event => $listener) {
             $events->listen($event, __CLASS__ . '@' . $listener);
+        }
+    }
+
+    public function onUserFollowed($event)
+    {
+        if ($event->is_follow) {
+            $follow = $event->follow;
+            $fan    = $event->fan;
+
+            Activity::create([
+                'user_id'      => $fan->id,
+                'subject_id'   => $follow->id,
+                'subject_type' => $follow->getTable(),
+                'description'  => '关注了用户',
+                'properties'   => [
+                    'event'  => 'user.followed',
+                    'fan'    => [
+                        'name'   => $fan->name,
+                        'avatar' => $fan->avatar,
+                    ],
+                    'follow' => [
+                        'name'     => $follow->name,
+                        'avatar'   => $follow->avatar,
+                        'company'  => $follow->company,
+                        'position' => $follow->position,
+                        'intro'    => $follow->intro,
+                        'fan'      => $follow->fan,
+                    ],
+                ],
+            ]);
         }
     }
 

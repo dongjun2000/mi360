@@ -25,12 +25,14 @@
 
                                     <li class="list-group-item">
                                         <div class="media">
-                                            <img src="{{ $article['user']['avatar'] }}" class="mr-3 avatar-38"
-                                                 alt="{{ $article['user']['name'] }}"
-                                                 title="{{ $article['user']['name'] }}">
                                             <div class="media-body">
                                                 <div class="mt-2 d-flex justify-content-between">
-                                                    <strong>{{ $activity->description }}</strong>
+                                                    <div>
+                                                        <span class="font-weight-bold">
+                                                            {{ $article['user']['name'] }}
+                                                        </span>
+                                                        {{ $activity->description }}
+                                                    </div>
                                                     <span>{{ $activity->created_at->diffForHumans() }}</span>
                                                 </div>
                                                 <div class="media mt-3">
@@ -58,12 +60,14 @@
                                 @elseif($activity->properties['event'] === 'question.created' && $question = $activity->properties)
                                     <li class="list-group-item">
                                         <div class="media">
-                                            <img src="{{ $question['user']['avatar'] }}" class="mr-3 avatar-38"
-                                                 alt="{{ $question['user']['name'] }}"
-                                                 title="{{ $question['user']['name'] }}">
                                             <div class="media-body">
                                                 <div class="mt-2 d-flex justify-content-between">
-                                                    <strong>{{ $activity->description }}</strong>
+                                                    <div>
+                                                        <span class="font-weight-bold">
+                                                            {{ $question['user']['name'] }}
+                                                        </span>
+                                                        {{ $activity->description }}
+                                                    </div>
                                                     <span>{{ $activity->created_at->diffForHumans() }}</span>
                                                 </div>
                                                 <div class="media mt-3">
@@ -81,12 +85,14 @@
                                 @elseif($activity->properties['event'] === 'answer.created' && $answer = $activity->properties)
                                     <li class="list-group-item">
                                         <div class="media">
-                                            <img src="{{ $answer['user']['avatar'] }}" class="mr-3 avatar-38"
-                                                 alt="{{ $answer['user']['name'] }}"
-                                                 title="{{ $answer['user']['name'] }}">
                                             <div class="media-body">
                                                 <div class="mt-2 d-flex justify-content-between">
-                                                    <strong>{{ $activity->description }}</strong>
+                                                    <div>
+                                                        <span class="font-weight-bold">
+                                                            {{ $answer['user']['name'] }}
+                                                        </span>
+                                                        {{ $activity->description }}
+                                                    </div>
                                                     <span>{{ $activity->created_at->diffForHumans() }}</span>
                                                 </div>
                                                 <div class="media mt-3">
@@ -106,12 +112,14 @@
                                 @elseif($activity->properties['event'] === 'article.collected' && $article = $activity->properties)
                                     <li class="list-group-item">
                                         <div class="media">
-                                            <img src="{{ $article['user']['avatar'] }}" class="mr-3 avatar-38"
-                                                 alt="{{ $article['user']['name'] }}"
-                                                 title="{{ $article['user']['name'] }}">
                                             <div class="media-body">
                                                 <div class="mt-2 d-flex justify-content-between">
-                                                    <strong>{{ $activity->description }}</strong>
+                                                    <div>
+                                                        <span class="font-weight-bold">
+                                                            {{ $article['user']['name'] }}
+                                                        </span>
+                                                        {{ $activity->description }}
+                                                    </div>
                                                     <span>{{ $activity->created_at->diffForHumans() }}</span>
                                                 </div>
                                                 <div class="media mt-3">
@@ -138,12 +146,14 @@
                                 @elseif($activity->properties['event'] === 'question.collected' && $question = $activity->properties)
                                     <li class="list-group-item">
                                         <div class="media">
-                                            <img src="{{ $question['user']['avatar'] }}" class="mr-3 avatar-38"
-                                                 alt="{{ $question['user']['name'] }}"
-                                                 title="{{ $question['user']['name'] }}">
                                             <div class="media-body">
                                                 <div class="mt-2 d-flex justify-content-between">
-                                                    <strong>{{ $activity->description }}</strong>
+                                                    <div>
+                                                        <span class="font-weight-bold">
+                                                            {{ $question['user']['name'] }}
+                                                        </span>
+                                                        {{ $activity->description }}
+                                                    </div>
                                                     <span>{{ $activity->created_at->diffForHumans() }}</span>
                                                 </div>
                                                 <div class="media mt-3">
@@ -161,12 +171,14 @@
                                 @elseif($activity->properties['event'] === 'question.followed' && $question = $activity->properties)
                                     <li class="list-group-item">
                                         <div class="media">
-                                            <img src="{{ $question['user']['avatar'] }}" class="mr-3 avatar-38"
-                                                 alt="{{ $question['user']['name'] }}"
-                                                 title="{{ $question['user']['name'] }}">
                                             <div class="media-body">
                                                 <div class="mt-2 d-flex justify-content-between">
-                                                    <strong>{{ $activity->description }}</strong>
+                                                    <div>
+                                                        <span class="font-weight-bold">
+                                                            {{ $question['user']['name'] }}
+                                                        </span>
+                                                        {{ $activity->description }}
+                                                    </div>
                                                     <span>{{ $activity->created_at->diffForHumans() }}</span>
                                                 </div>
                                                 <div class="media mt-3">
@@ -184,12 +196,14 @@
                                 @elseif($activity->properties['event'] === 'article.zan' && $article = $activity->properties)
                                     <li class="list-group-item">
                                         <div class="media">
-                                            <img src="{{ $article['user']['avatar'] }}" class="mr-3 avatar-38"
-                                                 alt="{{ $article['user']['name'] }}"
-                                                 title="{{ $article['user']['name'] }}">
                                             <div class="media-body">
                                                 <div class="mt-2 d-flex justify-content-between">
-                                                    <strong>{{ $activity->description }}</strong>
+                                                    <div>
+                                                        <span class="font-weight-bold">
+                                                            {{ $article['user']['name'] }}
+                                                        </span>
+                                                        {{ $activity->description }}
+                                                    </div>
                                                     <span>{{ $activity->created_at->diffForHumans() }}</span>
                                                 </div>
                                                 <div class="media mt-3">
@@ -209,6 +223,40 @@
                                                                  title="{{ $article['article']['title'] }}">
                                                         </a>
                                                     @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @elseif($activity->properties['event'] === 'user.followed' && $users = $activity->properties)
+                                    <li class="list-group-item">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <div class="mt-2 d-flex justify-content-between">
+                                                    <div>
+                                                        <span class="font-weight-bold">{{ $users['fan']['name'] }}</span>
+                                                        {{ $activity->description }}
+                                                    </div>
+                                                    <span>{{ $activity->created_at->diffForHumans() }}</span>
+                                                </div>
+                                                <div class="media mt-3">
+                                                    <a href="{{ route('users.show', $activity->subject_id) }}">
+                                                        <img src="{{ $users['follow']['avatar'] }}"
+                                                             class="mr-3 avatar-48"
+                                                             alt="{{ $users['follow']['name'] }}" title="{{ $users['follow']['name'] }}">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <h5 class="mt-0">
+                                                            <a href="{{ route('users.show', $activity->subject_id) }}">{{ $users['follow']['name'] }}</a>
+                                                        </h5>
+                                                        <p title="工作单位与职位">
+                                                            @if($users['follow']['position'])
+                                                                {{ $users['follow']['position'] }}
+                                                                @
+                                                            @endif
+                                                            {{ $users['follow']['company'] }}
+                                                        </p>
+                                                        <p>{{ $users['follow']['intro'] ?: '这家伙太懒，懒得介绍自己~~~' }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

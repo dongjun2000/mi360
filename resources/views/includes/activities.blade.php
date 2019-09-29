@@ -203,6 +203,29 @@
                             </div>
                         </div>
                     </li>
+                @elseif($activity->properties['event'] === 'user.followed')
+                    <li class="list-group-item p-2">
+                        <div class="media">
+                            <a href="{{ route('users.show', $activity->user_id) }}">
+                                <img src="{{ $activity->properties['fan']['avatar'] }}"
+                                     class="mr-2 avatar-38"
+                                     alt="{{ $activity->properties['fan']['name'] }}"
+                                     title="{{ $activity->properties['fan']['name'] }}">
+                            </a>
+                            <div class="media-body">
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-weight-bold">{{ Str::limit($activity->properties['fan']['name'], 10) }}</span>
+                                    <span style="font-size: 12px;">{{ $activity->created_at->diffForHumans() }}</span>
+                                </div>
+                                <div style="font-size:12px">
+                                    <span>{{ $activity->description }}</span>
+                                    <a href="{{ route('users.show', $activity->subject_id) }}">
+                                        {{ $activity->properties['follow']['name'] }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 @endif
 
             @endforeach
