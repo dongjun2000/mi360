@@ -79,4 +79,25 @@ class Question extends Model
     {
         return $this->collects()->wherePivot('user_id', $user_id)->exists();
     }
+
+    /**
+     * 关注问答的用户
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function concerns()
+    {
+        return $this->morphToMany(User::class, 'concern')->withTimestamps();
+    }
+
+    /**
+     * 判断用户是否关注该问答
+     *
+     * @param $user_id
+     * @return bool
+     */
+    public function isConcern($user_id)
+    {
+        return $this->concerns()->wherePivot('user_id', $user_id)->exists();
+    }
 }

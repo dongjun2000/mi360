@@ -5,10 +5,11 @@ namespace App\Listeners;
 use App\Answer;
 use App\Article;
 use App\Question;
+use App\Events\ArticleZan;
 use App\Events\UserFollow;
+use App\Events\QuestionFollow;
 use App\Events\ArticleCollect;
 use App\Events\QuestionCollect;
-use App\Events\ArticleZan;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -40,12 +41,14 @@ class HandleCountSubscriber
             'onArticleCollectTotal',
         ],
         // 问答收藏
-        QuestionCollect::class => [
+        QuestionCollect::class           => [
             // 更新问答的用户的被收藏总数
             'onQuestionUserCollectTotal',
             // 更新问答的被收藏总数
             'onQuestionCollectTotal',
         ],
+        // 问答关注
+        QuestionFollow::class            => 'onQuestionFollowTotal',
         // 用户关注与取关
         UserFollow::class                => [
             // 更新用户的关注数
@@ -84,8 +87,6 @@ class HandleCountSubscriber
 
     public function onUserFollowTotal($event)
     {
-        //User $follow, User $fan, $is_follow
-
         $user             = $event->follow;
         $user->timestamps = false;
         $event->is_follow ? $user->increment('fan') : $user->decrement('fan');
@@ -93,7 +94,7 @@ class HandleCountSubscriber
 
     public function onUserFanTotal($event)
     {
-        $user = $event->fan;
+        $user             = $event->fan;
         $user->timestamps = false;
         $event->is_follow ? $user->increment('follow') : $user->decrement('follow');
     }
@@ -178,7 +179,7 @@ class HandleCountSubscriber
      */
     public function onQuestionCollectTotal($event)
     {
-        $question = $event->question;
+        $question             = $event->question;
         $question->timestamps = false;
         $event->is_collect ? $question->increment('collect') : $question->decrement('collect');
     }
@@ -191,5 +192,12 @@ class HandleCountSubscriber
         $article             = $event->article;
         $article->timestamps = false;
         $event->is_collect ? $article->increment('collect') : $article->decrement('collect');
+    }
+
+    public function onQuestionFollowTotal($event)
+    {
+        $question = $event->question;
+        $question->timestamps = false;
+        $event->is_follow ? $question->increment('follow') : $question->decrement('follow');
     }
 }

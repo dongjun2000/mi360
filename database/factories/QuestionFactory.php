@@ -11,7 +11,6 @@ $factory->define(Question::class, function (Faker $faker) {
         'user_id'            => ($user_id = $faker->randomElement($ids)),
         'title'              => $faker->text(50),
         'content'            => $faker->text(2000),
-        'follow'             => $faker->numberBetween(0, 100),
         'hot'                => $faker->boolean,
         'laster_answer_user' => [
             'id'         => $user_id,

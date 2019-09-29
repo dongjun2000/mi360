@@ -57,11 +57,15 @@
 
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="pl-3 d-inline-flex">
-                                <form action="" method="post" class="pr-2">
+                                <form action="{{ route('questions.concern', $question) }}" method="post" class="pr-2">
                                     @csrf
-                                    <button type="submit" class="btn btn-success btn-sm">关注 <span
-                                                class="line">|</span> {{ $question->follow }}</button>
+                                    <button type="submit" class="btn btn-success btn-sm">
+                                        {{ $concernStatus ? '取消关注' : '关注' }}
+                                        <span class="line">|</span>
+                                        {{ $question->follow }}
+                                    </button>
                                 </form>
+
                                 <form action="{{ route('questions.collect', $question) }}" method="post">
                                     @csrf
                                     <button type="submit" class="btn btn-primary btn-sm">

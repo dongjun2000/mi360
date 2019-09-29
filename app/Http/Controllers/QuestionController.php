@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\QuestionFollow;
 use Auth;
 use App\Question;
 use App\Events\QuestionCollect;
@@ -101,14 +102,19 @@ class QuestionController extends Controller
         event('article.read', $question);
 
         $collectStatus = false;     // 收藏状态
+        $concernStatus = false;
         if (Auth::check()) {
             $collectStatus = $question->isCollect(Auth::user()->id);
+            $concernStatus = $question->isConcern(AUth::user()->id);
         }
 
         // 回答列表
         $answers = $question->answers()->with('user')->orderByDesc('accept')->orderByDesc('updated_at')->get();
 
-        return view('questions.show', compact('question', 'answers', 'collectStatus'));
+        return view(
+            'questions.show',
+            compact('question', 'answers', 'collectStatus', 'concernStatus')
+        );
     }
 
     /**
@@ -158,6 +164,17 @@ class QuestionController extends Controller
         $is_collect = (bool)count($result['attached']);
 
         event(new QuestionCollect($question, $is_collect));
+
+        return back();
+    }
+
+    public function concern(Question $question)
+    {
+        $result = $question->concerns()->toggle(Auth::user());
+
+        $is_follow = (bool)count($result['attached']);
+
+        event(new QuestionFollow($question, $is_follow));
 
         return back();
     }
