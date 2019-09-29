@@ -181,6 +181,38 @@
                                             </div>
                                         </div>
                                     </li>
+                                @elseif($activity->properties['event'] === 'article.zan' && $article = $activity->properties)
+                                    <li class="list-group-item">
+                                        <div class="media">
+                                            <img src="{{ $article['user']['avatar'] }}" class="mr-3 avatar-38"
+                                                 alt="{{ $article['user']['name'] }}"
+                                                 title="{{ $article['user']['name'] }}">
+                                            <div class="media-body">
+                                                <div class="mt-2 d-flex justify-content-between">
+                                                    <strong>{{ $activity->description }}</strong>
+                                                    <span>{{ $activity->created_at->diffForHumans() }}</span>
+                                                </div>
+                                                <div class="media mt-3">
+                                                    <div class="media-body">
+                                                        <h2 class="mt-0 title">
+                                                            <a href="{{ route('articles.show', $activity->subject_id) }}">
+                                                                {{ $article['article']['title'] }}
+                                                            </a>
+                                                        </h2>
+                                                        {{ $article['article']['intro'] }}
+                                                    </div>
+                                                    @if($article['article']['pic'])
+                                                        <a href="{{ route('articles.show', $activity->subject_id) }}">
+                                                            <img src="{{ $article['article']['pic'] }}"
+                                                                 class="align-self-center ml-3 rounded pic"
+                                                                 alt="{{ $article['article']['title'] }}"
+                                                                 title="{{ $article['article']['title'] }}">
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
                                 @endif
                                 {{--TODO:: 招聘...--}}
                             @endforeach

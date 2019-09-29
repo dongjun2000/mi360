@@ -4,9 +4,10 @@ namespace App\Listeners;
 
 use App\Answer;
 use App\Article;
-use App\Events\QuestionFollow;
 use App\Question;
 use App\Activity;
+use App\Events\ArticleZan;
+use App\Events\QuestionFollow;
 use App\Events\ArticleCollect;
 use App\Events\QuestionCollect;
 use Illuminate\Queue\InteractsWithQueue;
@@ -19,6 +20,7 @@ class UserActivitySubscriber
         QuestionFollow::class            => 'onQuestionFollowed',
         QuestionCollect::class           => 'onQuestionCollected',
         ArticleCollect::class            => 'onArticleCollected',
+        ArticleZan::class                => 'onArticleZan',
         'eloquent.created: App\Article'  => 'onArticleCreated',
         'eloquent.created: App\Question' => 'onQuestionCreated',
         'eloquent.created: App\Answer'   => 'onAnswerCreated',
@@ -33,6 +35,37 @@ class UserActivitySubscriber
     {
         foreach ($this->listen as $event => $listener) {
             $events->listen($event, __CLASS__ . '@' . $listener);
+        }
+    }
+
+    /**
+     * 文章点赞
+     *
+     * @param $event
+     */
+    public function onArticleZan($event)
+    {
+        if ($event->is_zan) {
+            $article = $event->article;
+            $user    = \Auth::user();
+            Activity::create([
+                'user_id'      => $user->id,
+                'subject_id'   => $article->id,
+                'subject_type' => $article->getTable(),
+                'description'  => '点赞了文章',
+                'properties'   => [
+                    'event'   => 'article.zan',
+                    'user'    => [
+                        'name'   => $user->name,
+                        'avatar' => $user->avatar,
+                    ],
+                    'article' => [
+                        'title' => $article->title,
+                        'intro' => $article->intro,
+                        'pic'   => $article->pic,
+                    ],
+                ],
+            ]);
         }
     }
 
