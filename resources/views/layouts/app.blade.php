@@ -131,6 +131,28 @@
     <main class="py-4" id="app">
         @yield('content')
     </main>
+    <footer class="container-fluid bg-dark">
+        <div class="container">
+            <div class="row pt-3">
+                <div class="col-12 text-center text-white-50">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="http://beian.miit.gov.cn/" target="_blank" class="text-white-50">鄂ICP备18011339号</a>
+                        </li>
+                        <li class="list-inline-item">
+                            copyright © 2019
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="/" class="text-white-50">编程故事</a>
+                        </li>
+                        <li class="list-inline-item">
+                            十堰梦航教育科技有限公司版权所有
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
 <!-- Scripts -->
 <script src="{{ mix('js/app.js') }}"></script>
