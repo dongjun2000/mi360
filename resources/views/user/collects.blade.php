@@ -22,12 +22,16 @@
                     </div>
                     <div class="card-body p-2">
                         <ul class="list-group list-group-flush">
-                            @foreach($models as $model)
-                                <li class="list-group-item d-flex justify-content-between">
-                                    <a href="{{ route($type . '.show', $model) }}">{{ $model->title }}</a>
-                                    <span>{{ $model->created_at }}</span>
-                                </li>
-                            @endforeach
+                            @if($models->total())
+                                @foreach($models as $model)
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <a href="{{ route($type . '.show', $model) }}">{{ $model->title }}</a>
+                                        <span>{{ $model->created_at }}</span>
+                                    </li>
+                                @endforeach
+                            @else
+                                <li class="list-group-item">暂无收藏！</li>
+                            @endif
                         </ul>
                     </div>
                     <div class="card-footer">
