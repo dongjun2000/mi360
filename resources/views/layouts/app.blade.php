@@ -60,15 +60,21 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('tags.index') }}">标签</a>
+                                <a class="dropdown-item" href="{{ route('tags.index') }}">
+                                    <i class="fa fa-tags"></i>标签
+                                </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="">排行榜</a>
+                                <a class="dropdown-item" href="">
+                                    <i class="fa fa-signal"></i>排行榜
+                                </a>
                             </div>
                         </li>
                     </ul>
                     <form class="form-inline ml-auto">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-success my-2 my-sm-0" type="submit">搜索</button>
+                        <button class="btn btn-success my-2 my-sm-0" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
                     </form>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto align-items-center">
@@ -86,17 +92,40 @@
                             {{--操作菜单--}}
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>创建</a>
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fa fa-plus"></i>创建
+                                </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a href="{{ route('questions.create') }}" class="dropdown-item">提问题</a>
+                                    <a href="{{ route('questions.create') }}" class="dropdown-item">
+                                        <i class="fa fa-question"></i>提问题
+                                    </a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="{{ route('articles.create') }}" class="dropdown-item">写文章</a>
+                                    <a href="{{ route('articles.create') }}" class="dropdown-item">
+                                        <i class="fa fa-pencil"></i>
+                                        写文章
+                                    </a>
                                 </div>
                             </li>
 
+                            <li class="ml-3" style="position: relative;">
+                                <a href="" class="text-muted">
+                                    <i class="fa fa-bell-o"></i>
+                                    <span class="badge badge-danger badge-pill"
+                                          style="position: absolute; top: -8px;left: 6px">2</span>
+                                </a>
+                            </li>
+
+                            <li class="ml-3" style="position: relative;">
+                                <a href="" class="text-muted">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge badge-danger badge-pill"
+                                          style="position: absolute; top: -8px;left: 6px">2</span>
+                                </a>
+                            </li>
+
                             {{--用户信息--}}
-                            <li class="nav-item dropdown ml-4" data-pjax>
+                            <li class="nav-item dropdown ml-3" data-pjax>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}"
@@ -104,18 +133,24 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}">我的主页</a>
+                                    <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}">
+                                        <i class="fa fa-home"></i>我的主页
+                                    </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('users.settings') }}">个人设置</a>
+                                    <a class="dropdown-item" href="{{ route('users.settings') }}">
+                                        <i class="fa fa-user"></i>
+                                        个人设置
+                                    </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('users.collects', Auth::user()) }}">我的收藏</a>
+                                    <a class="dropdown-item" href="{{ route('users.collects', Auth::user()) }}">
+                                        <i class="fa fa-heart"></i>我的收藏
+                                    </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        退出
+                                        <i class="fa fa-sign-in"></i>退出
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                           style="display: none;">
                                         @csrf
