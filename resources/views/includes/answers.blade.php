@@ -12,7 +12,8 @@
                         <a href="{{ route('users.show', $answer->user) }}"
                            class="font-weight-bold mr-2">{{ $answer->user->name }}</a>
                         <span class="font">{{ $answer->created_at }}
-                            回答了： <a href="{{ route('questions.show', $answer->question) }}" title="{{ $answer->question->title }}">{{ $answer->question->title }}</a></span>
+                            回答了： <a href="{{ route('questions.show', $answer->question) }}"
+                                    title="{{ $answer->question->title }}">{{ $answer->question->title }}</a></span>
                     </div>
                     <div class="mt-2">
                         {!! $answer->content !!}

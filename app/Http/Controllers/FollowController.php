@@ -18,7 +18,7 @@ class FollowController extends Controller
         $tag = 'fans';
         $users = $user->fans()->paginate(10);
 
-        return view('follows.fans', compact('tag', 'users', 'user'));
+        return view('user.show', compact('tag', 'users', 'user'));
     }
 
     /**
@@ -31,6 +31,6 @@ class FollowController extends Controller
     {
         $tag = 'follows';
         $users = $user->follows()->paginate(10);
-        return view('follows.follows', compact('tag', 'users', 'user'));
+        return view('user.show', compact('tag', 'users', 'user'));
     }
 }

@@ -41,12 +41,12 @@
                     </li>
                     <li class="list-inline-item">
                         {{--<a href="">--}}
-                            {{ Carbon\Carbon::parse($question->laster_answer_user['created_at'])->diffForHumans() }}
-                            @if($question->laster_answer_user['type'])
-                                回答
-                            @else
-                                创建
-                            @endif
+                        {{ Carbon\Carbon::parse($question->laster_answer_user['created_at'])->diffForHumans() }}
+                        @if($question->laster_answer_user['type'])
+                            回答
+                        @else
+                            创建
+                        @endif
                         {{--</a>--}}
                     </li>
                 </ul>

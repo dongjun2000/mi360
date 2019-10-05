@@ -72,7 +72,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $tag = 'show';
+        $tag = 'activities';
 
         $activities = $user->activities()->orderByDesc('created_at')->paginate(20);
 
@@ -132,7 +132,7 @@ class UserController extends Controller
 
         $articles = $user->articles()->with('user')->orderByDesc($sort)->paginate(10);
 
-        return view('user.articles', compact('tag', 'user', 'articles'));
+        return view('user.show', compact('tag', 'user', 'articles'));
     }
 
     /**
@@ -152,7 +152,7 @@ class UserController extends Controller
 
         $questions = $user->questions()->orderByDesc($sort)->paginate(10);
 
-        return view('user.questions', compact('tag', 'user', 'questions'));
+        return view('user.show', compact('tag', 'user', 'questions'));
     }
 
     /**
@@ -172,7 +172,7 @@ class UserController extends Controller
 
         $answers = $user->answers()->with('question')->orderByDesc($sort)->paginate(10);
 
-        return view('user.answers', compact('tag', 'user', 'answers'));
+        return view('user.show', compact('tag', 'user', 'answers'));
     }
 
     /**
@@ -192,7 +192,7 @@ class UserController extends Controller
 
         $models = $user->collects($type)->paginate(20);
 
-        return view('user.collects', compact('tag','type', 'user', 'models'));
+        return view('user.show', compact('tag','type', 'user', 'models'));
     }
 
     /**

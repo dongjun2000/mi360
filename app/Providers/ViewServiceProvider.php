@@ -19,7 +19,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         // 注册视图合成器
-        View::composer(['includes.user', 'includes.user_nav'], UserComposer::class);
+        View::composer(['user.show'], UserComposer::class);
         View::composer('includes.category', CategoryComposer::class);
         View::composer('includes.visitor', VisitorComposer::class);
         View::composer('includes.activities', ActivityComposer::class);
