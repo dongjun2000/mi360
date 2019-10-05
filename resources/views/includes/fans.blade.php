@@ -2,20 +2,22 @@
     @foreach($users as $user)
         <li class="list-group-item">
             <div class="media">
-                <a href="">
+                <a href="{{ route('users.show', $user) }}">
                     <img src="{{ $user->avatar }}" class="mr-3 avatar-48"
-                         alt="..." title="">
+                         alt="{{ $user->name }}" title="{{ $user->name }}">
                 </a>
                 <div class="media-body">
                     <h5 class="mt-0">
-                        <a href="">{{ $user->name }}</a>
+                        <a href="{{ route('users.show', $user) }}" title="{{ $user->name }}">{{ $user->name }}</a>
                     </h5>
                     <p title="工作单位与职位">
-                        php开发者
-                        @
-                        十堰梦航教育科技有限公司
+                        @if(!is_null($user->position))
+                            {{ $user->position }}
+                            @
+                        @endif
+                        {{ $user->company }}
                     </p>
-                    <p>这家伙太懒，懒得介绍自己~~~</p>
+                    <p title="自我介绍">{{ $user->intro ?: '这家伙太懒，懒得介绍自己~~~' }}</p>
                 </div>
             </div>
         </li>
