@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <div class="card">
+                <div class="card" style="position: sticky; top: 15px;">
                     <div class="card-body p-0">
                         <div class="list-group list-group-flush">
                             <a href="{{ route('users.settings') }}"
