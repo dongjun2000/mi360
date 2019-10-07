@@ -109,18 +109,18 @@
                             </li>
 
                             <li class="ml-3" style="position: relative;">
-                                <a href="" class="text-muted">
+                                <a href="{{ route('notifications.index', ['filter' => 'unread']) }}" class="text-muted" title="新通知">
                                     <i class="fa fa-bell-o"></i>
                                     <span class="badge badge-danger badge-pill"
-                                          style="position: absolute; top: -8px;left: 6px">2</span>
+                                          style="position: absolute; top: -8px;left: 6px">{{ Auth::user()->inform > 99 ? '99+' : Auth::user()->inform }}</span>
                                 </a>
                             </li>
 
                             <li class="ml-3" style="position: relative;">
-                                <a href="" class="text-muted">
+                                <a href="{{ route('messages.index') }}" class="text-muted" title="新私信">
                                     <i class="fa fa-envelope-o"></i>
                                     <span class="badge badge-danger badge-pill"
-                                          style="position: absolute; top: -8px;left: 6px">2</span>
+                                          style="position: absolute; top: -8px;left: 6px">{{ Auth::user()->message > 99 ? '99+' : Auth::user()->message  }}</span>
                                 </a>
                             </li>
 

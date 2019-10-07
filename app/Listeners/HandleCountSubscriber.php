@@ -33,6 +33,8 @@ class HandleCountSubscriber
             'onUserZanTotal',
             // 更新文章的获赞总数
             'onArticleZanTotal',
+            // 更新被点赞文章作者的通知总数
+            'onArticleAuthorInformTotal',
         ],
         // 文章收藏
         ArticleCollect::class            => [
@@ -40,6 +42,8 @@ class HandleCountSubscriber
             'onArticleUserCollectTotal',
             // 更新文章的被收藏总数
             'onArticleCollectTotal',
+            // 更新被收藏文章作者的通知总数
+            'onArticleAuthorInformTotal',
         ],
         // 问答收藏
         QuestionCollect::class           => [
@@ -58,6 +62,8 @@ class HandleCountSubscriber
             'onUserFollowTotal',
             // 更新用户的粉丝数
             'onUserFanTotal',
+            // 更新被关注用户的通知数
+            'onFollowUserInformTotal',
         ],
         'eloquent.created: App\Article'  => 'onUserArticleTotal',
         'eloquent.created: App\Question' => 'onUserQuestionTotal',
@@ -209,5 +215,15 @@ class HandleCountSubscriber
         $tag             = $event->tag;
         $tag->timestamps = false;
         $event->is_follow ? $tag->increment('follow') : $tag->decrement('follow');
+    }
+
+    public function onFollowUserInformTotal($event)
+    {
+        $event->follow->increment('inform');
+    }
+
+    public function onArticleAuthorInformTotal($event)
+    {
+        $event->article->user()->increment('inform');
     }
 }

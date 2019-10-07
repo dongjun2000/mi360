@@ -8,6 +8,8 @@ use App\Category;
 use App\Events\ArticleZan;
 use App\Events\ArticleCollect;
 use App\Http\Requests\ArticleSotre;
+use App\Notifications\NewArticleZan;
+use App\Notifications\NewArticleCollect;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -163,6 +165,8 @@ class ArticleController extends Controller
 
         event(new ArticleCollect($article, $is_collect));
 
+        $article->user->notify(new NewArticleCollect(Auth::user(), $article, $is_collect));
+
         return back();
     }
 
@@ -179,6 +183,8 @@ class ArticleController extends Controller
         $is_zan = count($result['attached']) ? true : false;
 
         event(new ArticleZan($article, $is_zan));
+
+        $article->user->notify(new NewArticleZan(Auth::user(), $article, $is_zan));
 
         return back();
     }

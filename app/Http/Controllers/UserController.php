@@ -8,6 +8,7 @@ use App\Events\UserShow;
 use App\Events\UserFollow;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserSettings;
+use App\Notifications\NewUserFollow;
 
 class UserController extends Controller
 {
@@ -29,6 +30,8 @@ class UserController extends Controller
         $is_follow = count($result['attached']) ? true : false;
 
         event(new UserFollow($user, Auth::user(), $is_follow));
+
+        $user->notify(new NewUserFollow(Auth::user(), $is_follow));
 
         return back()->with('success', '关注成功!');
     }

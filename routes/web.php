@@ -51,6 +51,9 @@ Route::get('tags/{name}/article', 'TagController@article')->name('tags.article')
 Route::get('tags/{name}/info', 'TagController@info')->name('tags.info');
 Route::post('tags/{tag}/concern', 'TagController@concern')->name('tags.concern');
 
+// 通知
+Route::get('notifications', 'NotificationController@index')->name('notifications.index');
+
 Route::resource('users', 'UserController');
 Route::resource('articles', 'ArticleController');
 Route::resource('tags', 'TagController');
@@ -58,4 +61,4 @@ Route::resource('questions', 'QuestionController');
 Route::resource('answers', 'AnswerController');
 Route::resource('comments', 'CommentController');
 Route::resource('categories', 'CategoryController');
-
+Route::resource('messages', 'MessageController');

@@ -6,6 +6,7 @@ use App\Tag;
 use App\Answer;
 use App\Article;
 use App\Question;
+use App\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // 自定义多态类型
         Relation::morphMap([
+            'user'      => User::class,
             'articles'  => Article::class,
             'questions' => Question::class,
             'answers'   => Answer::class,
