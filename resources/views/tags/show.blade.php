@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title', "{$tag->name}标签 - {$tag->getLabel($label)}")
+@section('keywords', "{$tag->name}")
+@section('description', "{$tag->intro}")
+
 @section('content')
     <div class="container">
         {{--面包屑导航--}}
@@ -8,20 +12,7 @@
             <li class="breadcrumb-item"><a href="{{ route('tags.index') }}" title="标签">标签</a></li>
             <li class="breadcrumb-item"><a href="{{ route('tags.show', $tag->name) }}">{{ $tag->name }}</a></li>
             <li class="breadcrumb-item">
-                @switch($label)
-                    @case('show')
-                    标签动态
-                    @break
-                    @case('info')
-                    标签百科
-                    @break
-                    @case('questions')
-                    相关问答
-                    @break
-                    @case('article')
-                    相关文章
-                    @break
-                @endswitch
+                {{ $tag->getLabel($label) }}
             </li>
         </ol>
         <div class="row">

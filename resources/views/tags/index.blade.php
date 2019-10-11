@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', '所有标签')
+
 @section('script')
     <script>
         $(document).ready(function () {

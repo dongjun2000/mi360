@@ -8,6 +8,27 @@ class Tag extends Model
 {
     public $fillable = ['name'];
 
+    public function getLabel($value)
+    {
+        $str = '';
+        switch ($value) {
+            case('show'):
+                $str = '标签动态';
+                break;
+            case('info'):
+                $str = '标签百科';
+                break;
+            case('questions'):
+                $str = '相关问答';
+                break;
+            case('article'):
+                $str = '相关文章';
+                break;
+        }
+        return $str;
+    }
+
+
     /**
      * 与文章模型多对多关联
      *

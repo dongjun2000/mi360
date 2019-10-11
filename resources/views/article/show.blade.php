@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title', "{$article->title} - {$article->category->name}")
+@section('description', "{$article->intro}")
+
 @section('css')
     <link rel="stylesheet"
           href="{{ asset('vendor/unisharp/laravel-ckeditor/plugins/codesnippet/lib/highlight/styles/zenburn.css') }}">
