@@ -23,7 +23,7 @@
                                 <div style="font-size:12px">
                                     <span>{{ $activity->description }}</span>
                                     <figure class="figure">
-                                        @if(isset($activity->properties['article']['pic']))
+                                        @if(!empty($activity->properties['article']['pic']))
                                             <a href="{{ route('articles.show', $activity->subject_id) }}">
                                                 <img src="{{ $activity->properties['article']['pic'] }}"
                                                      class="figure-img img-fluid rounded"
@@ -104,7 +104,7 @@
                                 <div style="font-size:12px">
                                     <span>{{ $activity->description }}</span>
                                     <figure class="figure">
-                                        @if(isset($activity->properties['article']['pic']))
+                                        @if(!empty($activity->properties['article']['pic']))
                                             <a href="{{ route('articles.show', $activity->subject_id) }}">
                                                 <img src="{{ $activity->properties['article']['pic'] }}"
                                                      class="figure-img img-fluid rounded"
@@ -185,7 +185,7 @@
                                 <div style="font-size:12px">
                                     <span>{{ $activity->description }}</span>
                                     <figure class="figure">
-                                        @if(isset($activity->properties['article']['pic']))
+                                        @if(!empty($activity->properties['article']['pic']))
                                             <a href="{{ route('articles.show', $activity->subject_id) }}">
                                                 <img src="{{ $activity->properties['article']['pic'] }}"
                                                      class="figure-img img-fluid rounded"
