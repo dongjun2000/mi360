@@ -25,7 +25,7 @@
                         @endauth
                     </div>
                     <div class="card-body">
-                        <ul class="list-group list-group-flush list" data-pjax>
+                        <ul class="list-group list-group-flush list">
                             @include('includes.articles')
                         </ul>
                     </div>

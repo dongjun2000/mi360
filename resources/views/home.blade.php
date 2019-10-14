@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <div class="row" data-pjax>
-            <div class="col-md-2">
+        <div class="row">
+            <div class="col-md-2" data-pjax>
                 <div class="card">
                     <div class="card-body p-0">
                         <div class="list-group list-group-flush">
