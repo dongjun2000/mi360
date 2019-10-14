@@ -7,6 +7,7 @@
     <meta name="description" content="@yield('description')">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="baidu-site-verification" content="XWEOfCvSAG">
 
     <title>@hasSection('title')@yield('title') - @endif{{ config('app.name', '编程故事') }} - 一个技术问答分享社区</title>
 
