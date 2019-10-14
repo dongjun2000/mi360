@@ -178,4 +178,21 @@ class TagController extends Controller
         }
         return $concernStatus;
     }
+
+    /**
+     * 用户 select2插件 检索标签
+     */
+    public function search(Request $request)
+    {
+        $search_key = $request->get('key', null);
+
+        $tags = [];
+        if ($search_key) {
+            $tags = Tag::query()->select('id', 'name')->where('name', 'like', "{$search_key}%")->get();
+        }
+
+        return \Response::json([
+            'results'    => $tags,
+        ]);
+    }
 }

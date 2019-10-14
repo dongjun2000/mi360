@@ -50,6 +50,7 @@ Route::get('tags/{name}/questions', 'TagController@questions')->name('tags.quest
 Route::get('tags/{name}/article', 'TagController@article')->name('tags.article');
 Route::get('tags/{name}/info', 'TagController@info')->name('tags.info');
 Route::post('tags/{tag}/concern', 'TagController@concern')->name('tags.concern');
+Route::get('tags/search', 'TagController@search')->name('tags.search');
 
 // 通知
 Route::get('notifications', 'NotificationController@index')->name('notifications.index');

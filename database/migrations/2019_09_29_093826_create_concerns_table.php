@@ -20,7 +20,7 @@ class CreateConcernsTable extends Migration
     {
         Schema::create('concerns', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->comment('关注人');
             $table->bigInteger('concern_id');
             $table->string('concern_type');
             $table->timestamps();

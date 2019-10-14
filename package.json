@@ -26,6 +26,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "nprogress": "^0.2.0"
+        "nprogress": "^0.2.0",
+        "select2": "^4.0.11"
     }
 }

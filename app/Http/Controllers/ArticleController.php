@@ -90,6 +90,8 @@ class ArticleController extends Controller
             'intro'       => mb_substr(strip_tags($request->get('content')), 0, 100),
         ]);
 
+        $article->tags()->attach($request->get('tags'));
+
         return redirect()->route('articles.show', $article);
     }
 
