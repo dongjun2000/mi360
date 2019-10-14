@@ -250,7 +250,7 @@
 
             <div class="col-md-3 mt-md-0 mt-3">
                 {{--作者信息--}}
-                @include('includes.user', ['user' => $article->user ]);
+                @include('includes.user', ['user' => $article->user ])
 
             </div>
         </div>
