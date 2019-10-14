@@ -22,8 +22,7 @@
                             </div>
 
                             <div class="form-group">
-                                <input type="text" class="form-control tags" name="tags" id="tags"
-                                       placeholder="标签，如：php,Laravel(用逗号,分隔)">
+                                <select class="form-control" name="tags[]" id="tags" multiple="multiple"></select>
                             </div>
 
                             <div class="form-group">
@@ -55,6 +54,31 @@
     <script>
         $('textarea').ckeditor({
             height: 400
+        });
+
+        $('#tags').select2({
+            placeholder: '选择相关标签',
+            maximumInputLength: 10,
+            ajax: {
+                delay: 250,
+                url: "{{ route('tags.search') }}",
+                data: function (params) {
+                    console.log(params.term);
+                    var query = {
+                        key: params.term,
+                    };
+                    return query;
+                },
+                dataType: 'json',
+                processResults: function (data) {
+                    // ajax返回结果格式转换
+                    data.results = $.map(data.results, function (obj) {
+                        obj.text = obj.text || obj.name;
+                        return obj;
+                    });
+                    return data;
+                }
+            }
         });
     </script>
 @stop

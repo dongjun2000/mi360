@@ -87,6 +87,8 @@ class QuestionController extends Controller
             ],
         ]);
 
+        $question->tags()->attach($request->get('tags'));
+
         return redirect()->route('questions.show', $question);
     }
 
