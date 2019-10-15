@@ -21,6 +21,18 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     @yield('css')
+
+    <script>
+        // 百度统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?157eed7560ccd58fc0a0e989ef46627e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
 </head>
 <body>
 <div id="pjax-container">
