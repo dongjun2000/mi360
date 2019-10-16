@@ -5,6 +5,8 @@
           href="{{ asset('vendor/unisharp/laravel-ckeditor/plugins/codesnippet/lib/highlight/styles/zenburn.css') }}">
 @stop
 
+@section('title', "{$question->title} - 问答")
+
 @section('content')
     <div class="container">
         {{--面包屑导航--}}

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', $user->name . '的个人主页')
+
 @section('content')
     <div class="container">
         <div class="row" data-pjax>
@@ -25,7 +27,7 @@
 
             <div class="col-md-3">
                 {{--用户信息--}}
-                @include('includes.user');
+                @include('includes.user')
 
                 {{--最近访客--}}
                 @include('includes.visitor', ['user' => $user])

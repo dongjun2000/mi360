@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title')
+@switch($category)
+        @case('index')最新的问题@break
+        @case('unanswered')等待回答的问题@break
+        @case('hot')热门的问题@break
+@endswitch
+@stop
+
 @section('content')
     <div class="container">
         <div class="row">
