@@ -10738,6 +10738,11 @@ h1 {
   font-size: 20px;
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   color: #777;
 }
@@ -10754,6 +10759,25 @@ header {
 header .nav-link {
   padding-top: 0;
   padding-bottom: 0;
+}
+
+#app {
+  margin-bottom: 50px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+footer .container p {
+  margin: 19px 0;
+  color: #c1c1c1;
+}
+
+footer .container p a {
+  color: inherit;
 }
 
 .avatar-24 {

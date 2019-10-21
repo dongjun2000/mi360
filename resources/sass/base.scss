@@ -15,6 +15,11 @@ h1 {
   font-size: 20px;
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   color: #777;
 }
@@ -33,6 +38,26 @@ header {
   .nav-link {
     padding-top: 0;
     padding-bottom: 0;
+  }
+}
+
+#app {
+  margin-bottom: 50px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  .container {
+    p {
+      margin: 19px 0;
+      color: #c1c1c1;
+
+      a {
+        color: inherit;
+      }
+    }
   }
 }
 
