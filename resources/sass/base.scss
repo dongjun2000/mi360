@@ -41,6 +41,14 @@ header {
   }
 }
 
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+  pointer-events: none;
+}
+
 #app {
   margin-bottom: 50px;
 }

@@ -73,7 +73,7 @@
                                 发现 <span class="caret"></span>
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-left mt-0" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('tags.index') }}">
                                     <i class="fa fa-tags"></i>标签
                                 </a>
@@ -110,7 +110,7 @@
                                     <i class="fa fa-plus"></i>创建
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
                                     <a href="{{ route('questions.create') }}" class="dropdown-item">
                                         <i class="fa fa-question"></i>提问题
                                     </a>
