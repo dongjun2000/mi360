@@ -56,7 +56,7 @@ class ArticleController extends Controller
      */
     public function index(Request $request, Article $article)
     {
-        $category = 'commend';
+        $category = 'index';
         $articles = $article->comment();
 
         return view('article.index', compact('articles', 'category'));

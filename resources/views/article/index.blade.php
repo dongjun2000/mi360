@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', \App\Article::Category[$category])
+
 @section('content')
     <div class="container">
         <div class="row article-list">
@@ -7,18 +9,12 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-end">
                         <ul class="nav nav-tabs card-header-tabs" data-pjax>
-                            <li class="nav-item">
-                                <a class="nav-link @if($category === 'commend') active @endif"
-                                   href="{{ route('articles.index') }}">推荐文章</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @if($category === 'hot') active @endif"
-                                   href="{{ route('articles.hot') }}">热门文章</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @if($category === 'new') active @endif"
-                                   href="{{ route('articles.new') }}">最新文章</a>
-                            </li>
+                            @foreach(\App\Article::Category as $key => $value)
+                                <li class="nav-item">
+                                    <a class="nav-link @if($category === $key) active @endif"
+                                       href="{{ route('articles.' . $key) }}">{{ $value }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                         @auth
                             <a class="btn btn-primary btn-sm" href="{{ route('articles.create') }}">写文章</a>

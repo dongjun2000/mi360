@@ -7,6 +7,8 @@ use Illuminate\Support\Carbon;
 
 class Article extends Model
 {
+    const Category = ['index' => '推荐文章', 'hot' => '热门文章', 'new' => '最新文章'];
+
     public $fillable = ['type', 'title', 'pic', 'content', 'intro', 'category_id'];
 
     /**

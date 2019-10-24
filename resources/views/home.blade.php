@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', isset($category) ? $category->name : '')
+@section('title', isset($category) ? $category->name : '编程故事')
 
 @section('content')
     <div class="container">
