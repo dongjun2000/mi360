@@ -126,11 +126,6 @@
                 <div style="position:sticky; top:15px;">
                     <ul class="list-group">
                         <li class="list-group-item disabled active">相似问题</li>
-                        <li class="list-group-item"><a href="">Ajax实现的长轮询如何才能不阻塞同一时间内页面的其他Ajax请求（同域请求）呢？</a></li>
-                        <li class="list-group-item"><a href="">php爬虫ajax请求地址怎么获取？</a></li>
-                        <li class="list-group-item"><a href="">ajax 轮询php后台，当后台没有返回信息会关闭当前的ajax的请求吗</a></li>
-                        <li class="list-group-item"><a href="">实际开发中比较流行的ph框架</a></li>
-                        <li class="list-group-item"><a href="">php怎么设计帖子回复系统</a></li>
                     </ul>
                 </div>
 
