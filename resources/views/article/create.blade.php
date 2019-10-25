@@ -13,8 +13,8 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1" name="category_id">
-                                    <option>==请选择文章分类==</option>
+                                <select class="form-control" required id="exampleFormControlSelect1" name="category_id">
+                                    <option value="" hidden disabled selected>==请选择文章分类==</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
