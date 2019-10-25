@@ -87,7 +87,7 @@ class ArticleController extends Controller
             'type'        => $request->get('type'),
             'title'       => $request->get('title'),
             'content'     => $request->get('content'),
-            'intro'       => mb_substr(strip_tags($request->get('content')), 0, 100),
+            'intro'       => mb_substr(preg_replace('/\r\n|\r|\n+/', '', strip_tags($request->get('content'))), 0, 100),
         ]);
 
         $article->tags()->attach($request->get('tags'));
