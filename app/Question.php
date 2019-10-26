@@ -105,6 +105,8 @@ class Question extends Model
 
     /**
      * 获取网站关键字
+     *
+     * @return string
      */
     public function getkeywords()
     {
@@ -113,5 +115,15 @@ class Question extends Model
             $keywords .= $tag->name . ',';
         }
         return trim($keywords,',');
+    }
+
+    /**
+     * 获取网站描述
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return str_limit(trim(preg_replace('/\r\n|\r|\n+/', '', strip_tags($this->content))), 200);
     }
 }

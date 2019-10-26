@@ -9,7 +9,7 @@
 
 @section('keywords', $question->getkeywords())
 
-@section('description', Str::limit($question->content, 100))
+@section('description', $question->getDescription())
 
 @section('content')
     <div class="container">
