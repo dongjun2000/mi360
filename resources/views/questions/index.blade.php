@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-@switch($category)
-        @case('index')最新的问题@break
-        @case('unanswered')等待回答的问题@break
-        @case('hot')热门的问题@break
-@endswitch
-@stop
+@section('title', \App\Question::Category[$category])
 
 @section('content')
     <div class="container">
@@ -15,7 +9,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-end">
                         <ul class="nav nav-tabs card-header-tabs" data-pjax>
-                            @foreach(['index' => '最新问答', 'unanswered' => '等待回答', 'hot' => '热门问答'] as $key => $item)
+                            @foreach(\App\Question::Category as $key => $item)
                                 <li class="nav-item">
                                     <a class="nav-link @if($key === $category) active @endif"
                                        href="{{ route("questions.{$key}") }}">{{ $item }}</a>

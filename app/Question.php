@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+    const Category = ['index' => '最新的问题', 'unanswered' => '等待回答的问题', 'hot' => '热门的问题'];
+
     public $fillable = ['title', 'content', 'laster_answer_user'];
 
     /**
@@ -99,5 +101,17 @@ class Question extends Model
     public function isConcern($user_id)
     {
         return $this->concerns()->wherePivot('user_id', $user_id)->exists();
+    }
+
+    /**
+     * 获取网站关键字
+     */
+    public function getkeywords()
+    {
+        $keywords = '编程故事,';
+        foreach($this->tags as $tag) {
+            $keywords .= $tag->name . ',';
+        }
+        return trim($keywords,',');
     }
 }

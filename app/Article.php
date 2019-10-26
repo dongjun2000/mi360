@@ -218,4 +218,21 @@ class Article extends Model
             ->comment()
             ->paginate(10);
     }
+
+    /**
+     * 获取网站关键字
+     */
+    public function getkeywords()
+    {
+        $keywords = '编程故事,';
+        foreach($this->tags as $tag) {
+            $keywords .= $tag->name . ',';
+        }
+        return trim($keywords,',');
+    }
+
+    public function getTitle()
+    {
+        return $this->title . ' - ' . $this->category->name;
+    }
 }

@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('title', "{$article->title} - {$article->category->name}")
+@section('title', $article->getTitle())
+
+@section('keywords', $article->getKeywords())
+
 @section('description', "{$article->intro}")
 
 @section('css')

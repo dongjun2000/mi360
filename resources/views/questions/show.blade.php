@@ -7,6 +7,10 @@
 
 @section('title', "{$question->title} - 问答")
 
+@section('keywords', $question->getkeywords())
+
+@section('description', Str::limit($question->content, 100))
+
 @section('content')
     <div class="container">
         {{--面包屑导航--}}
