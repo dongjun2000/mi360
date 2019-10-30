@@ -2,6 +2,8 @@
 
 @section('title', isset($category) ? $category->name : '编程故事')
 
+@section('keywords', '编程语言,前端开发,JavaScript,小程序开发,区块链,人工智能,iOS开发,Android开发,PHP开发,数据库,Python开发,Ruby开发,开发工具,Java开发,Linux服务器,编程故事')
+
 @section('content')
     <div class="container">
         <div class="row">
