@@ -104,7 +104,7 @@ class TagController extends Controller
         $label = 'questions';
         $tag   = Tag::where('name', $name)->first();
 
-        $items = $tag->questions()->paginate(10);
+        $items = $tag->questions()->orderBy('created_at', 'desc')->paginate(10);
 
         $concernStatus = $this->isConcern($tag);
 
@@ -123,7 +123,7 @@ class TagController extends Controller
         $label = 'article';
         $tag   = Tag::where('name', $name)->first();
 
-        $items = $tag->articles()->with('user:id,name,avatar')->paginate(10);
+        $items = $tag->articles()->with('user:id,name,avatar')->orderBy('created_at', 'desc')->paginate(10);
 
         $concernStatus = $this->isConcern($tag);
 
