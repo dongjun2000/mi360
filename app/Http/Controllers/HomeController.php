@@ -73,7 +73,7 @@ class HomeController extends Controller
         $tag = 'channel';
 
         $category = Category::where('name', $name)->first();
-        $articles = $category->articles()->with('user')->paginate(10);
+        $articles = $category->articles()->with('user')->orderBy('created_at', 'desc')->paginate(10);
 
         return view('home', compact('tag', 'category', 'articles'));
     }
